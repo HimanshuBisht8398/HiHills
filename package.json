@@ -28,6 +28,10 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.10"
+    "@types/react-slick": "^0.23.10",
+    "eslint": "^8.x",
+    "eslint-config-next": "^14.x",
+    "@typescript-eslint/parser": "^7.x",
+    "@typescript-eslint/eslint-plugin": "^7.x"
   }
 }
