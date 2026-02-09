@@ -14,6 +14,9 @@ import Joinus from './components/Joinus/index';
 import Insta from './components/Insta/index';
 import Wintertrek from './components/Wework/Wintertrek';
 import Adveture from './components/Wework/Adveture';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export default function Home() {
   return (
     <main>
@@ -29,8 +32,8 @@ export default function Home() {
       {/* <Featured /> */}
       <Manage />
       <FAQ />
-      <Testimonials />
       <Articles />
+      <Testimonials />
       <Joinus />
       <Insta />
     </main>

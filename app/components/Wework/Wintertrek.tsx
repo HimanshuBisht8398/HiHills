@@ -2,7 +2,6 @@
 import Slider from "react-slick";
 import React, { Component } from "react";
 
-// CAROUSEL DATA
 interface DataType {
   profession: string;
   name: string;
@@ -20,10 +19,17 @@ const postData: DataType[] = [
   { profession: "Kainchi Dham", name: "John Doe", imgSrc: "/images/wework/Kainchi.webp" },
 ];
 
-export default class Wintertrek extends Component {
-  state = {
-    animatedWords: [] as string[],
+type StateType = {
+  animatedWords: string[];
+  deleting: boolean;
+  selectedPlace: DataType | null;
+};
+
+export default class Wintertrek extends Component<{}, StateType> {
+  state: StateType = {
+    animatedWords: [],
     deleting: false,
+    selectedPlace: null,
   };
 
   text = "Most Recommended Winter Trek.";
@@ -67,6 +73,8 @@ export default class Wintertrek extends Component {
   };
 
   render() {
+    const { selectedPlace } = this.state;
+
     const settings = {
       dots: false,
       infinite: true,
@@ -86,35 +94,66 @@ export default class Wintertrek extends Component {
 
     return (
       <div className="bg-wework py-32">
-        <div className="mx-auto max-w-2xl lg:max-w-7xl sm:py-4 lg:px-8">
-          <div className="text-center">
-            <h3 className="text-4xl sm:text-6xl font-bold text-black my-2">
-              {this.state.animatedWords.join(" ")}
-              <span className="opacity-50">|</span>
-            </h3>
-          </div>
+        <div className="mx-auto max-w-7xl text-center">
+          <h3 className="text-4xl sm:text-6xl font-bold my-2">
+            {this.state.animatedWords.join(" ")}
+            <span className="opacity-50">|</span>
+          </h3>
         </div>
 
         <Slider {...settings}>
           {postData.map((items, i) => (
             <div key={i}>
-              <div className="bg-white m-3 py-14 my-10 text-center shadow-xl rounded-3xl">
-                <div className="relative">
-                  <img
-                    src={items.imgSrc}
-                    alt={items.profession}
-                    width={182}
-                    height={282}
-                    style={{ margin: "0 auto" }}
-                  />
-                </div>
-                <h3 className="text-2xl font-normal pt-4 pb-2 opacity-50">
+              <div
+                onClick={() => this.setState({ selectedPlace: items })}
+                className="bg-white cursor-pointer m-3 py-14 my-10 text-center shadow-xl rounded-3xl hover:scale-105 transition"
+              >
+                <img
+                  src={items.imgSrc}
+                  alt={items.profession}
+                  width={182}
+                  height={282}
+                  style={{ margin: "0 auto" }}
+                />
+                <h3 className="text-2xl pt-4 opacity-60">
                   {items.profession}
                 </h3>
               </div>
             </div>
           ))}
         </Slider>
+
+        {/* MODAL */}
+        {selectedPlace && (
+          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
+            <div className="bg-white rounded-2xl p-8 max-w-lg w-full relative">
+              <button
+                onClick={() => this.setState({ selectedPlace: null })}
+                className="absolute top-3 right-4 text-2xl font-bold"
+              >
+                ×
+              </button>
+
+              <img
+                src={selectedPlace.imgSrc}
+                className="w-full h-60 object-cover rounded-xl"
+              />
+
+              <h2 className="text-3xl font-bold mt-4">
+                {selectedPlace.profession}
+              </h2>
+
+              <p className="mt-3 text-gray-600">
+                Discover the winter beauty of {selectedPlace.profession}.
+                Perfect destination for snow lovers and spiritual seekers.
+              </p>
+
+              <button className="mt-6 bg-black text-white px-6 py-2 rounded-xl">
+                Book Trek
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

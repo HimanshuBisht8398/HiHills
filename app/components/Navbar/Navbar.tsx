@@ -80,7 +80,7 @@ const Navbar = () => {
                         {/* DRAWER LINKS DATA */}
 
                         <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-                            <Drawerdata />
+                            <Drawerdata />  
                         </Drawer>
 
                     </div>
