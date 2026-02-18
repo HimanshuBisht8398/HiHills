@@ -1,93 +1,171 @@
 "use client"
-import { Disclosure } from '@headlessui/react';
-import Link from 'next/link';
-import React from 'react';
-import { Bars3Icon } from '@heroicons/react/24/outline';
-import Drawer from "./Drawer";
-import Drawerdata from "./Drawerdata";
-import Contactusform from './Contactus';
 
-interface NavigationItem {
-    name: string;
-    href: string;
-    current: boolean;
-}
+import React from "react"
+import Link from "next/link"
+import { Bars3Icon } from "@heroicons/react/24/outline"
+import Drawer from "./Drawer"
+import Drawerdata from "./Drawerdata"
+import Contactusform from "./Contactus"
+import PackageModal from "./PackageModal"
 
-const navigation: NavigationItem[] = [
-    { name: 'About Us', href: '#aboutus-section', current: false },
-    { name: 'Services', href: '#services-section', current: false },
-    { name: 'FAQ', href: '#faq-section', current: false },
-    { name: 'Blog', href: '#blog-section', current: false },
-    { name: 'Testimonial', href: '#testimonial-section', current: false },
-]
-
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
+const packagesData = {
+  chardham: [
+    "Char Dham Yatra 2024",
+    "Char Dham Yatra (9N)",
+    "Char Dham by Helicopter",
+    "Do Dham Yatra (Badrinath–Kedarnath)",
+    "Do Dham by Helicopter",
+  ],
+  tours: [
+    "Jim Corbett Safari",
+    "Mussoorie Rishikesh Tour",
+    "Best Nainital Kausani",
+    "Auli Tour Packages",
+    "Sri Badrinath Ji Yatra",
+    "Sri Kedarnath Ji Yatra",
+  ],
+  treks: [
+    "Valley of Flowers",
+    "Gomukh Trek",
+    "Dayara Bugyal",
+    "Dodital Trek",
+    "Kunjapuri Trek",
+    "Chopta Trek",
+  ],
 }
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const [activeTitle, setActiveTitle] = React.useState("")
 
-    const [isOpen, setIsOpen] = React.useState(false);
+  const openModal = (title: string) => {
+    setActiveTitle(title)
+    setModalOpen(true)
+  }
 
-    return (
-        <Disclosure as="nav" className="navbar">
-            <>
-                <div className="mx-auto max-w-7xl p-3 md:p-4 lg:px-8">
-                    <div className="relative flex h-12 sm:h-20 items-center">
-                        <div className="flex flex-1 items-center sm:justify-between">
+  return (
+    <nav className="navbar bg-white shadow relative z-50">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="flex h-20 items-center justify-between">
 
-                            {/* LOGO */}
+          <Link href="/" className="text-3xl font-bold">
+            HI HILLS
+          </Link>
 
-                            <div className="flex flex-shrink-0 items-center border-right">
-                                <Link href="/" className='text-2xl sm:text-4xl font-semibold text-black'>
-                                    HI HILLS
-                                </Link>
-                            </div>
+          <div className="hidden lg:flex items-center space-x-6">
 
-                            {/* LINKS */}
+            <Link href="#aboutus-section" className="navlinks">
+              About Us
+            </Link>
 
-                            <div className="hidden lg:flex items-center border-right ">
-                                <div className="flex justify-end space-x-4">
-                                    {navigation.map((item) => (
-                                        <Link
-                                            key={item.name}
-                                            href={item.href}
-                                            className={classNames(
-                                                item.current ? 'bg-gray-900' : 'navlinks hover:text-black',
-                                                'px-3 py-4 rounded-md text-lg font-normal'
-                                            )}
-                                            aria-current={item.href ? 'page' : undefined}
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    ))}
-                                </div>
+            <Link href="#services-section" className="navlinks">
+              Services
+            </Link>
 
-                            </div>
-                            {/* <button className='hidden lg:flex justify-end text-xl font-semibold bg-transparent py-4 px-6 lg:px-12 navbutton rounded-full hover:bg-navyblue hover:text-white'>Contact us</button> */}
-                            <Contactusform />
-                        </div>
+            {/* PACKAGES */}
+            <div className="relative group">
+              <span className="navlinks cursor-pointer">
+                Packages
+              </span>
 
+              <div className="
+                absolute left-[-300px] top-full mt-4 w-[1000px]
+                bg-white shadow-2xl rounded-xl p-8
+                grid grid-cols-3 gap-8
+                opacity-0 invisible
+                group-hover:opacity-100 group-hover:visible
+                transition-all duration-200
+              ">
 
-                        {/* DRAWER FOR MOBILE VIEW */}
-
-                        {/* DRAWER ICON */}
-
-                        <div className='block lg:hidden'>
-                            <Bars3Icon className="block h-6 w-6" aria-hidden="true" onClick={() => setIsOpen(true)} />
-                        </div>
-
-                        {/* DRAWER LINKS DATA */}
-
-                        <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-                            <Drawerdata />  
-                        </Drawer>
-
-                    </div>
+                <div>
+                  <h4 className="font-semibold mb-3">Chardham</h4>
+                  {packagesData.chardham.map(item => (
+                    <a
+                      key={item}
+                      href="#"
+                      className="megaItem block"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        openModal(item)
+                      }}
+                    >
+                      {item}
+                    </a>
+                  ))}
                 </div>
-            </>
-        </Disclosure>
-    )
+
+                <div>
+                  <h4 className="font-semibold mb-3">Tours</h4>
+                  {packagesData.tours.map(item => (
+                    <a
+                      key={item}
+                      href="#"
+                      className="megaItem block"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        openModal(item)
+                      }}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-3">Treks</h4>
+                  {packagesData.treks.map(item => (
+                    <a
+                      key={item}
+                      href="#"
+                      className="megaItem block"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        openModal(item)
+                      }}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+
+            <Link href="#blog-section" className="navlinks">
+              Blog
+            </Link>
+
+            <Link href="#testimonial-section" className="navlinks">
+              Testimonial
+            </Link>
+
+            <Contactusform />
+          </div>
+
+          <div className="block lg:hidden">
+            <Bars3Icon
+              className="h-7 w-7 cursor-pointer"
+              onClick={() => setIsOpen(true)}
+            />
+          </div>
+
+        </div>
+      </div>
+
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Drawerdata />
+      </Drawer>
+
+      {/* MODAL */}
+      <PackageModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={activeTitle}
+        items={[activeTitle]}
+      />
+    </nav>
+  )
 }
 
-export default Navbar;
+export default Navbar

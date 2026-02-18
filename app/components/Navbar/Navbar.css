@@ -1,0 +1,21 @@
+.navlinks {
+  font-size: 18px;
+  padding: 8px 12px;
+  transition: all 0.2s;
+}
+
+.navlinks:hover {
+  color: #f97316;
+}
+
+.megaItem {
+  font-size: 15px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.megaItem:hover {
+  color: #f97316;
+  transform: translateX(4px);
+}
