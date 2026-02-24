@@ -34,7 +34,7 @@ export default function Home() {
       <FAQ />
       <Articles />
       <Testimonials />
-      <Joinus />
+      {/* <Joinus /> */}
       <Insta />
     </main>
   )

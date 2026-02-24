@@ -8,7 +8,6 @@ interface datatype {
     heading: string;
     imgSrc: string;
     paragraph: string;
-    link: string;
 }
 
 const Aboutdata: datatype[] = [
@@ -16,36 +15,30 @@ const Aboutdata: datatype[] = [
         heading: "Transportation.",
         imgSrc: "/images/aboutus/Transportation.png",
         paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
-        link: 'Learn more'
     },
     {
         heading: "Adventure Activities.",
         imgSrc: "/images/aboutus/Adventure.png",
         paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
-        link: 'Learn more'
     },
     {
        heading: "Treks.",
        imgSrc: "/images/aboutus/Trek.png",
        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
-       link: 'Learn more'
    },
     {
         heading: "Uttrakhand Char Dham Yatra.",
         imgSrc: "/images/aboutus/chardham.png",
         paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
-        link: 'Learn more'
     }, {
         heading: "Hotel Booking.",
         imgSrc: "/images/aboutus/Hotel.png",
         paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
-        link: 'Learn more'
     },
        {
         heading: "Jeep Safari.",
         imgSrc: "/images/aboutus/Junglesafari.png",
         paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
-        link: 'Learn more'
     }
 ]
 
@@ -121,10 +114,22 @@ const Aboutus = () => {
                                     <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
                                     <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
                                     <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                    <Link href="#" className='text-lg font-semibold group-hover:text-white text-blue hover-underline'>
-                                        {item.link}
+                                    <button
+                                        type="button"
+                                        className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'
+                                        onClick={() => {
+                                            try {
+                                                if (typeof window !== 'undefined') {
+                                                    window.dispatchEvent(new Event('openContactForm'))
+                                                }
+                                            } catch (e) {
+                                                // ignore
+                                            }
+                                        }}
+                                    >
+                                        Book Now
                                         <ChevronRightIcon width={20} height={20} />
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         ))}

@@ -156,11 +156,22 @@ export default class MultipleItems extends Component<{}, State> {
               <div key={i}>
                 <div className='bg-white m-3 px-3 pt-3 pb-12 my-10 shadow-lg rounded-3xl relative'>
                   <Image src={items.imgSrc} alt="img" width={389} height={262} className="inline-block m-auto" />
-                  {/* <Link href={''}> */}
-                    <h3 className="absolute bg-blue text-white hover:bg-black hover:shadow-xl py-3 px-6 rounded-full article-img">
-                      {items.time} 
-                    </h3>
-                  {/* </Link> */}
+                  {/* Book Now opens the contact form modal via a global event */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        try {
+                          if (typeof window !== 'undefined') {
+                            window.dispatchEvent(new Event('openContactForm'))
+                          }
+                        } catch (e) {
+                          // ignore
+                        }
+                      }}
+                      className="absolute bg-blue text-white hover:bg-black hover:shadow-xl py-3 px-6 rounded-full article-img"
+                    >
+                      Book Now
+                    </button>
                   <h4 className='text-2xl font-bold pt-6 text-black'>{items.heading}</h4>
                   <h4 className='text-2xl font-bold pt-1 text-black'>{items.heading2}</h4>
                   <div>

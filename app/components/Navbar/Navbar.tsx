@@ -45,6 +45,18 @@ const Navbar = () => {
     setModalOpen(true)
   }
 
+  // scroll to an element id with offset to account for sticky navbar
+  const scrollToId = (e: React.MouseEvent, id: string) => {
+    e.preventDefault()
+    if (typeof document === 'undefined') return
+    const el = document.getElementById(id)
+    if (!el) return
+    const nav = document.querySelector('nav')
+    const navHeight = nav ? (nav as HTMLElement).offsetHeight : 80
+    const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 12
+    window.scrollTo({ top, behavior: 'smooth' })
+  }
+
   return (
     <nav className="bg-white shadow sticky top-0 z-50">
       <div className="mx-auto max-w-7xl px-4">
@@ -93,9 +105,9 @@ const Navbar = () => {
           {/* RIGHT SIDE - MENU */}
           <div className="hidden lg:flex items-center space-x-6">
 
-            <Link href="#aboutus-section" className="navlinks">
+            <a href="#about-us" className="navlinks" onClick={(e) => scrollToId(e, 'about-us')}>
               About Us
-            </Link>
+            </a>
 
             <Link href="#services-section" className="navlinks">
               Services
@@ -171,7 +183,7 @@ const Navbar = () => {
             </div>
 
             <Link href="#blog-section" className="navlinks">
-              Blog
+              Popular
             </Link>
 
             <Link href="#testimonial-section" className="navlinks">
