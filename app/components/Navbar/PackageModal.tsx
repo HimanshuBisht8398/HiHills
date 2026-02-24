@@ -5,11 +5,13 @@ interface Props {
   open: boolean
   onClose: () => void
   title: string
-  image: string
-  description: string
+  // optional fields to support different usages
+  items?: string[]
+  image?: string
+  description?: string
 }
 
-const PackageModal = ({ open, onClose, title, image, description }: Props) => {
+const PackageModal = ({ open, onClose, title, items, image, description }: Props) => {
   if (!open) return null
 
   return (
@@ -23,33 +25,45 @@ const PackageModal = ({ open, onClose, title, image, description }: Props) => {
           ✕
         </button>
 
-        <img
-          src={image}
-          alt={title}
-          className="rounded-xl h-[260px] w-full object-cover"
-        />
+        {items && items.length > 0 ? (
+          <div className="p-4">
+            <h2 className="text-2xl font-bold mb-2">{title}</h2>
+            <div className="grid grid-cols-2 gap-3">
+              {items.map((i) => (
+                <div key={i} className="border p-3 rounded hover:bg-orange-50 cursor-pointer">
+                  {i}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <>
+            {image && (
+              <img src={image} alt={title} className="rounded-xl h-[260px] w-full object-cover" />
+            )}
+            <div className="p-4">
+              <h2 className="text-2xl font-bold mb-2">{title}</h2>
+              {description && <p className="text-gray-600 mb-4">{description}</p>}
 
-        <div className="p-4">
-          <h2 className="text-2xl font-bold mb-2">{title}</h2>
-          <p className="text-gray-600 mb-4">{description}</p>
-
-          <button
-            className="bg-black text-white px-6 py-2 rounded-full"
-            onClick={() => {
-              // close the package modal and open the contact form elsewhere
-              try {
-                onClose()
-                if (typeof window !== 'undefined') {
-                  window.dispatchEvent(new Event('openContactForm'))
-                }
-              } catch (e) {
-                // fail silently
-              }
-            }}
-          >
-            Book Now
-          </button>
-        </div>
+              <button
+                className="bg-black text-white px-6 py-2 rounded-full"
+                onClick={() => {
+                  // close the package modal and open the contact form elsewhere
+                  try {
+                    onClose()
+                    if (typeof window !== 'undefined') {
+                      window.dispatchEvent(new Event('openContactForm'))
+                    }
+                  } catch (e) {
+                    // fail silently
+                  }
+                }}
+              >
+                Book Now
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

@@ -2,12 +2,13 @@
 
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Bars3Icon } from "@heroicons/react/24/outline"
+import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/solid"
 import Drawer from "./Drawer"
 import Drawerdata from "./Drawerdata"
 import Contactusform from "./Contactus"
 import PackageModal from "./PackageModal"
-
 const packagesData = {
   chardham: [
     "Char Dham Yatra 2024",
@@ -45,14 +46,51 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar bg-white shadow relative z-50">
+    <nav className="bg-white shadow sticky top-0 z-50">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-20 items-center justify-between">
 
-          <Link href="/" className="text-3xl font-bold">
-            HI HILLS
-          </Link>
+          {/* LEFT SIDE */}
+          <div className="flex items-center space-x-10">
 
+            {/* Logo with Image + Text */}
+            <Link href="/" className="flex items-center space-x-2">
+                {/* <Image
+                  src="/hihills.icon"
+                  alt="HI HILLS Logo"
+                  width={45}
+                  height={45}
+                  className="object-contain"
+                /> */}
+              <span className="text-3xl font-bold text-black">
+                HI HILLS
+              </span>
+            </Link>
+
+            {/* Contact Info */}
+            <div className="hidden lg:flex items-center space-x-6 text-black font-bold text-sm">
+
+              <div className="flex items-center space-x-1">
+                <PhoneIcon className="h-4 w-4" />
+                <a href="tel:+917617610909" className="hover:text-orange-500">
+                  +91-7617610909 , +91-87711105877
+                </a>
+              </div>
+
+              <div className="flex items-center space-x-1">
+                <EnvelopeIcon className="h-4 w-4" />
+                <a
+                  href="mailto:hihillstourandtravels@gmail.com"
+                  className="hover:text-orange-500"
+                >
+                  hihillstourandtravels@gmail.com
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+          {/* RIGHT SIDE - MENU */}
           <div className="hidden lg:flex items-center space-x-6">
 
             <Link href="#aboutus-section" className="navlinks">
@@ -143,6 +181,7 @@ const Navbar = () => {
             <Contactusform />
           </div>
 
+          {/* MOBILE MENU */}
           <div className="block lg:hidden">
             <Bars3Icon
               className="h-7 w-7 cursor-pointer"
@@ -157,7 +196,6 @@ const Navbar = () => {
         <Drawerdata />
       </Drawer>
 
-      {/* MODAL */}
       <PackageModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
