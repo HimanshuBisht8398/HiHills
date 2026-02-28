@@ -29,7 +29,7 @@ const Banner = () => {
   <div className="py-6 text-center lg:text-start">
     <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed tracking-wide max-w-2xl mx-auto lg:mx-0">
       <span className="font-semibold text-darkpurple">
-        Himalayan Edge
+        Hi Hills 
       </span>{" "}
       is a premier Haridwar-based travel agency specializing in expert-led
       Uttarakhand tour packages and Chardham Yatra pilgrimages. Leveraging
@@ -39,7 +39,7 @@ const Banner = () => {
       rentals with a focus on cleanliness and safety.
       <br /><br />
       By offering competitive pricing and seamless logistics starting from
-      both Haridwar and Delhi, Himalayan Edge has established itself as a
+      both Haridwar and Delhi, Hi Hills has established itself as a
       reliable tour operator dedicated to balancing affordability with the
       personal comfort and unique requirements of every traveler.
     </p>

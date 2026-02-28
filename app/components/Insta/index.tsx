@@ -25,10 +25,18 @@ const Insta = () => {
   }
 
   const images = [
-    "/images/insta/insta1.png",
-    "/images/insta/insta2.png",
-    "/images/insta/insta3.png",
-    "/images/insta/insta4.png",
+    "/images/insta/One.jpeg",
+    "/images/insta/Two.png",
+    "/images/insta/Three.jpeg",
+    "/images/insta/Four.jpeg",
+    "/images/insta/Five.jpeg",
+    "/images/insta/Six.png",
+    // "/images/insta/Seven.jpeg",
+    "/images/insta/Eight.jpeg",
+    // "/images/insta/Nine.jpeg",
+    // "/images/insta/Ten.jpeg",
+    "/images/insta/Eleven.png",
+    "/images/insta/Twleve.jpeg",
   ]
 
   return (

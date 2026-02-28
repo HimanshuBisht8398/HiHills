@@ -85,10 +85,9 @@ const Footer = () => {
             <ul className="space-y-4 text-gray-300">
 
               <li className="flex items-start space-x-3">
-                <MapPinIcon className="h-5 w-5 mt-1 text-orange-400" />
+                <MapPinIcon className="h-12 w-18 mt-1 text-orange-400" />
                 <span>
-                  Haridwar Office <br />
-                  Uttarakhand, India
+                  257, SANT KRIPAL NAGAR - SHIVALIK NAGAR, RAWALI MEHDOOD, BAHADRABAD - HARIDWAR, UTTARAKHAND - 249402
                 </span>
               </li>
 

@@ -21,12 +21,18 @@ html {
 body {
   margin: 0;
   font-family: 'Urbanist', sans-serif;
-  background-image: url('/icon.svg'); /* Your logo */
+  
+  /* --- CHANGED SECTION --- */
+  /* This creates a 50% opaque white layer on top of your logo.
+     Change '0.5' to make it more or less faded (e.g., 0.2 is very faded). */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/Logo.jpeg');
+  /* ---------------------- */
+
   background-repeat: no-repeat;
-  background-position: center 120px; /* Adjust vertical position */
-  background-size: 420px; /* Adjust size */
-  background-attachment: fixed; /* Keeps logo fixed while scrolling */
-  background-color: #ffffff; /* Keep site background white */
+  background-position: center 120px;
+  background-size: 420px;
+  background-attachment: fixed;
+  background-color: #ffffff; /* This is the base page color */
 }
 
 /* ============================= */
