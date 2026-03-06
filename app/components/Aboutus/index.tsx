@@ -14,31 +14,31 @@ const Aboutdata: datatype[] = [
     {
         heading: "Transportation.",
         imgSrc: "/images/aboutus/Transportation.png",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+        paragraph: 'We provide reliable and comfortable transportation services to make your journey smooth and hassle-free. From airport pickups and local transfers to complete travel arrangements for tours and treks, we ensure safe, timely, and convenient travel so you can focus on enjoying your trip.',
     },
     {
         heading: "Adventure Activities.",
         imgSrc: "/images/aboutus/Adventure.png",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+        paragraph: 'We offer thrilling adventure activities to make your trip truly unforgettable. From exciting river rafting and jet skiing to peaceful boating, kayaking, breathtaking hot air balloon rides and many more, there’s something for every adventure lover. Whether you seek adrenaline or scenic fun, we ensure safe, well-organized, and memorable experiences every time.',
     },
     {
        heading: "Treks.",
        imgSrc: "/images/aboutus/Trek.png",
-       paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+       paragraph: 'We offer unforgettable trekking experiences across summer, monsoon, and winter — each season bringing its own unique charm. From clear skies and alpine views in summer, to lush green trails in monsoon, and snow-covered landscapes in winter, every trek is carefully guided to ensure safety, adventure, and memories that last a lifetime.',
    },
     {
         heading: "Uttrakhand Char Dham Yatra.",
         imgSrc: "/images/aboutus/chardham.png",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+        paragraph: 'Experience the sacred Char Dham Yatra in the serene mountains of Uttarakhand — a spiritually enriching journey to the four holy shrines: Kedarnath, Badrinath, Gangotri, & Yamunotri. This divine pilgrimage offers peace, devotion,and a once-in-a-lifetime spiritual experience.',
     }, {
         heading: "Hotel Booking.",
         imgSrc: "/images/aboutus/Hotel.png",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+        paragraph: 'We offer seamless hotel booking services to ensure a comfortable and stress-free stay throughout your journey. From budget-friendly accommodations to premium stays, we carefully select hotels that provide comfort, safety, and convenience — so you can relax and enjoy your trip with complete peace of mind.',
     },
        {
         heading: "Jeep Safari.",
         imgSrc: "/images/aboutus/Junglesafari.png",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+        paragraph: 'Experience the thrill of a Jeep Safari, where adventure meets the wild. Explore dense forests, scenic landscapes, and wildlife in their natural habitat with our safe and guided safari experiences. Perfect for nature lovers and adventure seekers, our Jeep Safaris offer an exciting and unforgettable journey into the wilderness',
     }
 ]
 
@@ -88,7 +88,7 @@ const Aboutus = () => {
 
     return (
         <div id="services-section">
-            <div className='mx-auto max-w-7xl px-4 py-24 my-32 lg:px-10 bg-lightgrey rounded-3xl relative'>
+            {/* <div className='mx-auto max-w-7xl px-4 py-24 my-32 lg:px-10 bg-lightgrey rounded-3xl relative'> */}
                 <Image src="/images/aboutus/dots.svg" width={100} height={100} alt="dots-image" className="absolute bottom-1 -left-20" />
                 <h4 className='text-center text-4xl lg:text-65xl font-bold'>Know more about our Services.</h4>
 
@@ -110,27 +110,80 @@ const Aboutus = () => {
                                 className='flex-shrink-0 px-4'
                                 style={{ width: `${100 / slidesToShow}%` }}
                             >
-                                <div className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group'>
-                                    <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                    <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                    <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                    <button
-                                        type="button"
-                                        className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'
-                                        onClick={() => {
-                                            try {
-                                                if (typeof window !== 'undefined') {
-                                                    window.dispatchEvent(new Event('openContactForm'))
+                                {/* if this card is the Treks card, link to /treks page, otherwise keep Book Now behaviour */}
+                                {item.heading && item.heading.toLowerCase().includes('trek') ? (
+                                    <Link href="/treks" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            Book Now
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : item.heading && item.heading.toLowerCase().includes('advent') ? (
+                                    <Link href="/adventure" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            See Packages
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : item.heading && item.heading.toLowerCase().includes('hotel') ? (
+                                    <Link href="/hotels" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            See Packages
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : item.heading && (item.heading.toLowerCase().includes('char') && item.heading.toLowerCase().includes('dham') || item.heading.toLowerCase().includes('chardham')) ? (
+                                    <Link href="/chardham" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            See Packages
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : item.heading && (item.heading.toLowerCase().includes('jeep') || item.heading.toLowerCase().includes('safari')) ? (
+                                    <Link href="/jeep-safari" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            See Packages
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : (
+                                    <div className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <button
+                                            type="button"
+                                            className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'
+                                            onClick={() => {
+                                                try {
+                                                    if (typeof window !== 'undefined') {
+                                                        window.dispatchEvent(new Event('openContactForm'))
+                                                    }
+                                                } catch (e) {
+                                                    // ignore
                                                 }
-                                            } catch (e) {
-                                                // ignore
-                                            }
-                                        }}
-                                    >
-                                        Book Now
-                                        <ChevronRightIcon width={20} height={20} />
-                                    </button>
-                                </div>
+                                            }}
+                                        >
+                                            Book Now
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -141,14 +194,14 @@ const Aboutus = () => {
                             <button
                                 key={ii}
                                 onClick={() => setIndex(ii)}
-                                className={`w-3 h-3 rounded-full ${ii === index ? 'bg-blue' : 'bg-gray-300'}`}
+                                // className={`w-3 h-3 rounded-full ${ii === index ? 'bg-blue' : 'bg-gray-300'}`}
                                 aria-label={`Go to slide ${ii + 1}`}
                             />
                         ))}
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
