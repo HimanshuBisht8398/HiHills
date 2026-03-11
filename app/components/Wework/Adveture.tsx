@@ -1,6 +1,9 @@
 "use client";
+
 import Slider from "react-slick";
 import React, { Component } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface DataType {
   profession: string;
@@ -10,44 +13,61 @@ interface DataType {
 
 const postData: DataType[] = [
   {
-    profession: "Rishikesh",
+    profession: "Rafting In Rishikesh",
     name: "John Doe",
-    images: [
-      "/images/wework/Rishikesh.jpg",
-      "/images/wework/Haridwar.jpeg",
-      "/images/wework/Kedarnath.jpg",
-    ],
+    images: ["/images/wework/Rafting.jpeg"],
   },
   {
-    profession: "Nainital",
+    profession: "Jungle Safari in Corbett",
     name: "John Doe",
-    images: [
-      "/images/wework/Nainital.jpg",
-      "/images/wework/Almora.jpg",
-      "/images/wework/Kainchi.webp",
-    ],
+    images: ["/images/wework/JungleSafari.avif"],
   },
   {
-    profession: "Badrinath Dham",
+    profession: "Paragliding",
     name: "John Doe",
-    images: [
-      "/images/wework/Badrinath.webp",
-      "/images/wework/Tungnath.jpeg",
-    ],
+    images: ["/images/wework/Paragliding.jpeg"],
   },
+  {
+    profession: "Jet skiing in Tehri",
+    name: "John Doe",
+    images: ["/images/wework/Jetskee.jpg"],
+  },
+  {
+    profession: "Bungee Jumping in Rishikesh",
+    name: "John Doe",
+    images: ["/images/wework/bungee-jumping.webp"],
+  },
+  {
+    profession: "Zipline in Rishikesh",
+    name: "John Doe",
+    images: ["/images/wework/Zipline.jpeg"],
+  },
+  {
+    profession: "Hot Air Balloon in Ramnagar",
+    name: "John Doe",
+    images: ["/images/wework/Hotairbaloon.jpg"],
+  },
+  {
+    profession: "Skiing in Auli",
+    name: "John Doe",
+    images: ["/images/wework/SnowSkii.jpeg"],
+  },
+  {
+    profession: "Camping in Rishikesh",
+    name: "John Doe",
+    images: ["/images/wework/Camping.avif"],
+  }
 ];
 
 type StateType = {
   animatedWords: string[];
   deleting: boolean;
-  selectedPlace: DataType | null;
 };
 
 export default class Adveture extends Component<{}, StateType> {
   state: StateType = {
     animatedWords: [],
     deleting: false,
-    selectedPlace: null,
   };
 
   text = "Adventure Activities in Uttarakhand.";
@@ -72,7 +92,7 @@ export default class Adveture extends Component<{}, StateType> {
       } else {
         setTimeout(() => {
           this.setState({ deleting: true }, this.animateWords);
-        }, 1000);
+        }, 1200);
       }
     } else {
       if (index >= 0) {
@@ -91,101 +111,78 @@ export default class Adveture extends Component<{}, StateType> {
   };
 
   render() {
-    const { selectedPlace } = this.state;
-
-    const mainSettings = {
+    const settings = {
       dots: false,
       infinite: true,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      arrows: false,
+      centerMode: true,
+      centerPadding: "0px",
+      slidesToShow: 3,
       autoplay: true,
-      speed: 3000,
-      autoplaySpeed: 2000,
-      cssEase: "linear",
+      autoplaySpeed: 2500,
+      speed: 1000,
+      arrows: true,
       responsive: [
-        { breakpoint: 1200, settings: { slidesToShow: 3 } },
-        { breakpoint: 800, settings: { slidesToShow: 2 } },
-        { breakpoint: 450, settings: { slidesToShow: 1 } },
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            centerMode: false,
+          },
+        },
+        {
+          breakpoint: 640,
+          settings: {
+            slidesToShow: 1,
+            centerMode: false,
+          },
+        },
       ],
     };
 
-    const modalSettings = {
-      dots: true,
-      arrows: true,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
-
     return (
-      <div className="bg-wework py-32">
-        <div className="mx-auto max-w-7xl text-center mb-10">
-          <h3 className="text-4xl sm:text-6xl font-bold">
+      <div className="bg-gray-50 py-28">
+
+        {/* Heading */}
+        <div className="mx-auto max-w-7xl text-center mb-16 px-6">
+          <h3 className="text-4xl sm:text-6xl font-bold text-gray-900">
             {this.state.animatedWords.join(" ")}
-            <span className="opacity-50">|</span>
+            <span className="opacity-40">|</span>
           </h3>
         </div>
 
-        {/* MAIN SLIDER */}
-        <Slider {...mainSettings}>
-          {postData.map((items, i) => (
-            <div key={i}>
-              <div
-                onClick={() => this.setState({ selectedPlace: items })}
-                className="bg-white cursor-pointer m-3 py-10 text-center shadow-xl rounded-3xl hover:scale-105 transition"
-              >
-                <img
-                  src={items.images[0]}
-                  alt={items.profession}
-                  className="h-52 mx-auto object-cover rounded-xl"
-                />
-                <h3 className="text-xl pt-4 opacity-70">
-                  {items.profession}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </Slider>
+        {/* Slider */}
+        <div className="max-w-7xl mx-auto px-6">
+          <Slider {...settings}>
+            {postData.map((items, i) => (
+              <div key={i} className="px-4">
 
-        {/* MODAL WITH CAROUSEL */}
-        {selectedPlace && (
-          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
-            <div className="bg-white rounded-2xl p-6 max-w-2xl w-full relative animate-scale">
-              <button
-                onClick={() => this.setState({ selectedPlace: null })}
-                className="absolute top-2 right-3 text-3xl font-bold"
-              >
-                ×
-              </button>
+                <div className="relative h-[320px] rounded-3xl overflow-hidden shadow-xl group transition">
 
-              <Slider {...modalSettings}>
-                {selectedPlace.images.map((img, i) => (
-                  <div key={i}>
-                    <img
-                      src={img}
-                      className="w-full h-80 object-cover rounded-xl"
-                    />
+                  {/* Image */}
+                  <img
+                    src={items.images[0]}
+                    alt={items.profession}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  />
+
+                  {/* Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+                  {/* Text */}
+                  <div className="absolute bottom-6 left-6 right-6">
+
+                    <h3 className="text-white text-2xl font-semibold">
+                      {items.profession}
+                    </h3>
                   </div>
-                ))}
-              </Slider>
 
-              <h2 className="text-3xl font-bold mt-4">
-                {selectedPlace.profession}
-              </h2>
+                </div>
 
-              <p className="mt-2 text-gray-600">
-                Discover thrilling adventure experiences at{" "}
-                {selectedPlace.profession}. Perfect for trekking, rafting,
-                camping and spiritual journeys.
-              </p>
+              </div>
+            ))}
+          </Slider>
+        </div>
 
-              <button className="mt-5 bg-black text-white px-6 py-2 rounded-xl">
-                Book Activity
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     );
   }

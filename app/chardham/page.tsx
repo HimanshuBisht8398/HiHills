@@ -1,5 +1,6 @@
 "use client"
 import Image from 'next/image'
+import Link from 'next/link'
 
 const charDhamPackages = [
   { id: 'badrinath', name: 'Badrinath Package', days: '9N/10D', price: '₹12,000/person', img: '/images/digital/Aadi Kailash.jpg' },
@@ -41,7 +42,7 @@ export default function ChardhamPage() {
                     >
                       Book Now
                     </button>
-                    <a href="#" className="px-4 py-2 rounded-lg border border-gray-200">Details</a>
+                    <Link href={`/chardham/${p.id}`} className="px-4 py-2 rounded-lg border border-gray-200">Details</Link>
                   </div>
                 </div>
               </div>
@@ -70,7 +71,7 @@ export default function ChardhamPage() {
                     >
                       Book Now
                     </button>
-                    <a href="#" className="px-4 py-2 rounded-lg border border-gray-200">Details</a>
+                    <Link href={`/chardham/${p.id}`} className="px-4 py-2 rounded-lg border border-gray-200">Details</Link>
                   </div>
                 </div>
               </div>

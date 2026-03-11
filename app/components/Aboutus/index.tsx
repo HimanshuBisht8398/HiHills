@@ -30,7 +30,13 @@ const Aboutdata: datatype[] = [
         heading: "Uttrakhand Char Dham Yatra.",
         imgSrc: "/images/aboutus/chardham.png",
         paragraph: 'Experience the sacred Char Dham Yatra in the serene mountains of Uttarakhand — a spiritually enriching journey to the four holy shrines: Kedarnath, Badrinath, Gangotri, & Yamunotri. This divine pilgrimage offers peace, devotion,and a once-in-a-lifetime spiritual experience.',
-    }, {
+    },
+    {
+        heading: "Uttrakhand Do Dham Yatra.",
+        imgSrc: "/images/aboutus/chardham.png",
+        paragraph: 'The Do Dham Yatra is one of the most sacred pilgrimages in India. Devotees travel through scenic Himalayan valleys, ancient temples, and sacred rivers to seek blessings and spiritual peace. Our Do Dham packages include comfortable transport, accommodation, and guided travel to ensure a smooth and memorable pilgrimage.',
+    },
+    {
         heading: "Hotel Booking.",
         imgSrc: "/images/aboutus/Hotel.png",
         paragraph: 'We offer seamless hotel booking services to ensure a comfortable and stress-free stay throughout your journey. From budget-friendly accommodations to premium stays, we carefully select hotels that provide comfort, safety, and convenience — so you can relax and enjoy your trip with complete peace of mind.',
@@ -142,7 +148,7 @@ const Aboutus = () => {
                                         </div>
                                     </Link>
                                 ) : item.heading && (item.heading.toLowerCase().includes('char') && item.heading.toLowerCase().includes('dham') || item.heading.toLowerCase().includes('chardham')) ? (
-                                    <Link href="/chardham" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                    <Link href="/chardham/char-dham" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
                                         <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
                                         <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
                                         <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>

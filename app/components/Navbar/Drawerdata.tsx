@@ -9,10 +9,10 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-    { name: 'Banner', href: '#about-us', current: true },
+    { name: 'About Us', href: '#about-us', current: true },
     { name: 'Services', href: '#services-section', current: false },
-    { name: 'FAQ', href: '#faq-section', current: false },
-    { name: 'Blog', href: '#blog-section', current: false },
+    { name: 'Why Choose Us?', href: '#faq-section', current: false },
+    { name: 'Popular packages', href: '#blog-section', current: false },
     { name: 'Testimonial', href: '#testimonial-section', current: false },
 ]
 
