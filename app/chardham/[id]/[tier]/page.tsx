@@ -41,6 +41,7 @@ export default function TierItineraryPage() {
     "Arrival and orientation.",
     "Local exploration and activities.",
     "Return journey.",
+    ""
   ]
 
   const tierDecoration: Record<string, string> = {
@@ -114,14 +115,25 @@ export default function TierItineraryPage() {
           </h2>
 
           <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
-            <li>
-              All itineraries are indicative and may change based on weather
-              and availability.
-            </li>
-            <li>{tierDecoration[tier]}</li>
-            <li>
-              Exact travel details will be shared after confirmation of booking.
-            </li>
+            <li>MEETING AND ASSISTANCE ON ARRIVAL</li>
+            <li>GROUP LEADER ALSO WITH YOU IN ENTIRE JOURNEY</li>
+           <li>ACCOMMODATIONS IN Rooms On Triple Occupancy At The Hotel.</li>
+           <li>Daily Fixed Menu Breakfast & Dinner</li>
+           <li>Driver Bata, Toll Tax And Parking</li>
+          </ul>
+          <br/>
+            <h2 className="text-2xl font-semibold mb-4">
+            Exclusions 
+          </h2>
+
+          <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+            <li>Air fare/train fare until mentioned in the itinerary</li>
+            <li>Any meals other than those specified in ‘inclusions.</li>
+           <li>Expenses of personal nature such as tips, telephone calls, laundry, pooja samagri etc.</li>
+           <li>Any other item not specified in “inclusions”.</li>
+           <li>Porterage at hotel/airport/railway station and during trekking.</li>
+           <li>Entrance fee/emergency & medical cost.</li>
+           <li>Cost incidental due to road blocks, landslides, change in the itinerary/stay on account of cancellation due to bad weather, ill health, and any factors beyond control.</li>
           </ul>
 
           {/* CTA */}

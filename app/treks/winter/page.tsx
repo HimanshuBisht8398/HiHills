@@ -5,8 +5,16 @@ import Image from 'next/image'
 const winterTreks = [
   { slug: 'kedarkantha', name: 'Kedarkantha Trek', price: '₹6,500/person', days: '4N/5D', img: '/images/Treks/Kedarkantha.png' },
   { slug: 'tungnath', name: 'Tungnath & Chandrashila', price: '₹5,200/person', days: '2N/3D', img: '/images/wework/Tungnath.jpeg' },
-  { slug: 'kedar', name: 'Kedarnath Winter (Heli assist)', price: '₹25,000/person', days: '1N/2D', img: '/images/wework/Kedarnath.jpg' },
-  { slug: 'kedar-kantha-extended', name: 'Kedarkantha Extended', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar', name: 'Khaliya Top', price: '₹25,000/person', days: '1N/2D', img: '/images/wework/Kedarnath.jpg' },
+  { slug: 'kedar-kantha-extended', name: 'Kuari Pass', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Hamta Pass', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Brahmatal Trek', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Chandra Tal', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Kuari Pass', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Chadar Trek', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Dayara Bugyal Trek', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Gulabi Kantha Trek', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
+  { slug: 'kedar-kantha-extended', name: 'Nag Tibba', price: '₹9,000/person', days: '6N/7D', img: '/images/Treks/Kedarkantha.png' },
 ]
 
 export default function WinterTreksPage() {

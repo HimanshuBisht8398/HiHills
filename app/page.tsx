@@ -30,9 +30,9 @@ export default function Home() {
       <Adveture/>
       <Ourteam />
       {/* <Featured /> */}
-      <Manage />
-      <FAQ />
+      {/* <Manage /> */}
       <Articles />
+      <FAQ />
       <Testimonials />
       {/* <Joinus /> */}
       <Insta />

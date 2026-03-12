@@ -1,32 +1,96 @@
-import Image from "next/image";
+"use client";
+
+const features = [
+    {
+        title: "Small Groups",
+        desc: "Join a small group of like-minded travellers eager to explore safely and confidently.",
+        icon: "👥",
+    },
+    {
+        title: "100% Guaranteed Departures",
+        desc: "Every departure is guaranteed. If it's safe, your adventure is happening.",
+        icon: "🧳",
+    },
+    {
+        title: "Locally Based Guides",
+        desc: "Our guides know the region like the back of their hand.",
+        icon: "🧭",
+    },
+    {
+        title: "Support Local Communities",
+        desc: "Our tours benefit local communities through meaningful relationships.",
+        icon: "💛",
+    },
+    {
+        title: "Flexibility & Fun",
+        desc: "Well-planned itineraries with flexibility to make your experience unique.",
+        icon: "🤸",
+    },
+    {
+        title: "Travel Responsibly",
+        desc: "We prioritize responsible travel and positive impact on the places we visit.",
+        icon: "⛰️",
+    },
+];
 
 const Dedicated = () => {
     return (
-        <div className="relative">
+        <div className="py-24">
 
-            <Image src="/images/dedicated/spiral.svg" height={272} width={686} alt="spiral-design" className="absolute left-0 hidden lg:block -z-10" />
+            <div className="mx-auto max-w-7xl px-6">
 
-            <div className='mx-auto max-w-7xl px-4 my-40 sm:py-20 lg:px-8'>
-                <div className='grid grid-cols-1 md:grid-cols-2 my-16'>
+                {/* HEADING */}
+                <div className="text-center mb-20 max-w-3xl mx-auto">
 
-                    {/* COLUMN-1 */}
-                    <div>
-                        <Image src="/images/dedicated/man.svg" alt="man-icon" width={416} height={530} className="mx-auto md:mx-0" />
-                    </div>
+                    {/* CHANGED: Main Title set to Yellow */}
+                    <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-yellow-500 mb-6">
+                        Plan Your Trip On Your Finger Tips!!
+                    </h2>
 
-                    {/* COLUMN-2 */}
-                    <div className="relative">
-                        <Image src="images/dedicated/comma.svg" alt="comma-image" width={200} height={106} className="absolute comma-pos hidden lg:block" />
-                        <h2 className="text-4xl lg:text-65xl pt-4 font-bold sm:leading-tight mt-5 text-center lg:text-start">Dedicated to help peoples design needs.</h2>
-                        <p className="font-medium text-lightblack text-2xl mt-5 text-center lg:text-start">Quis ipsum suspendisse ultrices gravida risus commodo viverra maecenas accumsan lacus vel facilisis</p>
-                        <p className="text-2xl font-semibold mt-12 lg:ml-32 preline text-center lg:text-start"> Cathy Hills, CEO</p>
-                    </div>
+                    <p className="text-lg text-gray-700">
+                        <span className="font-bold text-[#02033b]">Hi Hills:</span> Crafting memorable trekking adventures and relaxing
+                        travel experiences in the Himalayas.
+                    </p>
+
+                    <p className="text-lg text-gray-700 mt-3">
+                        Let’s plan your next escape together.
+                    </p>
+
+                    {/* Decorative line under title */}
+                    <div className="w-24 h-1 bg-yellow-400 mx-auto mt-6 rounded-full"></div>
 
                 </div>
+
+                {/* FEATURES GRID */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 place-items-center">
+
+                    {features.map((item, i) => (
+                        <div
+                            key={i}
+                            className="bg-[#02033b] w-[280px] h-[280px] rounded-full text-center flex flex-col items-center justify-center p-8 shadow-xl transition duration-300 hover:scale-105 border-4 border-yellow-500/20"
+                        >
+                            <div className="text-4xl mb-4">
+                                {item.icon}
+                            </div>
+
+                            {/* Feature Title - kept Yellow for contrast against dark blue */}
+                            <h3 className="text-sm font-bold text-white leading-relaxed uppercase tracking-wide mb-2">
+                                {item.title}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-sm text-white leading-relaxed">
+                                {item.desc}
+                            </p>
+                        </div>
+                    ))}
+
+                </div>
+
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 export default Dedicated;

@@ -15,8 +15,21 @@ const postData: DataType[] = [
   { profession: "Badrinath Dham", name: "John Doe", imgSrc: "/images/wework/Badrinath.webp" },
   { profession: "Tungnath Temple", name: "John Doe", imgSrc: "/images/wework/Tungnath.jpeg" },
   { profession: "Almora", name: "John Doe", imgSrc: "/images/wework/Almora.jpg" },
-  { profession: "Nainital", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Gangotri", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Yamunotri", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
   { profession: "Kainchi Dham", name: "John Doe", imgSrc: "/images/wework/Kainchi.webp" },
+  { profession: "Panch Kedar", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Kartik swami Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Patal Bhuvneshwar", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Jageshwar & Bageshwar Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Mukteshwar Mahadev", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Dhari Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Naina Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Surkunda Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Chitai Golu & Ghodkhal Temple ", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Kasar Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Puniya Giri", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Nanda Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" }
 ];
 
 type StateType = {

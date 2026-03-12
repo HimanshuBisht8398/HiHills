@@ -4,19 +4,66 @@ import React, { Component } from "react";
 
 interface DataType {
   profession: string;
-  name: string;
+  height: string;
   imgSrc: string;
 }
 
 const postData: DataType[] = [
-  { profession: "Rishikesh", name: "John Doe", imgSrc: "/images/wework/Rishikesh.jpg" },
-  { profession: "Haridwar", name: "John Doe", imgSrc: "/images/wework/Haridwar.jpeg" },
-  { profession: "Kedarnath Dham", name: "John Doe", imgSrc: "/images/wework/Kedarnath.jpg" },
-  { profession: "Badrinath Dham", name: "John Doe", imgSrc: "/images/wework/Badrinath.webp" },
-  { profession: "Tungnath Temple", name: "John Doe", imgSrc: "/images/wework/Tungnath.jpeg" },
-  { profession: "Almora", name: "John Doe", imgSrc: "/images/wework/Almora.jpg" },
-  { profession: "Nainital", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Kainchi Dham", name: "John Doe", imgSrc: "/images/wework/Kainchi.webp" },
+  {
+    profession: "Kedarkantha Trek (Uttarakhand)",
+    height: "12,500 ft",
+    imgSrc: "/images/wework/Rishikesh.jpg",
+  },
+  {
+    profession: "Nag Tibba Trek (Uttarakhand)",
+    height: "9,915 ft",
+    imgSrc: "/images/wework/Haridwar.jpeg",
+  },
+  {
+    profession: "Khaliya Top Trek (Uttarakhand)",
+    height: "11,500 ft",
+    imgSrc: "/images/wework/Kedarnath.jpg",
+  },
+  {
+    profession: "Kuari Pass Trek (Uttarakhand)",
+    height: "12,516 ft",
+    imgSrc: "/images/wework/Badrinath.webp",
+  },
+  {
+    profession: "Tungnath Chandrashila Trek (Uttarakhand)",
+    height: "13,123 ft",
+    imgSrc: "/images/wework/Tungnath.jpeg",
+  },
+  {
+    profession: "Brahmatal Trek (Uttarakhand)",
+    height: "12,250 ft",
+    imgSrc: "/images/wework/Almora.jpg",
+  },
+  {
+    profession: "Gulabi Kantha Trek (Uttarakhand)",
+    height: "13,000 ft",
+    imgSrc: "/images/wework/Nainital.jpg",
+  },
+  {
+    profession: "Pangarchulla Trek (Uttarakhand)",
+    height: "15,069 ft",
+    imgSrc: "/images/wework/Kainchi.webp",
+  },
+  {
+    profession: "Triund Trek (Himachal)",
+    height: "9,350 ft",
+    imgSrc: "/images/wework/Kainchi.webp",
+  },
+  {
+    profession: "Prashar Lake Trek (Himachal)",
+    height: "8,960 ft",
+    imgSrc: "/images/wework/Kainchi.webp",
+  },
+  {
+    profession: "Chadar Trek (Ladakh Winter Trek)",
+    height: "11,123 ft",
+    imgSrc: "/images/wework/Kainchi.webp",
+  },
 ];
 
 type StateType = {

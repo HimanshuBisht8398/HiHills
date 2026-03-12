@@ -116,7 +116,7 @@ export default function PackagesView({ id }: Props) {
                 </ul>
 
                 {/* Button */}
-<div className="mt-6 flex gap-3">
+                  <div className="mt-6 flex gap-3">
                     <Link href={`/chardham/${id}/${t.key}`} className="px-4 py-2 rounded-lg border border-gray-200"> View Itinerary</Link>
                   </div>
 
