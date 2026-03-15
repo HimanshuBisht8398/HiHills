@@ -17,9 +17,15 @@ import Adveture from './components/Wework/Adveture';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+export const metadata = {
+  title: 'Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
+  description:
+    'Hi Hills — Premier Haridwar-based travel agency for Uttarakhand tour packages, Char Dham Yatra, Himalayan treks, jeep safaris & handpicked stays. Expert-led, safe & customized.',
+};
+
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <Digital />
       <Banner />
       <Aboutus />
