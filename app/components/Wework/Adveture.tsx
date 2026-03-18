@@ -8,9 +8,10 @@
   interface DataType {
     profession: string;
     price: string;
-    inclusions: string;
     pickup: string;
     images: string[];
+    inclusions: string;
+    
   }
 
   const postData: DataType[] = [
@@ -154,33 +155,52 @@
     };
 
     render() {
-      const settings = {
-        dots: false,
-        infinite: true,
-        centerMode: true,
-        centerPadding: "0px",
-        slidesToShow: 3,
-        autoplay: true,
-        autoplaySpeed: 2500,
-        speed: 1000,
-        arrows: true,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              centerMode: false,
-            },
-          },
-          {
-            breakpoint: 640,
-            settings: {
-              slidesToShow: 1,
-              centerMode: false,
-            },
-          },
-        ],
-      };
+      const NextArrow = ({ onClick }: any) => (
+  <button
+    onClick={onClick}
+    className="
+    absolute -right-10 top-1/2 -translate-y-1/2 z-20
+      w-12 h-12 flex items-center justify-center
+      rounded-full bg-white shadow-lg border
+      hover:bg-orange-500 hover:text-white
+      transition
+    "
+  >
+    →
+  </button>
+);
+
+const PrevArrow = ({ onClick }: any) => (
+  <button
+    onClick={onClick}
+    className="
+       absolute -left-10 top-1/2 -translate-y-1/2 z-20
+      w-12 h-12 flex items-center justify-center
+      rounded-full bg-white shadow-lg border
+      hover:bg-orange-500 hover:text-white
+      transition
+    "
+  >
+    ←
+  </button>
+);
+    const settings = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: false, // ✅ manual control
+      speed: 600,
+      swipeToSlide: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+      responsive: [
+        { breakpoint: 1200, settings: { slidesToShow: 3 } },
+        { breakpoint: 1024, settings: { slidesToShow: 2 } },
+        { breakpoint: 640, settings: { slidesToShow: 1 } },
+      ],
+    };
 
       return (
         <div className="bg-gray-50 py-28">
@@ -236,10 +256,10 @@
                       </p>
 
                       <p className="text-sm opacity-90">
-                        ✔ {items.inclusions}
+                        Inclusions:- {items.inclusions}
                       </p>
                          <p className="text-sm opacity-90">
-                        ✔ {items.price}
+                        {items.price}
                       </p>
                     </div>
 

@@ -195,21 +195,58 @@ export default function MultipleItems() {
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, text]);
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    autoplay: true,
-    autoplaySpeed: 0,
-    speed: 5000,
-    cssEase: "linear",
-    pauseOnHover: true,
-    arrows: false,
-    responsive: [
-      { breakpoint: 1200, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
-    ],
-  };
+    const NextArrow = ({ onClick }: any) => (
+      <button
+        onClick={onClick}
+        className="
+          absolute -right-10 top-1/2 -translate-y-1/2 z-20
+          w-12 h-12 flex items-center justify-center
+          rounded-full bg-white/90 backdrop-blur-md
+          shadow-xl border border-gray-200
+          hover:bg-orange-500 hover:text-white
+          transition-all duration-300 group
+        "
+      >
+        <span className="text-xl font-bold group-hover:scale-110 transition">
+          →
+        </span>
+      </button>
+    );
+
+    const PrevArrow = ({ onClick }: any) => (
+      <button
+        onClick={onClick}
+        className="
+          absolute -left-10 top-1/2 -translate-y-1/2 z-20
+          w-12 h-12 flex items-center justify-center
+          rounded-full bg-white/90 backdrop-blur-md
+          shadow-xl border border-gray-200
+          hover:bg-orange-500 hover:text-white
+          transition-all duration-300 group
+        "
+      >
+        <span className="text-xl font-bold group-hover:scale-110 transition">
+          ←
+        </span>
+      </button>
+    );
+     const settings = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: false, // ✅ manual control
+      speed: 600,
+      swipeToSlide: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+      responsive: [
+        { breakpoint: 1200, settings: { slidesToShow: 3 } },
+        { breakpoint: 1024, settings: { slidesToShow: 2 } },
+        { breakpoint: 640, settings: { slidesToShow: 1 } },
+      ],
+    };
   const inclusionIcons: Record<string, any> = {
   meals: Utensils,
   transport: Bus,

@@ -1,39 +1,30 @@
 "use client";
+
 import Slider from "react-slick";
 import React, { Component } from "react";
-
+import { FaUtensils, FaBed, FaUserTie, FaBus } from "react-icons/fa";
 interface DataType {
-   profession: string;
+  profession: string;
   price: string;
   duration: string;
   route: string;
   imgSrc: string;
   tag?: string;
+  inclusions: {
+    meals?: boolean;
+    stay?: boolean;
+    guide?: boolean;
+    transport?: boolean;
+  };
 }
 
 const postData: DataType[] = [
-  { profession: "Rishikesh", price: " 5,000", duration: "2 Days", route: "Rishikesh - Neelkanth - Rishikesh", imgSrc: "/images/wework/Rishikesh.jpg" },
-  { profession: "Haridwar", price: " 4,000", duration: "1 Day", route: "Haridwar - Rishikesh - Haridwar", imgSrc: "/images/wework/Haridwar.jpeg" },
-  { profession: "Kedarnath Dham", price: " 12,000", duration: "5 Days", route: "Haridwar - Kedarnath - Haridwar", imgSrc: "/images/wework/Kedarnath.jpg" },
-  { profession: "Badrinath Dham", price: " 12,000", duration: "5 Days", route: "Haridwar - Badrinath - Haridwar", imgSrc: "/images/wework/Badrinath.webp" },
-  { profession: "Tungnath Temple", price: " 6,000", duration: "3 Days", route: "Rishikesh - Tungnath - Rishikesh", imgSrc: "/images/wework/Tungnath.jpeg" },
-  { profession: "Almora", price: " 8,000", duration: "4 Days", route: "Rishikesh - Almora - Rishikesh", imgSrc: "/images/wework/Almora.jpg" },
-  { profession: "Gangotri", price: " 10,000", duration: "5 Days", route: "Haridwar - Gangotri - Haridwar", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Yamunotri", price: " 10,000", duration: "5 Days", route: "Haridwar - Yamunotri - Haridwar", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Kainchi Dham", price: " 6,000", duration: "3 Days", route: "Rishikesh - Kainchi Dham - Rishikesh", imgSrc: "/images/wework/Kainchi.webp" },
-  { profession: "Panch Kedar", price: " 15,000", duration: "7 Days", route: "Haridwar - Panch Kedar - Haridwar", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Kartik swami Temple", price: " 5,000", duration: "2 Days", route: "Rishikesh - Kartik Swami - Rishikesh", imgSrc: "/images/wework/Kartik_swami.jpeg" },
-  { profession: "Patal Bhuvneshwar", price: " 6,000", duration: "3 Days", route: "Rishikesh - Patal Bhuvneshwar - Rishikesh", imgSrc: "/images/wework/patal-bhuvaneshwar.webp" },
-  { profession: "Jageshwar", price: " 7,000", duration: "4 Days", route: "Rishikesh - Jageshwar - Rishikesh", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Baijnath Temple", price: " 5,000", duration: "2 Days", route: "Rishikesh - Baijnath - Rishikesh", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Mukteshwar Mahadev", price: " 5,000", duration: "2 Days", route: "Rishikesh - Mukteshwar - Rishikesh", imgSrc: "/images/wework/MukteshwarMahadev.jpg" },
-  { profession: "Dhari Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Dhari Devi - Rishikesh", imgSrc: "/images/wework/DhariDevi.webp" },
-  { profession: "Naina Devi Temple(Almora)", price: " 4,000", duration: "1 Day", route: "Rishikesh - Naina Devi - Rishikesh", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Surkunda Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Surkunda Devi - Rishikesh", imgSrc: "/images/wework/surkanda-devi-temple.jpeg" },
-  { profession: "Chitai Golu & Ghodkhal Temple ", price: " 4,000", duration: "1 Day", route: "Rishikesh - Chitai Golu - Rishikesh", imgSrc: "/images/wework/Chitai-Golu-Devta-Temple.jpg" },
-  { profession: "Kasar Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Kasar Devi - Rishikesh", imgSrc: "/images/wework/Kasardevi.jpeg" },
-  { profession: "Puniya Giri", price: " 4,000", duration: "1 Day", route: "Rishikesh - Puniya Giri - Rishikesh", imgSrc: "/images/wework/Purnagiri.jpg" },
-  { profession: "Nanda Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Nanda Devi - Rishikesh", imgSrc: "/images/wework/Nandadevitemple.avif" }
+  { profession: "Rishikesh", price: "5,000", duration: "2 Days", route: "Rishikesh - Neelkanth - Rishikesh", imgSrc: "/images/wework/Rishikesh.jpg", inclusions: { meals: true, guide: true, transport: true }, },
+  { profession: "Haridwar", price: "4,000", duration: "1 Day", route: "Haridwar - Rishikesh - Haridwar", imgSrc: "/images/wework/Haridwar.jpeg", inclusions: { meals: false, guide: true, transport: true }, },
+  { profession: "Kedarnath Dham", price: "12,000", duration: "5 Days", route: "Haridwar - Kedarnath - Haridwar", imgSrc: "/images/wework/Kedarnath.jpg", inclusions: { meals: true, stay: true, guide: true, transport: true }, },
+  { profession: "Badrinath Dham", price: "12,000", duration: "5 Days", route: "Haridwar - Badrinath - Haridwar", imgSrc: "/images/wework/Badrinath.webp", inclusions: { meals: true, stay: true, guide: true, transport: true }, },
+  { profession: "Tungnath Temple", price: "6,000", duration: "3 Days", route: "Rishikesh - Tungnath - Rishikesh", imgSrc: "/images/wework/Tungnath.jpeg", inclusions: { meals: true, guide: true, transport: true }, },
+  { profession: "Almora", price: "8,000", duration: "4 Days", route: "Rishikesh - Almora - Rishikesh", imgSrc: "/images/wework/Almora.jpg", inclusions: { meals: true, stay: true, guide: true, transport: true }, },
 ];
 
 type StateType = {
@@ -71,15 +62,44 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
   render() {
     const { selectedPlace } = this.state;
 
+    // ✅ Custom Arrows
+    const NextArrow = (props: any) => (
+      <div
+        onClick={props.onClick}
+        className="absolute -right-10 top-1/2 -translate-y-1/2 z-20
+      w-12 h-12 flex items-center justify-center
+      rounded-full bg-white shadow-lg border
+      hover:bg-orange-500 hover:text-white
+      transition"
+      >
+        ➡
+      </div>
+    );
+
+    const PrevArrow = (props: any) => (
+      <div
+        onClick={props.onClick}
+        className="absolute -left-10 top-1/2 -translate-y-1/2 z-20
+      w-12 h-12 flex items-center justify-center
+      rounded-full bg-white shadow-lg border
+      hover:bg-orange-500 hover:text-white
+      transition"
+      >
+        ⬅
+      </div>
+    );
+
     const settings = {
       dots: false,
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
       arrows: true,
-      autoplay: true,
-      speed: 1000,
-      autoplaySpeed: 2000,
+      autoplay: false, // ✅ controlled by arrows
+      speed: 600,
+      swipeToSlide: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
       responsive: [
         { breakpoint: 1200, settings: { slidesToShow: 3 } },
         { breakpoint: 1024, settings: { slidesToShow: 2 } },
@@ -89,6 +109,7 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
 
     return (
       <div className="py-20 px-4 bg-gray-50">
+
         {/* Heading */}
         <div className="mx-auto max-w-7xl text-center mb-12">
           <h3 className="text-4xl sm:text-5xl font-bold">
@@ -97,7 +118,7 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
         </div>
 
         {/* Slider */}
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl relative">
           <Slider {...settings}>
             {postData.map((item, i) => (
               <div key={i} className="px-3 pb-10">
@@ -110,11 +131,6 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
                       alt={item.profession}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    {item.tag && (
-                      <span className="absolute top-3 right-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
-                        {item.tag}
-                      </span>
-                    )}
                   </div>
 
                   {/* Content */}
@@ -136,13 +152,49 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
                     {/* Details */}
                     <div className="space-y-3 mb-6">
                       <div className="flex items-center text-gray-600 text-sm gap-2">
-                        📅 <span>{item.duration}</span>
+                        📅 {item.duration}
                       </div>
                       <div className="text-gray-500 text-xs">
                         📍 {item.route}
                       </div>
                     </div>
+                <div className="flex items-center gap-4 mb-5">
+  {/* Label */}
+  <span className="text-sm font-bold text-[#1A2B49] whitespace-nowrap">
+    Inclusions:
+  </span>
 
+  {/* Icons Container */}
+  <div className="flex items-center gap-4 text-gray-600 text-lg">
+    {item.inclusions.meals && (
+      <div className="flex flex-col items-center text-[10px] leading-tight">
+        {React.createElement(FaUtensils as any)}
+        <span>Meals</span>
+      </div>
+    )}
+
+    {item.inclusions.stay && (
+      <div className="flex flex-col items-center text-[10px] leading-tight">
+        {React.createElement(FaBed as any)}
+        <span>Stay</span>
+      </div>
+    )}
+
+    {item.inclusions.guide && (
+      <div className="flex flex-col items-center text-[10px] leading-tight">
+        {React.createElement(FaUserTie as any)}
+        <span>Guide</span>
+      </div>
+    )}
+
+    {item.inclusions.transport && (
+      <div className="flex flex-col items-center text-[10px] leading-tight">
+        {React.createElement(FaBus as any)}
+        <span>Transport</span>
+      </div>
+    )}
+  </div>
+</div>
                     {/* Button */}
                     <button
                       onClick={() =>
@@ -198,9 +250,11 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
                   </button>
                 </div>
               </div>
+
             </div>
           </div>
         )}
+
       </div>
     );
   }

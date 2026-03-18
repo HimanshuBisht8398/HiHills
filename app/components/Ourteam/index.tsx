@@ -49,25 +49,56 @@ export default class Index extends Component<{}, StateType> {
   };
 
   render() {
-    const settings = {
+    const NextArrow = ({ onClick }: any) => (
+      <button
+        onClick={onClick}
+        className="
+          absolute -right-10 top-1/2 -translate-y-1/2 z-20
+          w-12 h-12 flex items-center justify-center
+          rounded-full bg-white/90 backdrop-blur-md
+          shadow-xl border border-gray-200
+          hover:bg-orange-500 hover:text-white
+          transition-all duration-300 group
+        "
+      >
+        <span className="text-xl font-bold group-hover:scale-110 transition">
+          →
+        </span>
+      </button>
+    );
+
+    const PrevArrow = ({ onClick }: any) => (
+      <button
+        onClick={onClick}
+        className="
+          absolute -left-10 top-1/2 -translate-y-1/2 z-20
+          w-12 h-12 flex items-center justify-center
+          rounded-full bg-white/90 backdrop-blur-md
+          shadow-xl border border-gray-200
+          hover:bg-orange-500 hover:text-white
+          transition-all duration-300 group
+        "
+      >
+        <span className="text-xl font-bold group-hover:scale-110 transition">
+          ←
+        </span>
+      </button>
+    );
+     const settings = {
       dots: false,
       infinite: true,
-      centerMode: true,
-      centerPadding: "0px",
       slidesToShow: 3,
-      autoplay: true,
-      autoplaySpeed: 2500,
-      speed: 1000,
+      slidesToScroll: 1,
       arrows: true,
+      autoplay: false, // ✅ manual control
+      speed: 600,
+      swipeToSlide: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
       responsive: [
-        {
-          breakpoint: 1024,
-          settings: { slidesToShow: 2, centerMode: false },
-        },
-        {
-          breakpoint: 640,
-          settings: { slidesToShow: 1, centerMode: false },
-        },
+        { breakpoint: 1200, settings: { slidesToShow: 3 } },
+        { breakpoint: 1024, settings: { slidesToShow: 2 } },
+        { breakpoint: 640, settings: { slidesToShow: 1 } },
       ],
     };
 
