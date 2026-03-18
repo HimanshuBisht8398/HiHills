@@ -3,45 +3,47 @@ import Slider from "react-slick";
 import React, { Component } from "react";
 
 interface DataType {
-  profession: string;
-  name: string;
+   profession: string;
+  price: string;
+  duration: string;
+  route: string;
   imgSrc: string;
+  tag?: string;
 }
 
 const postData: DataType[] = [
-  { profession: "Rishikesh", name: "John Doe", imgSrc: "/images/wework/Rishikesh.jpg" },
-  { profession: "Haridwar", name: "John Doe", imgSrc: "/images/wework/Haridwar.jpeg" },
-  { profession: "Kedarnath Dham", name: "John Doe", imgSrc: "/images/wework/Kedarnath.jpg" },
-  { profession: "Badrinath Dham", name: "John Doe", imgSrc: "/images/wework/Badrinath.webp" },
-  { profession: "Tungnath Temple", name: "John Doe", imgSrc: "/images/wework/Tungnath.jpeg" },
-  { profession: "Almora", name: "John Doe", imgSrc: "/images/wework/Almora.jpg" },
-  { profession: "Gangotri", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Yamunotri", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Kainchi Dham", name: "John Doe", imgSrc: "/images/wework/Kainchi.webp" },
-  { profession: "Panch Kedar", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Kartik swami Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Patal Bhuvneshwar", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Jageshwar & Bageshwar Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Mukteshwar Mahadev", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Dhari Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Naina Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Surkunda Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Chitai Golu & Ghodkhal Temple ", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Kasar Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Puniya Giri", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" },
-  { profession: "Nanda Devi Temple", name: "John Doe", imgSrc: "/images/wework/Nainital.jpg" }
+  { profession: "Rishikesh", price: " 5,000", duration: "2 Days", route: "Rishikesh - Neelkanth - Rishikesh", imgSrc: "/images/wework/Rishikesh.jpg" },
+  { profession: "Haridwar", price: " 4,000", duration: "1 Day", route: "Haridwar - Rishikesh - Haridwar", imgSrc: "/images/wework/Haridwar.jpeg" },
+  { profession: "Kedarnath Dham", price: " 12,000", duration: "5 Days", route: "Haridwar - Kedarnath - Haridwar", imgSrc: "/images/wework/Kedarnath.jpg" },
+  { profession: "Badrinath Dham", price: " 12,000", duration: "5 Days", route: "Haridwar - Badrinath - Haridwar", imgSrc: "/images/wework/Badrinath.webp" },
+  { profession: "Tungnath Temple", price: " 6,000", duration: "3 Days", route: "Rishikesh - Tungnath - Rishikesh", imgSrc: "/images/wework/Tungnath.jpeg" },
+  { profession: "Almora", price: " 8,000", duration: "4 Days", route: "Rishikesh - Almora - Rishikesh", imgSrc: "/images/wework/Almora.jpg" },
+  { profession: "Gangotri", price: " 10,000", duration: "5 Days", route: "Haridwar - Gangotri - Haridwar", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Yamunotri", price: " 10,000", duration: "5 Days", route: "Haridwar - Yamunotri - Haridwar", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Kainchi Dham", price: " 6,000", duration: "3 Days", route: "Rishikesh - Kainchi Dham - Rishikesh", imgSrc: "/images/wework/Kainchi.webp" },
+  { profession: "Panch Kedar", price: " 15,000", duration: "7 Days", route: "Haridwar - Panch Kedar - Haridwar", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Kartik swami Temple", price: " 5,000", duration: "2 Days", route: "Rishikesh - Kartik Swami - Rishikesh", imgSrc: "/images/wework/Kartik_swami.jpeg" },
+  { profession: "Patal Bhuvneshwar", price: " 6,000", duration: "3 Days", route: "Rishikesh - Patal Bhuvneshwar - Rishikesh", imgSrc: "/images/wework/patal-bhuvaneshwar.webp" },
+  { profession: "Jageshwar", price: " 7,000", duration: "4 Days", route: "Rishikesh - Jageshwar - Rishikesh", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Baijnath Temple", price: " 5,000", duration: "2 Days", route: "Rishikesh - Baijnath - Rishikesh", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Mukteshwar Mahadev", price: " 5,000", duration: "2 Days", route: "Rishikesh - Mukteshwar - Rishikesh", imgSrc: "/images/wework/MukteshwarMahadev.jpg" },
+  { profession: "Dhari Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Dhari Devi - Rishikesh", imgSrc: "/images/wework/DhariDevi.webp" },
+  { profession: "Naina Devi Temple(Almora)", price: " 4,000", duration: "1 Day", route: "Rishikesh - Naina Devi - Rishikesh", imgSrc: "/images/wework/Nainital.jpg" },
+  { profession: "Surkunda Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Surkunda Devi - Rishikesh", imgSrc: "/images/wework/surkanda-devi-temple.jpeg" },
+  { profession: "Chitai Golu & Ghodkhal Temple ", price: " 4,000", duration: "1 Day", route: "Rishikesh - Chitai Golu - Rishikesh", imgSrc: "/images/wework/Chitai-Golu-Devta-Temple.jpg" },
+  { profession: "Kasar Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Kasar Devi - Rishikesh", imgSrc: "/images/wework/Kasardevi.jpeg" },
+  { profession: "Puniya Giri", price: " 4,000", duration: "1 Day", route: "Rishikesh - Puniya Giri - Rishikesh", imgSrc: "/images/wework/Purnagiri.jpg" },
+  { profession: "Nanda Devi Temple", price: " 4,000", duration: "1 Day", route: "Rishikesh - Nanda Devi - Rishikesh", imgSrc: "/images/wework/Nandadevitemple.avif" }
 ];
 
 type StateType = {
   animatedWords: string[];
-  deleting: boolean;
   selectedPlace: DataType | null;
 };
 
-export default class MultipleItems extends Component<{}, StateType> {
+export default class SpiritualPlaces extends Component<{}, StateType> {
   state: StateType = {
     animatedWords: [],
-    deleting: false,
     selectedPlace: null,
   };
 
@@ -53,35 +55,16 @@ export default class MultipleItems extends Component<{}, StateType> {
   }
 
   animateWords = () => {
-    const { animatedWords, deleting } = this.state;
-    let index = deleting ? animatedWords.length - 1 : animatedWords.length;
+    const { animatedWords } = this.state;
+    let index = animatedWords.length;
 
-    if (!deleting) {
-      if (index < this.words.length) {
-        setTimeout(() => {
-          this.setState(
-            { animatedWords: [...animatedWords, this.words[index]] },
-            this.animateWords
-          );
-        }, 350);
-      } else {
-        setTimeout(() => {
-          this.setState({ deleting: true }, this.animateWords);
-        }, 1200);
-      }
-    } else {
-      if (index >= 0) {
-        setTimeout(() => {
-          this.setState(
-            { animatedWords: animatedWords.slice(0, index) },
-            this.animateWords
-          );
-        }, 200);
-      } else {
-        setTimeout(() => {
-          this.setState({ deleting: false }, this.animateWords);
-        }, 500);
-      }
+    if (index < this.words.length) {
+      setTimeout(() => {
+        this.setState(
+          { animatedWords: [...animatedWords, this.words[index]] },
+          this.animateWords
+        );
+      }, 300);
     }
   };
 
@@ -91,79 +74,130 @@ export default class MultipleItems extends Component<{}, StateType> {
     const settings = {
       dots: false,
       infinite: true,
-      slidesToShow: 5,
+      slidesToShow: 3,
       slidesToScroll: 1,
-      arrows: false,
+      arrows: true,
       autoplay: true,
-      speed: 4000,
+      speed: 1000,
       autoplaySpeed: 2000,
-      cssEase: "linear",
       responsive: [
         { breakpoint: 1200, settings: { slidesToShow: 3 } },
-        { breakpoint: 800, settings: { slidesToShow: 2 } },
-        { breakpoint: 450, settings: { slidesToShow: 1 } },
+        { breakpoint: 1024, settings: { slidesToShow: 2 } },
+        { breakpoint: 640, settings: { slidesToShow: 1 } },
       ],
     };
 
     return (
-      <div className="bg-wework py-32">
-        <div className="mx-auto max-w-7xl text-center">
-          <h3 className="text-4xl sm:text-6xl font-bold my-2">
+      <div className="py-20 px-4 bg-gray-50">
+        {/* Heading */}
+        <div className="mx-auto max-w-7xl text-center mb-12">
+          <h3 className="text-4xl sm:text-5xl font-bold">
             {this.state.animatedWords.join(" ")}
-            <span className="opacity-50">|</span>
           </h3>
         </div>
 
-        <Slider {...settings}>
-          {postData.map((items, i) => (
-            <div key={i}>
-              <div
-                onClick={() => this.setState({ selectedPlace: items })}
-                className="bg-white cursor-pointer m-3 py-14 my-10 text-center shadow-xl rounded-3xl hover:scale-105 transition"
-              >
-                <img
-                  src={items.imgSrc}
-                  alt={items.profession}
-                  width={182}
-                  height={282}
-                  style={{ margin: "0 auto" }}
-                />
-                <h3 className="text-2xl pt-4 opacity-60">
-                  {items.profession}
-                </h3>
+        {/* Slider */}
+        <div className="mx-auto max-w-7xl">
+          <Slider {...settings}>
+            {postData.map((item, i) => (
+              <div key={i} className="px-3 pb-10">
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden border flex flex-col h-full group">
+
+                  {/* Image */}
+                  <div className="relative h-60 overflow-hidden">
+                    <img
+                      src={item.imgSrc}
+                      alt={item.profession}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    {item.tag && (
+                      <span className="absolute top-3 right-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
+                        {item.tag}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5 flex flex-col flex-grow">
+                    <h3 className="text-xl font-bold text-gray-800 mb-1">
+                      {item.profession}
+                    </h3>
+
+                    {/* Price */}
+                    <div className="flex items-center gap-1 mb-4">
+                      <span className="text-lg font-bold text-[#1A2B49]">
+                        ₹{item.price}/-
+                      </span>
+                      <span className="text-sm text-gray-500">
+                        Onwards
+                      </span>
+                    </div>
+
+                    {/* Details */}
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center text-gray-600 text-sm gap-2">
+                        📅 <span>{item.duration}</span>
+                      </div>
+                      <div className="text-gray-500 text-xs">
+                        📍 {item.route}
+                      </div>
+                    </div>
+
+                    {/* Button */}
+                    <button
+                      onClick={() =>
+                        this.setState({ selectedPlace: item })
+                      }
+                      className="mt-auto w-max ml-auto border border-orange-300 text-orange-600 px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-50 transition"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        </div>
 
         {/* MODAL */}
         {selectedPlace && (
-          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
-            <div className="bg-white rounded-2xl p-8 max-w-lg w-full relative">
+          <div className="fixed inset-0 bg-black/70 z-[999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl overflow-hidden max-w-lg w-full relative">
+
               <button
-                onClick={() => this.setState({ selectedPlace: null })}
-                className="absolute top-3 right-4 text-2xl font-bold"
+                onClick={() =>
+                  this.setState({ selectedPlace: null })
+                }
+                className="absolute top-4 right-4 bg-white rounded-full w-8 h-8 flex items-center justify-center text-xl font-bold"
               >
                 ×
               </button>
 
               <img
                 src={selectedPlace.imgSrc}
-                className="w-full h-60 object-cover rounded-xl"
+                className="w-full h-64 object-cover"
               />
 
-              <h2 className="text-3xl font-bold mt-4">
-                {selectedPlace.profession}
-              </h2>
+              <div className="p-8">
+                <h2 className="text-3xl font-bold mb-2">
+                  {selectedPlace.profession}
+                </h2>
 
-              <p className="mt-3 text-gray-600">
-                Explore the spiritual beauty of {selectedPlace.profession}.
-                Experience peace, culture and divine energy.
-              </p>
+                <p className="text-gray-600 mb-6">
+                  Explore the divine beauty of {selectedPlace.profession}.
+                  A peaceful and spiritual journey awaits you.
+                </p>
 
-              <button className="mt-6 bg-black text-white px-6 py-2 rounded-xl">
-                Book Now
-              </button>
+                <div className="flex justify-between items-center">
+                  <p className="text-2xl font-bold">
+                    ₹{selectedPlace.price}
+                  </p>
+
+                  <button className="bg-orange-500 text-white px-6 py-2 rounded-xl">
+                    Book Now
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

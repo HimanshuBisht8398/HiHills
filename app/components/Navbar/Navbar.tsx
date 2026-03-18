@@ -85,7 +85,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-1">
                 <PhoneIcon className="h-4 w-4" />
                 <a href="tel:+917617610909" className="hover:text-orange-500">
-                  +91-7617610909 , +91-87711105877
+                  +91-7617610909 , +91-8171105877
                 </a>
               </div>
 

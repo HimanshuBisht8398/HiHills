@@ -4,17 +4,83 @@ import Image from 'next/image'
 import { Calendar, MapPin } from 'lucide-react' // Using lucide-react for the icons
 
 const winterTreks = [
-  { slug: 'kedarkantha', name: 'Kedarkantha Trek', price: '6,500', days: '4N/5D', route: 'Dehradun ⇄ Dehradun', img: '/images/Treks/Kedarkantha.png', tag: 'Group' },
-  { slug: 'tungnath', name: 'Tungnath & Chandrashila', price: '5,200', days: '2N/3D', route: 'Rishikesh ⇄ Rishikesh', img: '/images/wework/Tungnath.jpeg', tag: 'Group' },
-  { slug: 'kedar', name: 'Khaliya Top', price: '25,000', days: '1N/2D', route: 'Munsiyari ⇄ Munsiyari', img: '/images/wework/Kedarnath.jpg', tag: 'Group' },
-  { slug: 'kuari-pass', name: 'Kuari Pass', price: '9,000', days: '6N/7D', route: 'Joshimath ⇄ Joshimath', img: '/images/Treks/Kedarkantha.png', tag: 'Group' },
-  { slug: 'hamta-pass', name: 'Hamta Pass', price: '9,000', days: '6N/7D', route: 'Manali ⇄ Manali', img: '/images/Treks/Kedarkantha.png', tag: 'Group' },
-  { slug: 'brahmatal', name: 'Brahmatal Trek', price: '9,000', days: '6N/7D', route: 'Kathgodam ⇄ Kathgodam', img: '/images/Treks/Kedarkantha.png', tag: 'Group' },
-]
+  { 
+    slug: 'kedarkantha', 
+    name: 'Kedarkantha Trek', 
+    price: '6,500', 
+    days: '5N/6D', 
+    route: 'Dehradun ⇄ Dehradun', 
+    img: '/images/Treks/Kedarkantha.png', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'tungnath', 
+    name: 'Tungnath & Chandrashila', 
+    price: '5,500', 
+    days: '2N/3D', 
+    route: 'Rishikesh ⇄ Rishikesh', 
+    img: '/images/Treks/Chandrashila.jpg', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'khaliya-top', 
+    name: 'Khaliya Top Trek', 
+    price: '8,500', 
+    days: '3N/4D', 
+    route: 'Munsiyari ⇄ Munsiyari', 
+    img: '/images/Treks/Khaliyatop.webp', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'dayara-bugyal', 
+    name: 'Dayara Bugyal Trek', 
+    price: '7,500', 
+    days: '3N/4D', 
+    route: 'Dehradun ⇄ Dehradun', 
+    img: '/images/Treks/Dayara-Bugyal.jpg', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'gulabi-kantha', 
+    name: 'Gulabi Kantha Trek', 
+    price: '8,900', 
+    days: '4N/5D', 
+    route: 'Dehradun ⇄ Dehradun', 
+    img: '/images/Treks/Gulabikantha.webp', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'kuari-pass', 
+    name: 'Kuari Pass Trek', 
+    price: '9,500', 
+    days: '5N/6D', 
+    route: 'Rishikesh ⇄ Rishikesh', 
+    img: '/images/Treks/Kauripass.webp', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'brahmatal', 
+    name: 'Brahmatal Trek', 
+    price: '8,500', 
+    days: '5N/6D', 
+    route: 'Kathgodam ⇄ Kathgodam', 
+    img: '/images/Treks/Brahmataal.jpg  ', 
+    tag: 'Group' 
+  },
+  { 
+    slug: 'hamta-pass', 
+    name: 'Hampta Pass Trek', 
+    price: '9,000', 
+    days: '4N/5D', 
+    route: 'Manali ⇄ Manali', 
+    img: '/images/Treks/Hamptapass.webp', 
+    tag: 'Group' 
+  },
+];
 
 export default function WinterTreksPage() {
   return (
-    <div className="py-20 bg-[#FAF9F6]">
+    <div className="py-20">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#1A2B49] mb-4 text-center">Winter Treks</h1>

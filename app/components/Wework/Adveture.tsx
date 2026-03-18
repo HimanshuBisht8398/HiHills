@@ -97,39 +97,55 @@
       this.animateWords();
     }
 
+    // animateWords = () => {
+    //   const { animatedWords, deleting } = this.state;
+    //   let index = deleting ? animatedWords.length - 1 : animatedWords.length;
+
+    //   if (!deleting) {
+    //     if (index < this.words.length) {
+    //       setTimeout(() => {
+    //         this.setState(
+    //           { animatedWords: [...animatedWords, this.words[index]] },
+    //           this.animateWords
+    //         );
+    //       }, 200);
+    //     } else {
+    //       setTimeout(() => {
+    //         this.setState({ deleting: true }, this.animateWords);
+    //       }, 1200);
+    //     }
+    //   } else {
+    //     if (index >= 0) {
+    //       setTimeout(() => {
+    //         this.setState(
+    //           { animatedWords: animatedWords.slice(0, index) },
+    //           this.animateWords
+    //         );
+    //       }, 120);
+    //     } else {
+    //       setTimeout(() => {
+    //         this.setState({ deleting: false }, this.animateWords);
+    //       }, 400);
+    //     }
+    //   }
+    // };
+
+
     animateWords = () => {
-      const { animatedWords, deleting } = this.state;
-      let index = deleting ? animatedWords.length - 1 : animatedWords.length;
+    const { animatedWords } = this.state;
+    let index = animatedWords.length;
 
-      if (!deleting) {
-        if (index < this.words.length) {
-          setTimeout(() => {
-            this.setState(
-              { animatedWords: [...animatedWords, this.words[index]] },
-              this.animateWords
-            );
-          }, 200);
-        } else {
-          setTimeout(() => {
-            this.setState({ deleting: true }, this.animateWords);
-          }, 1200);
-        }
-      } else {
-        if (index >= 0) {
-          setTimeout(() => {
-            this.setState(
-              { animatedWords: animatedWords.slice(0, index) },
-              this.animateWords
-            );
-          }, 120);
-        } else {
-          setTimeout(() => {
-            this.setState({ deleting: false }, this.animateWords);
-          }, 400);
-        }
-      }
-    };
-
+    // Only add words if we haven't reached the end of the sentence
+    if (index < this.words.length) {
+      setTimeout(() => {
+        this.setState(
+          { animatedWords: [...animatedWords, this.words[index]] },
+          this.animateWords // Call again for the next word
+        );
+      }, 200);
+    }
+    // No 'else' block here means it stops once the sentence is full
+  };
     // open contact modal (used when a card is clicked)
     openContact = () => {
       if (typeof window !== "undefined") {
@@ -173,7 +189,7 @@
           <div className="mx-auto max-w-7xl text-center mb-16 px-6">
             <h3 className="text-4xl sm:text-6xl font-bold text-gray-900">
               {this.state.animatedWords.join(" ")}
-              <span className="opacity-40">|</span>
+              {/* <span className="opacity-40">|</span> */}
             </h3>
           </div>
 
@@ -201,9 +217,9 @@
                     />
 
                     {/* Price Badge */}
-                    <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-semibold shadow">
+                    {/* <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-semibold shadow">
                       {items.price}
-                    </div>
+                    </div> */}
 
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -222,7 +238,9 @@
                       <p className="text-sm opacity-90">
                         ✔ {items.inclusions}
                       </p>
-
+                         <p className="text-sm opacity-90">
+                        ✔ {items.price}
+                      </p>
                     </div>
 
                   </div>

@@ -115,18 +115,23 @@ const Footer = () => {
 
               <li className="flex items-center space-x-3">
                 <PhoneIcon className="h-5 w-5 text-orange-400" />
-                <span>+91-8771115877</span>
+                <span>+91-8171105877</span>
               </li>
 
             </ul>
           </div>
 
         </div>
-      </div>
-
-      {/* Bottom Orange Bar */}
-      <div className="bg-orange-500 text-center py-4 text-white text-sm">
-        ©2024 Hi Hills. All Rights Reserved.
+<div className="bg-gray-900 text-center py-4 text-gray-300 text-sm border-t border-gray-700">
+  © 2024-2026 Hi Hills  Tour and Travels | All rights reserved.{" "}
+  <Link href="/terms" className="underline hover:text-white">
+    Terms
+  </Link>{" "}
+  &{" "}
+  <Link href="/privacy" className="underline hover:text-white">
+    Privacy Policy
+  </Link>
+</div>
       </div>
 
     </footer>

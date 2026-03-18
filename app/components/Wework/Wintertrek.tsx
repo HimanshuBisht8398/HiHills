@@ -19,82 +19,82 @@ interface DataType {
 const postData: DataType[] = [
   {
     name: "Kedarkantha Trek (Uttarakhand)",
-    price: "₹ 8,500",
+    price: "8,500",
     duration: "6 Days",
     route: "Sankri - Kedarkantha - Sankri",
-    imgSrc: "/images/wework/Rishikesh.jpg",
+    imgSrc: "/images/Treks/Kedarkantha.webp",
   },
   
   {
     name: "Nag Tibba Trek (Uttarakhand)",
-    price: "₹ 7,000",
+    price: "7,000",
     duration: "5 Days",
     route: "Pantwari - Nag Tibba - Pantwari",
-    imgSrc: "/images/wework/Haridwar.jpeg",
+    imgSrc: "/images/Treks/Naag-tibba.webp",
   },
   {
     name: "Khaliya Top Trek (Uttarakhand)",
-    price: "₹ 6,500",
+    price: "6,500",
     duration: "4 Days",
     route: "Mukhwa - Khaliya Top - Mukhwa",
-    imgSrc: "/images/wework/Kedarnath.jpg",
+    imgSrc: "/images/Treks/Khaliyatop.webp",
   },
   {
     name: "Kuari Pass Trek (Uttarakhand)",
-    price: "₹ 7,500",
+    price: "7,500",
     duration: "5 Days",
     route: "Joshimath - Kuari Pass - Joshimath",
-    imgSrc: "/images/wework/Badrinath.webp",
+    imgSrc: "/images/Treks/Kauripass.webp",
   },
   {
     name: "Chandrashila Trek (Uttarakhand)",
-    price: "₹ 6,500",
+    price: "6,500",
     duration: "5 Days",
     route: "Chopta - Tungnath - Chandrashila - Chopta",
-    imgSrc: "/images/wework/Tungnath.jpeg",
+    imgSrc: "/images/Treks/Chandrashila.jpg",
   },
   {
     name: "Brahmatal Trek (Uttarakhand)",
-    price: "₹ 7,000",
+    price: "7,000",
     duration: "5 Days",
     route: "Karinth - Brahmatal - Karinth",
-    imgSrc: "/images/wework/Almora.jpg",
+    imgSrc: "/images/Treks/Brahmataal.jpg",
   },
   {
     name: "Gulabi Kantha Trek (Uttarakhand)",
-    price: "₹ 6,500",
+    price: "6,500",
     duration: "5 Days",
     route: "Mukhwa - Khaliya Top - Mukhwa",
-    imgSrc: "/images/wework/Nainital.jpg",
+    imgSrc: "/images/Treks/Gulabikantha.webp",
   },
   {
     name: "Pangarchulla Trek (Uttarakhand)",
-    price: "₹ 8,500",
+    price: "8,500",
     duration: "6 Days",
     route: "Joshimath - Pangarchulla - Joshimath",
-    imgSrc: "/images/wework/Kainchi.webp",
+    imgSrc: "/images/Treks/pangarchulla.jpg",
   },
   {
     name: "Triund Trek (Himachal)",
-    price: "₹ 4,500",
+    price: "4,500",
     duration: "3 Days",
     route: "McLeod Ganj - Triund - McLeod Ganj",
-    imgSrc: "/images/wework/Kainchi.webp",
+    imgSrc: "/images/Treks/Triund.jpg",
   },
-  {
-    name: "Prashar Lake Trek (Himachal)",
-    price: "₹ 5,000",
-    duration: "2 Days",
-    route: "Kullu - Prashar Lake - Kullu",
-    imgSrc: "/images/wework/Kainchi.webp",
-  },
-  {
-    name: "Chadar Trek (Ladakh Winter Trek)",
-    price: "₹ 12,000",
-    duration: "9 Days",
-    route: "Leh - Chadar - Leh",
-    imgSrc: "/images/wework/Kainchi.webp",
-  },
+  // {
+  //   name: "Prashar Lake Trek (Himachal)",
+  //   price: "5,000",
+  //   duration: "2 Days",
+  //   route: "Kullu - Prashar Lake - Kullu",
+  //   imgSrc: "/images/wework/Kainchi.webp",
+  // },
+  // {
+  //   name: "Chadar Trek (Ladakh Winter Trek)",
+  //   price: "₹ 12,000",
+  //   duration: "9 Days",
+  //   route: "Leh - Chadar - Leh",
+  //   imgSrc: "/images/wework/Kainchi.webp",
+  // },
 ];
 
 type StateType = {
@@ -117,39 +117,54 @@ export default class Wintertrek extends Component<{}, StateType> {
     this.animateWords();
   }
 
-  animateWords = () => {
-    const { animatedWords, deleting } = this.state;
-    let index = deleting ? animatedWords.length - 1 : animatedWords.length;
+  // animateWords = () => {
+  //   const { animatedWords, deleting } = this.state;
+  //   let index = deleting ? animatedWords.length - 1 : animatedWords.length;
 
-    if (!deleting) {
-      if (index < this.words.length) {
-        setTimeout(() => {
-          this.setState(
-            { animatedWords: [...animatedWords, this.words[index]] },
-            this.animateWords
-          );
-        }, 350);
-      } else {
-        setTimeout(() => {
-          this.setState({ deleting: true }, this.animateWords);
-        }, 1200);
-      }
-    } else {
-      if (index >= 0) {
-        setTimeout(() => {
-          this.setState(
-            { animatedWords: animatedWords.slice(0, index) },
-            this.animateWords
-          );
-        }, 200);
-      } else {
-        setTimeout(() => {
-          this.setState({ deleting: false }, this.animateWords);
-        }, 500);
-      }
+  //   if (!deleting) {
+  //     if (index < this.words.length) {
+  //       setTimeout(() => {
+  //         this.setState(
+  //           { animatedWords: [...animatedWords, this.words[index]] },
+  //           this.animateWords
+  //         );
+  //       }, 350);
+  //     } else {
+  //       setTimeout(() => {
+  //         this.setState({ deleting: true }, this.animateWords);
+  //       }, 1200);
+  //     }
+  //   } else {
+  //     if (index >= 0) {
+  //       setTimeout(() => {
+  //         this.setState(
+  //           { animatedWords: animatedWords.slice(0, index) },
+  //           this.animateWords
+  //         );
+  //       }, 200);
+  //     } else {
+  //       setTimeout(() => {
+  //         this.setState({ deleting: false }, this.animateWords);
+  //       }, 500);
+  //     }
+  //   }
+  // };
+
+
+  animateWords = () => {
+    const { animatedWords } = this.state;
+    let index = animatedWords.length;
+
+    // Fixed: Logic only adds words and stops once the array is full
+    if (index < this.words.length) {
+      setTimeout(() => {
+        this.setState(
+          { animatedWords: [...animatedWords, this.words[index]] },
+          this.animateWords
+        );
+      }, 350);
     }
   };
-
   render() {
     const { selectedPlace } = this.state;
 
@@ -174,7 +189,7 @@ export default class Wintertrek extends Component<{}, StateType> {
         <div className="mx-auto max-w-7xl text-center mb-12">
           <h3 className="text-4xl sm:text-5xl font-bold">
             {this.state.animatedWords.join(" ")}
-            <span className="text-blue-500 animate-pulse">|</span>
+            {/* <span className="text-blue-500 animate-pulse">|</span> */}
           </h3>
         </div>
 
