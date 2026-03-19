@@ -1,82 +1,12 @@
 "use client"
 
+import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, MapPin, Sun } from 'lucide-react' 
+import OpenContactButton from '@/app/components/Treks/OpenContactButton'
+import { getTreksBySeason } from '../trek-data'
 
-const summerTreks = [
-  { 
-    slug: 'roopkund', 
-    name: 'Roopkund Trek', 
-    price: '11,500', 
-    days: '7N/8D', 
-    route: 'Kathgodam ⇄ Kathgodam', 
-    img: '/images/Treks/Roopkund.jpg', 
-    tag: 'High Altitude' 
-  },
-  { 
-    slug: 'pindari-glacier', 
-    name: 'Pindari Glacier Trek', 
-    price: '9,000', 
-    days: '6N/7D', 
-    route: 'Kathgodam ⇄ Kathgodam', 
-    img: '/images/Treks/Pindari.jpg', 
-    tag: 'Glacier' 
-  },
-  { 
-    slug: 'rupinn-pass', 
-    name: 'Rupin Pass Trek', 
-    price: '15,500', 
-    days: '7N/8D', 
-    route: 'Dehradun ⇄ Shimla', 
-    img: '/images/Treks/RupinPass.jpg', 
-    tag: 'Cross-Over' 
-  },
-  { 
-    slug: 'buran-ghati', 
-    name: 'Buran Ghati Trek', 
-    price: '14,000', 
-    days: '6N/7D', 
-    route: 'Shimla ⇄ Shimla', 
-    img: '/images/Treks/BuranGhati.jpg', 
-    tag: 'Adventure' 
-  },
-  { 
-    slug: 'har-ki-dun-summer', 
-    name: 'Har Ki Dun Valley', 
-    price: '9,500', 
-    days: '6N/7D', 
-    route: 'Dehradun ⇄ Dehradun', 
-    img: '/images/Treks/Harkidun-Summer.jpg', 
-    tag: 'Ancient Culture' 
-  },
-  { 
-    slug: 'kedartal', 
-    name: 'Kedartal Trek', 
-    price: '12,500', 
-    days: '6N/7D', 
-    route: 'Dehradun ⇄ Dehradun', 
-    img: '/images/Treks/Kedartal.jpg', 
-    tag: 'Emerald Lake' 
-  },
-  { 
-    slug: 'bali-pass', 
-    name: 'Bali Pass Trek', 
-    price: '16,500', 
-    days: '7N/8D', 
-    route: 'Dehradun ⇄ Rishikesh', 
-    img: '/images/Treks/BaliPass.jpg', 
-    tag: 'Technical' 
-  },
-  { 
-    slug: 'gaumukh-tapovan', 
-    name: 'Gaumukh Tapovan', 
-    price: '13,500', 
-    days: '5N/6D', 
-    route: 'Dehradun ⇄ Dehradun', 
-    img: '/images/Treks/Gaumukh.jpg', 
-    tag: 'Spiritual' 
-  },
-];
+const summerTreks = getTreksBySeason('summer')
 
 export default function SummerTreksPage() {
   return (
@@ -127,26 +57,23 @@ export default function SummerTreksPage() {
                         <span className="text-xs truncate">{t.route}</span>
                     </div>
                 </div>
-
                 {/* Footer Buttons */}
-                <div className="mt-auto flex items-center justify-between">
-                  <button
-                    onClick={() => {
-                      try {
-                        if (typeof window !== 'undefined') window.dispatchEvent(new Event('openContactForm'))
-                      } catch (e) {}
-                    }}
-                    className="bg-[#1A2B49] hover:bg-black text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-100"
-                  >
-                    Join Batch
-                  </button>
+                            <div className="mt-auto flex items-center justify-between gap-3">
+                  {/* Book Now */}
+             <OpenContactButton
+  label="Book Now"
+  className="flex-1 bg-[#1A2B49] hover:bg-black text-white px-4 py-2 rounded-lg text-sm font-bold transition shadow-md shadow-blue-100"
+/>
 
-                  <a 
-                    href={`/treks/${t.slug}`} 
-                    className="text-amber-600 border border-amber-200 hover:bg-amber-50 px-4 py-2 rounded-lg text-xs font-bold transition-all"
+                  {/* View Details */}
+                  <Link
+                    href={`/treks/${t.slug}`}
+                    className="flex-1 text-center border border-orange-300 text-orange-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-50 transition"
                   >
                     View Details
-                  </a>
+                  </Link>
+
+
                 </div>
               </div>
             </div>

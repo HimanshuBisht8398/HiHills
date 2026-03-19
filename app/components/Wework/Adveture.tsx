@@ -2,83 +2,10 @@
 
   import Slider from "react-slick";
   import React, { Component } from "react";
+  import Link from "next/link";
   import "slick-carousel/slick/slick.css";
   import "slick-carousel/slick/slick-theme.css";
-
-  interface DataType {
-    profession: string;
-    price: string;
-    pickup: string;
-    images: string[];
-    inclusions: string;
-    
-  }
-
-  const postData: DataType[] = [
-    {
-      profession: "Rafting In Rishikesh",
-      price: "₹1200 / person",
-      inclusions: "Rafting, Safety Gear, Guide",
-      pickup: "Pickup: Tapovan / Shivpuri",
-      images: ["/images/wework/Rafting.jpeg"],
-    },
-    {
-      profession: "Jungle Safari in Corbett",
-      price: "₹3500 / jeep",
-      inclusions: "Safari Permit, Guide",
-      pickup: "Pickup: Ramnagar",
-      images: ["/images/wework/JungleSafari.avif"],
-    },
-    {
-      profession: "Paragliding",
-      price: "₹2500 / person",
-      inclusions: "Pilot, Safety Equipment",
-      pickup: "Pickup: Naukuchiatal",
-      images: ["/images/wework/Paragliding.jpeg"],
-    },
-    {
-      profession: "Jet skiing in Tehri",
-      price: "₹800 / ride",
-      inclusions: "Life Jacket, Instructor",
-      pickup: "Pickup: Tehri Lake",
-      images: ["/images/wework/Jetskee.jpg"],
-    },
-    {
-      profession: "Bungee Jumping in Rishikesh",
-      price: "₹3700 / person",
-      inclusions: "Jump, Safety Gear, Certificate",
-      pickup: "Pickup: Mohanchatti",
-      images: ["/images/wework/bungee-jumping.webp"],
-    },
-    {
-      profession: "Zipline in Rishikesh",
-      price: "₹1800 / person",
-      inclusions: "Safety Harness, Guide",
-      pickup: "Pickup: Mohanchatti",
-      images: ["/images/wework/Zipline.jpeg"],
-    },
-    {
-      profession: "Hot Air Balloon in Ramnagar",
-      price: "₹3500 / person",
-      inclusions: "Balloon Ride, Safety Briefing",
-      pickup: "Pickup: Ramnagar",
-      images: ["/images/wework/Hotairbaloon.jpg"],
-    },
-    {
-      profession: "Skiing in Auli",
-      price: "₹2000 / session",
-      inclusions: "Instructor, Ski Gear",
-      pickup: "Pickup: Auli Base Camp",
-      images: ["/images/wework/SnowSkii.jpeg"],
-    },
-    {
-      profession: "Camping in Rishikesh",
-      price: "₹1500 / person",
-      inclusions: "Stay, Meals, Bonfire",
-      pickup: "Pickup: Shivpuri",
-      images: ["/images/wework/Camping.avif"],
-    },
-  ];
+  import { ADVENTURE_PACKAGES } from "@/app/adventure/adventure-data";
 
   type StateType = {
     animatedWords: string[];
@@ -147,13 +74,6 @@
     }
     // No 'else' block here means it stops once the sentence is full
   };
-    // open contact modal (used when a card is clicked)
-    openContact = () => {
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new Event("openContactForm"));
-      }
-    };
-
     render() {
       const NextArrow = ({ onClick }: any) => (
   <button
@@ -216,23 +136,15 @@ const PrevArrow = ({ onClick }: any) => (
           {/* Slider */}
           <div className="max-w-7xl mx-auto px-6">
             <Slider {...settings}>
-              {postData.map((items, i) => (
+              {ADVENTURE_PACKAGES.map((items, i) => (
                 <div key={i} className="px-4">
 
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => this.openContact()}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") this.openContact();
-                    }}
-                    className="relative h-[340px] rounded-3xl overflow-hidden shadow-xl group cursor-pointer"
-                  >
+                  <div className="relative h-[340px] rounded-3xl overflow-hidden shadow-xl group">
 
                     {/* Image */}
                     <img
-                      src={items.images[0]}
-                      alt={items.profession}
+                      src={items.img}
+                      alt={items.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                     />
 
@@ -248,19 +160,28 @@ const PrevArrow = ({ onClick }: any) => (
                     <div className="absolute bottom-6 left-6 right-6 text-white">
 
                       <h3 className="text-2xl font-semibold mb-2">
-                        {items.profession}
+                        {items.name}
                       </h3>
 
                       <p className="text-sm opacity-90">
-                        📍 {items.pickup}
+                        📍 Pickup: {items.pickup}
                       </p>
 
                       <p className="text-sm opacity-90">
-                        Inclusions:- {items.inclusions}
+                        Inclusions:- {items.inclusions.slice(0, 3).join(", ")}
                       </p>
-                         <p className="text-sm opacity-90">
-                        {items.price}
+                      <p className="text-sm opacity-90">
+                        ₹{items.price}/-
                       </p>
+
+                      <div className="mt-4">
+                        <Link
+                          href={`/adventure/${items.slug}`}
+                          className="inline-flex rounded-lg border border-orange-300 bg-white/90 px-4 py-2 text-sm font-semibold text-orange-600 transition hover:bg-orange-50"
+                        >
+                          View Details
+                        </Link>
+                      </div>
                     </div>
 
                   </div>
