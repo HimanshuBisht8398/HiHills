@@ -75,10 +75,11 @@ export default function MonsoonTreksPage() {
                 {/* CTA Buttons */}
                 <div className="mt-auto flex items-center justify-between gap-3">
                   {/* Book Now */}
-                  <OpenContactButton
-                    label="Book Now"
-                    className="flex-1 bg-[#1A2B49] hover:bg-black text-white px-4 py-2 rounded-lg text-sm font-bold transition shadow-md shadow-blue-100"
-                  />
+             <OpenContactButton
+  destination={t.name}
+  label="Book Now"
+  className="flex-1 bg-[#1A2B49] hover:bg-black text-white px-4 py-2 rounded-lg text-sm font-bold transition shadow-md shadow-blue-100"
+/>
 
                   {/* View Details */}
                   <Link

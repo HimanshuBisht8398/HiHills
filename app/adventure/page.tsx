@@ -24,7 +24,11 @@ export default function AdventurePage() {
                   <button
                     onClick={() => {
                       try {
-                        if (typeof window !== 'undefined') window.dispatchEvent(new Event('openContactForm'))
+                        if (typeof window !== 'undefined') {
+                          window.dispatchEvent(new CustomEvent('openContactForm', {
+                            detail: { destination: p.name }
+                          }))
+                        }
                       } catch (e) {}
                     }}
                     className="bg-blue text-white px-4 py-2 rounded-lg"

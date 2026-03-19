@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { StarIcon as SolidStar } from "@heroicons/react/24/solid";
 import { StarIcon as OutlineStar } from "@heroicons/react/24/outline";
 import Image from "next/image";
-
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 // CAROUSEL DATA
 interface DataType {
   profession: string;
@@ -13,7 +13,30 @@ interface DataType {
   name: string;
   rating: number;
 }
+// Custom Arrow Components
+const NextArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <button
+      onClick={onClick}
+      className="absolute -right-5 lg:-right-10 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg border border-gray-100 hover:bg-yellow-400 hover:text-white transition-all group"
+    >
+      <ChevronRightIcon className="w-6 h-6" />
+    </button>
+  );
+};
 
+const PrevArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <button
+      onClick={onClick}
+      className="absolute -left-5 lg:-left-10 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg border border-gray-100 hover:bg-yellow-400 hover:text-white transition-all group"
+    >
+      <ChevronLeftIcon className="w-6 h-6" />
+    </button>
+  );
+};
 const postData: DataType[] = [
   {
     name: "Himanshu Bisht",
@@ -90,59 +113,60 @@ export default class MultipleItems extends Component<
   toggleExpand = (index: number) => {
     this.setState((prevState) => {
       const newSet = new Set(prevState.expandedIndexes);
-      if (newSet.has(index)) newSet.delete(index);
-      else newSet.add(index);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
       return { expandedIndexes: newSet };
     });
   };
-
-  renderStars = (rating: number) => {
-    const totalStars = 5;
-    return (
-      <div className="flex">
-        {[...Array(totalStars)].map((_, index) =>
-          index < rating ? (
-            <SolidStar
-              key={index}
-              width={20}
-              height={20}
-              className="mx-0.5"
-              style={{ fill: "#FFD700" }} // bright yellow
-            />
-          ) : (
-            <OutlineStar
-              key={index}
-              width={20}
-              height={20}
-              className="mx-0.5"
-              style={{ stroke: "#FFD700", strokeWidth: 2 }} // yellow outline
-            />
-          )
-        )}
-      </div>
-    );
-  };
+renderStars = (rating: number) => {
+  const totalStars = 5;
+  return (
+    <div className="flex items-center">
+      {[...Array(totalStars)].map((_, index) =>
+        index < rating ? (
+          <SolidStar
+            key={index}
+            width={20}
+            height={20}
+            className="mx-0.5 text-yellow-40" // Golden Yellow
+          />
+        ) : (
+          <OutlineStar
+            key={index}
+            width={20}
+            height={20}
+            className="mx-0.5 text-yellow-400 opacity-40" // Faded Golden Outline
+          />
+        )
+      )}
+    </div>
+  );
+};
 
   render() {
-    const settings = {
-      dots: false,
+    // Check if any card is currently in "See More" state
+    const isAnyExpanded = this.state.expandedIndexes.size > 0;
+
+   const settings = {
+      dots: true, // Added dots for better navigation
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 2500,
-      speed: 800,
-      cssEase: "ease-in-out",
-      pauseOnHover: false,
-      pauseOnFocus: false,
+      arrows: true, // Enabled arrows
+      nextArrow: <NextArrow />, // Assigned custom arrow
+      prevArrow: <PrevArrow />, // Assigned custom arrow
+      autoplay: !isAnyExpanded,
+      autoplaySpeed: 3000,
+      cssEase: "linear",
       responsive: [
-        { breakpoint: 1200, settings: { slidesToShow: 3 } },
-        { breakpoint: 800, settings: { slidesToShow: 2 } },
-        { breakpoint: 450, settings: { slidesToShow: 1 } },
+        { breakpoint: 1200, settings: { slidesToShow: 3, arrows: true } },
+        { breakpoint: 1024, settings: { slidesToShow: 2, arrows: false } }, // Hide arrows on tablet
+        { breakpoint: 640, settings: { slidesToShow: 1, arrows: false } }, // Hide arrows on mobile
       ],
-    };
-
+    }
     return (
       <div className="bg-testimonial pt-40 pb-32 lg:py-32" id="testimonial-section">
         <div className="mx-auto max-w-7xl sm:py-4 lg:px-8">
@@ -150,56 +174,46 @@ export default class MultipleItems extends Component<
             <h3 className="text-4xl sm:text-6xl font-bold text-black my-3">
               See what others are saying.
             </h3>
-            {/* <h3 className="text-4xl sm:text-6xl font-bold text-black text-opacity-50 lg:mr-48 my-4">
-              See what others are saying.
-            </h3>
-            <h3 className="text-4xl sm:text-6xl font-bold text-black text-opacity-25 lg:-mr-32 my-4">
-              See what others are saying.
-            </h3> */}
           </div>
 
           <Slider {...settings}>
             {postData.map((item, i) => {
               const isExpanded = this.state.expandedIndexes.has(i);
               const shouldTruncate = item.comment.length > 150;
+              
+              // Define how much text to show
               const displayedComment = isExpanded
                 ? item.comment
-                : item.comment.slice(0, 150) +
-                (shouldTruncate ? "..." : "");
+                : item.comment.slice(0, 150) + (shouldTruncate ? "..." : "");
 
               return (
-                <div key={i} className="relative">
-                  <div className="bg-white test-sha m-3 p-10 my-20 rounded-3xl relative">
-                    {/* <Image
-                      src={item.imgSrc}
-                      alt={item.name}
-                      width={71}
-                      height={71}
-                      className="inline-block m-auto absolute test-pos"
-                    /> */}
+                <div key={i} className="relative h-full">
+                  <div className="bg-white test-sha m-3 p-10 my-20 rounded-3xl relative flex flex-col h-full min-h-[350px]">
+                    
+                    {/* Comment Area */}
+                    <div className="flex-grow">
+                        <h4 className="text-base font-medium text-testColor my-4 leading-relaxed">
+                        {displayedComment}
+                        {shouldTruncate && (
+                            <button
+                            onClick={() => this.toggleExpand(i)}
+                            className="text-blue-500 font-bold ml-2 hover:underline focus:outline-none whitespace-nowrap"
+                            >
+                            {isExpanded ? "Show less" : "See more"}
+                            </button>
+                        )}
+                        </h4>
+                    </div>
 
-                    {/* Comment */}
-                    <h4 className="text-base font-medium text-testColor my-4">
-                      {displayedComment}
-                      {shouldTruncate && (
-                        <button
-                          onClick={() => this.toggleExpand(i)}
-                          className="text-blue-500 ml-2 hover:underline focus:outline-none"
-                        >
-                          {isExpanded ? "See less" : "See more"}
-                        </button>
-                      )}
-                    </h4>
-
-                    <hr style={{ color: "lightgrey" }} />
+                    <hr className="my-4 border-gray-200" />
 
                     {/* Name and stars */}
                     <div className="flex justify-between items-center">
                       <div>
-                        <h3 className="text-base font-medium pt-4 pb-2">
+                        <h3 className="text-base font-bold text-black">
                           {item.name}
                         </h3>
-                        <h3 className="text-xs font-medium pb-2 opacity-50">
+                        <h3 className="text-xs font-medium opacity-50 uppercase tracking-wider">
                           {item.profession}
                         </h3>
                       </div>

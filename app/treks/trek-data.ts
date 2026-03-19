@@ -30,7 +30,7 @@ export const TREKS: Trek[] = [
     price: "6,500",
     days: "5N/6D",
     route: "Dehradun ⇄ Dehradun",
-    img: "/images/Treks/Kedarkantha.png",
+    img: "/images/Treks/Kedarkantha.webp",
     tag: "Group",
     overview:
       "One of the most loved winter treks in Uttarakhand, Kedarkantha offers pine forests, snow camps, and a rewarding summit with panoramic Himalayan views.",

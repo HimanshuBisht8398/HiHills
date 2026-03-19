@@ -93,6 +93,7 @@ export default function TrekDetailPage({ params }: TrekDetailPageProps) {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <OpenContactButton
+                destination={trek.name}
                 label="Book This Trek"
                 className="rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
               />

@@ -1,48 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  Calendar,
-  CheckCircle2,
-  MapPin,
-  Sparkles,
-  XCircle,
-} from "lucide-react";
+import { ArrowLeft, Bus, Calendar, CheckCircle2, MapPin, Sparkles, XCircle } from "lucide-react";
 
 import OpenContactButton from "@/app/components/Treks/OpenContactButton";
 import {
-  ADVENTURE_PACKAGES,
-  getAdventurePackageBySlug,
-} from "../adventure-data";
+  SPIRITUAL_YATRA_PACKAGES,
+  getSpiritualYatraBySlug,
+} from "../yatra-data";
 
-type AdventurePageProps = {
+type SpiritualYatraPageProps = {
   params: {
     slug: string;
   };
 };
 
 export function generateStaticParams() {
-  return ADVENTURE_PACKAGES.map((pkg) => ({
-    slug: pkg.slug,
-  }));
+  return SPIRITUAL_YATRA_PACKAGES.map((item) => ({ slug: item.slug }));
 }
 
-export function generateMetadata({ params }: AdventurePageProps) {
-  const pkg = getAdventurePackageBySlug(params.slug);
-
+export function generateMetadata({ params }: SpiritualYatraPageProps) {
+  const item = getSpiritualYatraBySlug(params.slug);
   return {
-    title: pkg ? `${pkg.name} - HI HILLS` : "Adventure Package Not Found - HI HILLS",
-    description: pkg?.overview,
+    title: item ? `${item.heading} - HI HILLS` : "Spiritual Yatra Not Found - HI HILLS",
+    description: item?.paragraph,
   };
 }
 
-export default function AdventureDetailPage({ params }: AdventurePageProps) {
-  const pkg = getAdventurePackageBySlug(params.slug);
+export default function SpiritualYatraDetailPage({ params }: SpiritualYatraPageProps) {
+  const item = getSpiritualYatraBySlug(params.slug);
 
-  if (!pkg) {
-    notFound();
-  }
+  if (!item) notFound();
 
   return (
     <main className="bg-slate-50 pb-20">
@@ -50,44 +38,35 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.16),_transparent_34%),linear-gradient(135deg,_rgba(249,115,22,0.18),_transparent_45%)]" />
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:px-6 md:py-20">
           <div className="relative z-10">
-            <Link
-              href="/adventure"
-              className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-orange-200 transition hover:text-white"
-            >
+            <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-orange-200 transition hover:text-white">
               <ArrowLeft size={16} />
-              Back to adventure
+              Back to home
             </Link>
-
             <span className="inline-flex rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
-              Adventure Activity
+              Spiritual Yatra
             </span>
-
-            <h1 className="mt-5 text-4xl font-black leading-tight md:text-5xl">
-              {pkg.name}
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-200 md:text-lg">
-              {pkg.overview}
-            </p>
+            <h1 className="mt-5 text-4xl font-black leading-tight md:text-5xl">{item.heading}</h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-200 md:text-lg">{item.paragraph}</p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Price</p>
-                <p className="mt-2 text-2xl font-bold text-white">₹{pkg.price}/-</p>
+                <p className="mt-2 text-2xl font-bold text-white">{item.price}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Duration</p>
-                <p className="mt-2 text-lg font-semibold text-white">{pkg.days}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Route</p>
+                <p className="mt-2 text-sm font-semibold text-white">{item.route}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Pickup</p>
-                <p className="mt-2 text-sm font-semibold text-white">{pkg.pickup}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Best Time</p>
+                <p className="mt-2 text-sm font-semibold text-white">{item.bestTime}</p>
               </div>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8">
               <OpenContactButton
-                destination={pkg.name}
-                label="Book This Package"
+                destination={item.heading}
+                label="Book This Yatra"
                 className="rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
               />
             </div>
@@ -95,13 +74,7 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
 
           <div className="relative z-10">
             <div className="relative h-[280px] overflow-hidden rounded-[28px] border border-white/10 shadow-2xl md:h-full md:min-h-[440px]">
-              <Image
-                src={pkg.img}
-                alt={pkg.name}
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src={item.imgSrc} alt={item.heading} fill className="object-cover" priority />
             </div>
           </div>
         </div>
@@ -116,18 +89,13 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-slate-900">Day-wise Itinerary</h2>
-                <p className="text-sm text-slate-500">
-                  A clear day-by-day flow for the activity package.
-                </p>
+                <p className="text-sm text-slate-500">A clear day-by-day spiritual travel plan.</p>
               </div>
             </div>
 
             <div className="mt-8 space-y-4">
-              {pkg.itinerary.map((day, index) => (
-                <div
-                  key={day.title}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:border-orange-200 hover:bg-white"
-                >
+              {item.itinerary.map((day, index) => (
+                <div key={day.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:border-orange-200 hover:bg-white">
                   <div className="flex items-start gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#1A2B49] text-sm font-bold text-white">
                       {index + 1}
@@ -147,12 +115,16 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
               <h2 className="text-xl font-bold text-slate-900">Quick Info</h2>
               <div className="mt-5 space-y-4">
                 <div className="flex items-center gap-3 text-slate-700">
-                  <Calendar size={18} className="text-orange-500" />
-                  <span>{pkg.days}</span>
+                  <MapPin size={18} className="text-orange-500" />
+                  <span>{item.route}</span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-700">
-                  <MapPin size={18} className="text-orange-500" />
-                  <span>{pkg.pickup}</span>
+                  <Calendar size={18} className="text-orange-500" />
+                  <span>{item.bestTime}</span>
+                </div>
+                <div className="flex items-center gap-3 text-slate-700">
+                  <Bus size={18} className="text-orange-500" />
+                  <span>Transport included as per itinerary</span>
                 </div>
               </div>
             </div>
@@ -163,10 +135,10 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
                 <h2 className="text-xl font-bold text-slate-900">Inclusions</h2>
               </div>
               <div className="mt-5 space-y-3">
-                {pkg.inclusions.map((item) => (
-                  <div key={item} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
+                {item.inclusions.map((inc) => (
+                  <div key={inc} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
                     <CheckCircle2 size={18} className="mt-1 shrink-0 text-green-600" />
-                    <span>{item}</span>
+                    <span className="capitalize">{inc}</span>
                   </div>
                 ))}
               </div>
@@ -178,10 +150,10 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
                 <h2 className="text-xl font-bold text-slate-900">Exclusions</h2>
               </div>
               <div className="mt-5 space-y-3">
-                {pkg.exclusions.map((item) => (
-                  <div key={item} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
+                {item.exclusions.map((exc) => (
+                  <div key={exc} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
                     <XCircle size={18} className="mt-1 shrink-0 text-rose-500" />
-                    <span>{item}</span>
+                    <span className="capitalize">{exc}</span>
                   </div>
                 ))}
               </div>

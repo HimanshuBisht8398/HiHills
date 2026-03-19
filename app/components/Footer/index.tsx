@@ -62,6 +62,15 @@ const Footer = () => {
                   height={20}
                 />
               </Link>
+
+              <Link
+                href="https://wa.me/917617610909?text=Hello%20Hi%20Hills%2C%20I%20would%20like%20to%20know%20more%20about%20your%20travel%20packages."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center rounded-full bg-[#25D366] px-3 py-2 text-xs font-bold text-white"
+              >
+                WA
+              </Link>
             </div>
           </div>
 

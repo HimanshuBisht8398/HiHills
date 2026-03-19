@@ -1,6 +1,7 @@
 import './globals.css';
 import Navbar from './components/Navbar/index';
 import Footer from './components/Footer/index';
+import WhatsappChatButton from './components/WhatsappChatButton';
 
 
 export const metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <WhatsappChatButton />
         <Footer />
       </body>
     </html>

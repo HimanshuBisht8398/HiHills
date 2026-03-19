@@ -12,7 +12,7 @@ interface datatype {
 
 const Aboutdata: datatype[] = [
     {
-        heading: "Transportation.",
+        heading: "Cab Services.",
         imgSrc: "/images/aboutus/Transportation.png",
         paragraph: 'We provide reliable and comfortable transportation services to make your journey smooth and hassle-free. From airport pickups and local transfers to complete travel arrangements for tours and treks, we ensure safe, timely, and convenient travel so you can focus on enjoying your trip.',
     },
@@ -26,16 +26,6 @@ const Aboutdata: datatype[] = [
        imgSrc: "/images/aboutus/Trek.png",
        paragraph: 'We offer unforgettable trekking experiences across summer, monsoon, and winter — each season bringing its own unique charm. From clear skies and alpine views in summer, to lush green trails in monsoon, and snow-covered landscapes in winter, every trek is carefully guided to ensure safety, adventure, and memories that last a lifetime.',
    },
-    {
-        heading: "Uttrakhand Char Dham Yatra.",
-        imgSrc: "/images/aboutus/chardham.png",
-        paragraph: 'Experience the sacred Char Dham Yatra in the serene mountains of Uttarakhand — a spiritually enriching journey to the four holy shrines: Kedarnath, Badrinath, Gangotri, & Yamunotri. This divine pilgrimage offers peace, devotion,and a once-in-a-lifetime spiritual experience.',
-    },
-    {
-        heading: "Uttrakhand Do Dham Yatra.",
-        imgSrc: "/images/aboutus/chardham.png",
-        paragraph: 'The Do Dham Yatra is one of the most sacred pilgrimages in India. Devotees travel through scenic Himalayan valleys, ancient temples, and sacred rivers to seek blessings and spiritual peace. Our Do Dham packages include comfortable transport, accommodation, and guided travel to ensure a smooth and memorable pilgrimage.',
-    },
     {
         heading: "Hotel Booking.",
         imgSrc: "/images/aboutus/Hotel.png",
@@ -117,7 +107,17 @@ const Aboutus = () => {
                                 style={{ width: `${100 / slidesToShow}%` }}
                             >
                                 {/* if this card is the Treks card, link to /treks page, otherwise keep Book Now behaviour */}
-                                {item.heading && item.heading.toLowerCase().includes('trek') ? (
+                                {item.heading && item.heading.toLowerCase().includes('cab') ? (
+                                    <Link href="/cab-services" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            Explore Cars
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : item.heading && item.heading.toLowerCase().includes('trek') ? (
                                     <Link href="/treks" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
                                         <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
                                         <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />

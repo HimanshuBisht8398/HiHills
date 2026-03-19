@@ -86,6 +86,7 @@ export default function SpiritualPlacePage({ params }: SpiritualPlacePageProps) 
 
             <div className="mt-8 flex flex-wrap gap-3">
               <OpenContactButton
+                destination={place.profession}
                 label="Book This Package"
                 className="rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
               />

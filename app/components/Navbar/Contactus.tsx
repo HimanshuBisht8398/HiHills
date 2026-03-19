@@ -13,6 +13,11 @@ interface FormValues {
   input6: string
 }
 
+type OpenContactFormDetail = {
+  destination?: string
+  district?: string
+}
+
 const Contactusform = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -63,7 +68,22 @@ const Contactusform = () => {
   const closeModal = () => setIsOpen(false)
 
   useEffect(() => {
-    const handler = () => setIsOpen(true)
+    const handler = (event: Event) => {
+      const customEvent = event as CustomEvent<OpenContactFormDetail>
+      const destination =
+        customEvent.detail?.destination ||
+        customEvent.detail?.district?.replace(/-/g, ' ')
+
+      if (destination) {
+        setInputValues(prev => ({
+          ...prev,
+          input4: destination
+        }))
+      }
+
+      setIsOpen(true)
+    }
+
     window.addEventListener('openContactForm', handler as EventListener)
     return () => {
       window.removeEventListener('openContactForm', handler as EventListener)

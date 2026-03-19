@@ -14,6 +14,7 @@ import Joinus from './components/Joinus/index';
 import Insta from './components/Insta/index';
 import Wintertrek from './components/Wework/Wintertrek';
 import Adveture from './components/Wework/Adveture';
+import SpiritualPlacePage from './components/SpritualYatra/page';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -23,6 +24,7 @@ export default function Home() {
       <Digital />
       <Banner />
       <Aboutus />
+      <SpiritualPlacePage />
       <Dedicated />
       {/* <Beliefs /> */}
       <Wework />

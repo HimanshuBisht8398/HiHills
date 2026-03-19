@@ -23,7 +23,7 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading2: "Spiritual Himalayan Journey",
     price: "5000/person",
     bestSeason: "Best Season: May - Oct",
-    imgSrc: "/images/wework/kedarnath.jpg",
+    imgSrc: "/images/wework/Kedarnath.jpg",
     route: "Haridwar ⇄ Haridwar",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["helicopter or pony charges", "personal expenses", "special puja charges", "insurance"],

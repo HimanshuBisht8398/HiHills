@@ -3,6 +3,10 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
 import Link from 'next/link';
 
+type OpenContactFormDetail = {
+    destination?: string;
+    district?: string;
+};
 
 const Contactusform = () => {
     let [isOpen, setIsOpen] = useState(false)
@@ -55,7 +59,18 @@ const Contactusform = () => {
 
     // listen for a global event so other components (like PackageModal) can open this form
     useEffect(() => {
-        const handler = () => setIsOpen(true)
+        const handler = (event: Event) => {
+            const customEvent = event as CustomEvent<OpenContactFormDetail>
+            const destination =
+                customEvent.detail?.destination ||
+                customEvent.detail?.district?.replace(/-/g, ' ')
+
+            if (destination) {
+                setInputValues(prevState => ({ ...prevState, input4: destination }))
+            }
+
+            setIsOpen(true)
+        }
         if (typeof window !== 'undefined') {
             window.addEventListener('openContactForm', handler as EventListener)
         }
