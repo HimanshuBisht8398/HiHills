@@ -14,6 +14,8 @@ type CabCategory = {
 };
 
 type BookingForm = {
+  name: string;
+  email: string;
   vehicle: string;
   pickup: string;
   destination: string;
@@ -21,6 +23,8 @@ type BookingForm = {
   fromDate: string;
   toDate: string;
   mobile: string;
+  flightNumber: string;
+  notes: string;
 };
 
 const CAB_CATEGORIES: CabCategory[] = [
@@ -99,6 +103,8 @@ const CAB_CATEGORIES: CabCategory[] = [
 ];
 
 const emptyForm: BookingForm = {
+  name: "",
+  email: "",
   vehicle: "",
   pickup: "",
   destination: "",
@@ -106,18 +112,23 @@ const emptyForm: BookingForm = {
   fromDate: "",
   toDate: "",
   mobile: "",
+  flightNumber: "",
+  notes: "",
 };
 
 export default function CabServicesPage() {
   const [selectedCab, setSelectedCab] = useState<CabCategory | null>(null);
   const [form, setForm] = useState<BookingForm>(emptyForm);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const today = useMemo(() => new Date().toISOString().split("T")[0], []);
 
   const openBooking = (cab: CabCategory) => {
     setSelectedCab(cab);
     setSubmitted(false);
+    setSubmitError("");
     setForm({
       ...emptyForm,
       vehicle: cab.name,
@@ -127,6 +138,8 @@ export default function CabServicesPage() {
   const closeBooking = () => {
     setSelectedCab(null);
     setSubmitted(false);
+    setSubmitError("");
+    setIsSubmitting(false);
     setForm(emptyForm);
   };
 
@@ -137,12 +150,50 @@ export default function CabServicesPage() {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const hasEmpty = Object.values(form).some((value) => value.trim() === "");
     if (hasEmpty) return;
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("http://localhost:4000/cab_models", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          mobileNumber: form.mobile,
+          vehicleType: form.vehicle,
+          pickup: form.pickup,
+          destination: form.destination,
+          fromDate: form.fromDate,
+          toDate: form.toDate,
+          numberOfPersons: Number(form.persons),
+          metadata: {
+
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit cab booking");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Cab booking submission failed:", error);
+      setSubmitError("Unable to send your booking right now. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const isDisabled = Object.values(form).some((value) => value.trim() === "");
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f8fafc_0%,#eef4ff_100%)] py-16">
@@ -250,6 +301,27 @@ export default function CabServicesPage() {
             ) : (
               <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
                 <div>
+                  <label className="mb-2 block text-sm font-medium text-slate-900">Your Name</label>
+                  <input
+                    value={form.name}
+                    onChange={(e) => handleChange("name", e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 outline-none focus:border-orange-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-slate-900">Email</label>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 outline-none focus:border-orange-400"
+                  />
+                </div>
+
+                <div>
                   <label className="mb-2 block text-sm font-medium text-slate-900">Vehicle Type</label>
                   <input
                     value={form.vehicle}
@@ -335,6 +407,10 @@ export default function CabServicesPage() {
                   </div>
                 </div>
 
+                {submitError ? (
+                  <p className="md:col-span-2 text-sm text-red-600">{submitError}</p>
+                ) : null}
+
                 <div className="md:col-span-2 flex gap-3 pt-2">
                   <button
                     type="button"
@@ -344,11 +420,11 @@ export default function CabServicesPage() {
                     Cancel
                   </button>
                   <button
-                    type="button"
-                    onClick={closeBooking}
+                    type="submit"
+                    disabled={isDisabled || isSubmitting}
                     className="flex-1 rounded-xl border border-[#1A2B49] px-4 py-3 text-sm font-semibold text-[#1A2B49] transition hover:bg-[#1A2B49] hover:text-white"
                   >
-                    Send Request
+                    {isSubmitting ? "Sending..." : "Send Request"}
                   </button>
                 </div>
               </form>

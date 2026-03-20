@@ -3,6 +3,7 @@
 import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react"; // Added React for createElement if needed
 import { Bus, User, Bed, Utensils } from "lucide-react";
 import { POPULAR_PACKAGES } from "@/app/packages/package-data";
@@ -19,6 +20,7 @@ export default function MultipleItems() {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const text = "Our Popular Packages.";
+  const router = useRouter();
 
   useEffect(() => {
     if (currentIndex < text.length) {
@@ -59,7 +61,7 @@ export default function MultipleItems() {
   };
 
   return (
-    <div className="py-20 bg-gray-50">
+    <section id="blog-section" className="py-20 bg-gray-50">
       <div className="mx-auto max-w-7xl px-6 relative"> {/* Added relative for arrows */}
         <div className="text-center mb-14">
           <h3 className="text-4xl sm:text-5xl font-bold h-16">{displayText}</h3>
@@ -67,13 +69,17 @@ export default function MultipleItems() {
 
         <Slider {...settings}>
           {POPULAR_PACKAGES.map((item, i) => {
-            // Error Prevention: Ensure slug exists
-            const itemSlug = item.slug || "not-found";
+            const itemSlug = item.slug;
+            const itemHref = `/packages/${itemSlug}`;
 
             return (
               <div key={i}>
-                <Link 
-                  href={`/packages/${itemSlug}`} 
+                <Link
+                  href={itemHref}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    router.push(itemHref);
+                  }}
                   className="block cursor-pointer m-3 rounded-3xl overflow-hidden shadow-xl bg-white group"
                 >
                   <div className="relative h-[260px] overflow-hidden">
@@ -123,6 +129,6 @@ export default function MultipleItems() {
           })}
         </Slider>
       </div>
-    </div>
+    </section>
   );
 }

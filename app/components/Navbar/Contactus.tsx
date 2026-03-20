@@ -3,6 +3,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { getApiUrl } from '@/app/lib/api'
 
 interface FormValues {
   input1: string
@@ -21,6 +22,8 @@ type OpenContactFormDetail = {
 const Contactusform = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const [inputValues, setInputValues] = useState<FormValues>({
     input1: '',
@@ -36,7 +39,18 @@ const Contactusform = () => {
     setInputValues(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    setInputValues({
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: '',
+      input5: '',
+      input6: ''
+    })
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const isDisabled = Object.values(inputValues).some(
@@ -44,28 +58,59 @@ const Contactusform = () => {
     )
     if (isDisabled) return
 
-    setIsSubmitted(true)
+    setSubmitError('')
+    setIsSubmitting(true)
 
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setIsOpen(false)
-      setInputValues({
-        input1: '',
-        input2: '',
-        input3: '',
-        input4: '',
-        input5: '',
-        input6: ''
+    try {
+      const response = await fetch(getApiUrl('/customers'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: inputValues.input1,
+          email: inputValues.input2,
+          mobileNumber: inputValues.input3,
+          vehicleType: 'Not specified',
+          pickup: '',
+          destination: inputValues.input4,
+          dateofjourney: new Date(inputValues.input6).toISOString(),
+          numberOfPersons: Number(inputValues.input5),
+          metadata: {}
+        })
       })
-    }, 3500)
+
+      if (!response.ok) {
+        throw new Error('Failed to send inquiry')
+      }
+
+      setIsSubmitted(true)
+
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setIsOpen(false)
+        resetForm()
+      }, 3500)
+    } catch (error) {
+      console.error('Customer inquiry submission failed:', error)
+      setSubmitError('Unable to send your inquiry right now. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const isDisabled = Object.values(inputValues).some(
     value => value === ''
   )
 
-  const openModal = () => setIsOpen(true)
-  const closeModal = () => setIsOpen(false)
+  const openModal = () => {
+    setSubmitError('')
+    setIsOpen(true)
+  }
+  const closeModal = () => {
+    setSubmitError('')
+    setIsOpen(false)
+  }
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -192,12 +237,16 @@ const Contactusform = () => {
 
                       </div>
 
+                      {submitError ? (
+                        <p className="mt-4 text-sm text-red-600">{submitError}</p>
+                      ) : null}
+
                       <button
                         type="submit"
-                        disabled={isDisabled}
+                        disabled={isDisabled || isSubmitting}
                         className="mt-8 py-3 px-5 w-full text-white rounded-lg bg-blue disabled:opacity-50"
                       >
-                        Send inquiry
+                        {isSubmitting ? 'Sending...' : 'Send inquiry'}
                       </button>
                     </>
                   )}

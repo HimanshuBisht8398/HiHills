@@ -8,42 +8,40 @@ import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/solid"
 import Drawer from "./Drawer"
 import Drawerdata from "./Drawerdata"
 import Contactusform from "./Contactus"
-import PackageModal from "./PackageModal"
+
+type PackageLink = {
+  title: string
+  href: string
+}
+
 const packagesData = {
   chardham: [
-    "Char Dham Yatra 2024",
-    "Char Dham Yatra (9N)",
-    "Char Dham by Helicopter",
-    "Do Dham Yatra (Badrinath–Kedarnath)",
-    "Do Dham by Helicopter",
+    { title: "Char Dham Yatra 2024", href: "/spiritual-yatra/uttarakhand-char-dham-yatra" },
+    { title: "Char Dham Yatra (9N)", href: "/spiritual-yatra/uttarakhand-char-dham-yatra" },
+    { title: "Char Dham by Helicopter", href: "/chardham/badrinath-heli" },
+    { title: "Do Dham Yatra (Badrinath–Kedarnath)", href: "/spiritual-yatra/do-dham/kedarnath-badrinath" },
+    { title: "Do Dham by Helicopter", href: "/spiritual-yatra/do-dham/kedarnath-badrinath" },
   ],
   tours: [
-    "Jim Corbett Safari",
-    "Mussoorie Rishikesh Tour",
-    "Best Nainital Kausani",
-    "Auli Tour Packages",
-    "Sri Badrinath Ji Yatra",
-    "Sri Kedarnath Ji Yatra",
+    { title: "Jim Corbett Safari", href: "/adventure/jungle-safari-corbett" },
+    { title: "Mussoorie Rishikesh Tour", href: "/districts/dehradun" },
+    { title: "Best Nainital Kausani", href: "/districts/nainital" },
+    { title: "Auli Tour Packages", href: "/adventure/skiing-auli" },
+    { title: "Sri Badrinath Ji Yatra", href: "/packages/badrinath" },
+    { title: "Sri Kedarnath Ji Yatra", href: "/packages/kedarnath" },
   ],
   treks: [
-    "Valley of Flowers",
-    "Gomukh Trek",
-    "Dayara Bugyal",
-    "Dodital Trek",
-    "Kunjapuri Trek",
-    "Chopta Trek",
+    { title: "Valley of Flowers", href: "/treks/valley-of-flowers" },
+    { title: "Gomukh Trek", href: "/treks/gaumukh-tapovan" },
+    { title: "Dayara Bugyal", href: "/treks/dayara-bugyal" },
+    { title: "Dodital Trek", href: "/treks/dayara-bugyal" },
+    { title: "Kunjapuri Trek", href: "/spiritual-places/rishikesh" },
+    { title: "Chopta Trek", href: "/treks/tungnath" },
   ],
 }
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false)
-  const [modalOpen, setModalOpen] = React.useState(false)
-  const [activeTitle, setActiveTitle] = React.useState("")
-
-  const openModal = (title: string) => {
-    setActiveTitle(title)
-    setModalOpen(true)
-  }
 
   // scroll to an element id with offset to account for sticky navbar
   const scrollToId = (e: React.MouseEvent, id: string) => {
@@ -56,6 +54,17 @@ const Navbar = () => {
     const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 12
     window.scrollTo({ top, behavior: 'smooth' })
   }
+
+  const renderPackageLinks = (items: PackageLink[]) =>
+    items.map((item) => (
+      <Link
+        key={item.title}
+        href={item.href}
+        className="megaItem block"
+      >
+        {item.title}
+      </Link>
+    ))
 
   return (
     <nav className="bg-white shadow sticky top-0 z-50">
@@ -130,59 +139,23 @@ const Navbar = () => {
 
                 <div>
                   <h4 className="font-semibold mb-3">Chardham</h4>
-                  {packagesData.chardham.map(item => (
-                    <a
-                      key={item}
-                      href="#"
-                      className="megaItem block"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        openModal(item)
-                      }}
-                    >
-                      {item}
-                    </a>
-                  ))}
+                  {renderPackageLinks(packagesData.chardham)}
                 </div>
 
                 <div>
                   <h4 className="font-semibold mb-3">Tours</h4>
-                  {packagesData.tours.map(item => (
-                    <a
-                      key={item}
-                      href="#"
-                      className="megaItem block"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        openModal(item)
-                      }}
-                    >
-                      {item}
-                    </a>
-                  ))}
+                  {renderPackageLinks(packagesData.tours)}
                 </div>
 
                 <div>
                   <h4 className="font-semibold mb-3">Treks</h4>
-                  {packagesData.treks.map(item => (
-                    <a
-                      key={item}
-                      href="#"
-                      className="megaItem block"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        openModal(item)
-                      }}
-                    >
-                      {item}
-                    </a>
-                  ))}
+                  {renderPackageLinks(packagesData.treks)}
                 </div>
 
               </div>
             </div>
 
-            <Link href="#blog-section" className="navlinks">
+            <Link href="/#blog-section" className="navlinks">
               Popular
             </Link>
 
@@ -207,13 +180,6 @@ const Navbar = () => {
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
         <Drawerdata />
       </Drawer>
-
-      <PackageModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title={activeTitle}
-        items={[activeTitle]}
-      />
     </nav>
   )
 }
