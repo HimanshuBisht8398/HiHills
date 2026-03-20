@@ -10,7 +10,7 @@ import {
   GlobeAltIcon,
   UserIcon
 } from "@heroicons/react/24/solid"
-import { FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 const Footer = () => {
   const router = useRouter()
 
@@ -64,22 +64,24 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex space-x-4 mt-6">
-              <Link href="https://facebook.com">
-                <Image
-                  src="/images/footer/vec.svg"
-                  alt="facebook"
-                  width={20}
-                  height={20}
-                />
+              <Link
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center rounded-full bg-[#1877F2] p-2.5 text-white transition-all hover:scale-110 hover:shadow-lg"
+                title="Follow on Facebook"
+              >
+                {React.createElement(FaFacebookF as any, { size: 20 })}
               </Link>
 
-              <Link href="https://instagram.com">
-                <Image
-                  src="/images/footer/instagram.svg"
-                  alt="instagram"
-                  width={20}
-                  height={20}
-                />
+              <Link
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center rounded-full bg-[#E4405F] p-2.5 text-white transition-all hover:scale-110 hover:shadow-lg"
+                title="Follow on Instagram"
+              >
+                {React.createElement(FaInstagram as any, { size: 20 })}
               </Link>
 
 
