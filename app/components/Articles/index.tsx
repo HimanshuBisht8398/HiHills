@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react"; // Added React for createElement if needed
-import { Bus, User, Bed, Utensils } from "lucide-react";
+import { Bus, User, Bed, Utensils, Calendar } from "lucide-react";
 import { POPULAR_PACKAGES } from "@/app/packages/package-data";
 
 // Type-safe mapping for Lucide icons
@@ -95,6 +95,10 @@ export default function MultipleItems() {
                   <div className="p-6">
                     <h4 className="text-xl font-bold">{item.heading}</h4>
                     <p className="text-gray-500 text-sm line-clamp-1">{item.heading2}</p>
+                    <div className="mt-3 flex items-center gap-2 text-sm font-medium text-gray-600">
+                      <Calendar size={15} className="text-orange-500" />
+                      <span>{item.duration}</span>
+                    </div>
 
                     <div className="flex justify-between mt-4 items-center">
                       <span className="text-green-700 font-bold">{item.price}</span>

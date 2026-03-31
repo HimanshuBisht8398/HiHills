@@ -76,7 +76,7 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Duration</p>
-                <p className="mt-2 text-lg font-semibold text-white">{pkg.days}</p>
+                <p className="mt-2 text-lg font-semibold text-white">{pkg.duration}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Pickup</p>
@@ -148,7 +148,7 @@ export default function AdventureDetailPage({ params }: AdventurePageProps) {
               <div className="mt-5 space-y-4">
                 <div className="flex items-center gap-3 text-slate-700">
                   <Calendar size={18} className="text-orange-500" />
-                  <span>{pkg.days}</span>
+                  <span>{pkg.duration}</span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-700">
                   <MapPin size={18} className="text-orange-500" />

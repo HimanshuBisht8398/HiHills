@@ -7,7 +7,7 @@ export type AdventurePackage = {
   slug: string;
   name: string;
   price: string;
-  days: string;
+  duration: string;
   pickup: string;
   img: string;
   overview: string;
@@ -20,8 +20,8 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
   {
     slug: "river-rafting",
     name: "River Rafting Package",
-    price: "2,500",
-    days: "1N/2D",
+    price: "600",
+    duration: "1N/2D",
     pickup: "Tapovan / Shivpuri",
     img: "/images/wework/Rafting.jpeg",
     overview:
@@ -56,8 +56,8 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
   {
     slug: "jungle-safari-corbett",
     name: "Jungle Safari in Corbett",
-    price: "3,500",
-    days: "1N/2D",
+    price: "7,000",
+    duration: "1N/2D",
     pickup: "Ramnagar",
     img: "/images/wework/JungleSafari.avif",
     overview:
@@ -92,8 +92,8 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
   {
     slug: "paragliding",
     name: "Paragliding",
-    price: "2,500",
-    days: "1N/2D",
+    price: "3,800",
+    duration: "1N/2D",
     pickup: "Naukuchiatal",
     img: "/images/wework/Paragliding.jpeg",
     overview:
@@ -128,8 +128,8 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
   {
     slug: "jet-skiing-tehri",
     name: "Jet skiing in Tehri",
-    price: "800",
-    days: "1N/1D",
+    price: "1000",
+    duration: "1N/1D",
     pickup: "Tehri Lake",
     img: "/images/wework/Jetskee.jpg",
     overview:
@@ -159,7 +159,7 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
     slug: "bungee-jumping-rishikesh",
     name: "Bungee Jumping in Rishikesh",
     price: "3,700",
-    days: "1N/1D",
+    duration: "1N/1D",
     pickup: "Mohanchatti",
     img: "/images/wework/bungee-jumping.webp",
     overview:
@@ -190,7 +190,7 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
     slug: "zipline-rishikesh",
     name: "Zipline in Rishikesh",
     price: "1,800",
-    days: "1N/1D",
+    duration: "1N/1D",
     pickup: "Mohanchatti",
     img: "/images/wework/Zipline.jpeg",
     overview:
@@ -220,7 +220,7 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
     slug: "hot-air-balloon-ramnagar",
     name: "Hot Air Balloon in Ramnagar",
     price: "3,500",
-    days: "1N/2D",
+    duration: "1N/2D",
     pickup: "Ramnagar",
     img: "/images/wework/Hotairbaloon.jpg",
     overview:
@@ -256,7 +256,7 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
     slug: "skiing-auli",
     name: "Skiing in Auli",
     price: "2,000",
-    days: "1N/2D",
+    duration: "1N/2D",
     pickup: "Auli Base Camp",
     img: "/images/wework/SnowSkii.jpeg",
     overview:
@@ -292,7 +292,7 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
     slug: "camping-rishikesh",
     name: "Camping in Rishikesh",
     price: "1,500",
-    days: "1N/2D",
+    duration: "1N/2D",
     pickup: "Shivpuri",
     img: "/images/wework/Camping.avif",
     overview:

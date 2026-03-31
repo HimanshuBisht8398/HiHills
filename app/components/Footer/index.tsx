@@ -32,7 +32,7 @@ const Footer = () => {
     <footer className="relative text-white">
       <div className="absolute inset-0">
         <Image
-          src="/images/footer-bg.jpg"
+          src="/images/wework/Aboutus.png"
           alt="Footer Background"
           fill
           className="object-cover opacity-20"
@@ -172,6 +172,10 @@ const Footer = () => {
                 <PhoneIcon className="h-5 w-5 text-orange-400" />
                 <a href="tel:+917617610909" className="hover:text-white">+91-7617610909</a>
               </li>
+               <li className="flex items-center space-x-3">
+                <PhoneIcon className="h-5 w-5 text-orange-400" />
+                <a href="tel:+917617610909" className="hover:text-white">+91-8171105877</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -192,7 +196,7 @@ const Footer = () => {
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-300">
               <a href="tel:+917466934041" className="flex items-center space-x-2 hover:text-orange-400 transition">
                 <PhoneIcon className="h-4 w-4 text-orange-400" />
-                <span>+91 7466934041</span>
+                <span>+91-7466934041</span>
               </a>
               <a href="mailto:himanshubisht831998@gmail.com" className="flex items-center space-x-2 hover:text-orange-400 transition">
                 <EnvelopeIcon className="h-4 w-4 text-orange-400" />

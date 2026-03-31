@@ -18,7 +18,7 @@ export default function AdventurePage() {
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-semibold">{p.name}</h3>
-                <div className="mt-2 text-gray-600">Duration: <span className="font-medium">{p.days}</span></div>
+                <div className="mt-2 text-gray-600">Duration: <span className="font-medium">{p.duration}</span></div>
                 <div className="mt-1 text-green-700 font-bold">Price: ₹{p.price}/-</div>
                 <div className="mt-4 flex gap-3">
                   <button

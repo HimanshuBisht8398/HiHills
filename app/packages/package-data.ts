@@ -8,12 +8,14 @@ export type PopularPackage = {
   heading: string;
   heading2: string;
   price: string;
+  duration: string;
   bestSeason: string;
   imgSrc: string;
   route: string;
   inclusions: string[];
   exclusions: string[];
   itinerary: PopularPackageDay[];
+  overview: string;
 };
 
 export const POPULAR_PACKAGES: PopularPackage[] = [
@@ -22,9 +24,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Kedarnath Dham",
     heading2: "Spiritual Himalayan Journey",
     price: "5000/person",
+    duration: "5 Days / 4 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/wework/Kedarnath.jpg",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A sacred Himalayan pilgrimage to Kedarnath with scenic drives, temple darshan, and a complete yatra experience from Haridwar to Haridwar.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["helicopter or pony charges", "personal expenses", "special puja charges", "insurance"],
     itinerary: [
@@ -40,9 +44,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Badrinath Dham",
     heading2: "Sacred Vishnu Temple",
     price: "5000/person",
+    duration: "5 Days / 4 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/Badrinath_Temple.jpg",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A devotional journey to Badrinath with comfortable halts, darshan, and visits to nearby spiritual landmarks in the Garhwal Himalayas.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["personal expenses", "special puja charges", "entry fees outside itinerary", "insurance"],
     itinerary: [
@@ -58,9 +64,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Kedarnath & Badrinath",
     heading2: "Do Dham Yatra",
     price: "12000/person",
+    duration: "7 Days / 6 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/KedarnathBarinath.webp",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A complete Do Dham pilgrimage covering Kedarnath and Badrinath with planned travel, darshan, and overnight halts across the Garhwal circuit.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["pony or helicopter charges", "special darshan charges", "personal expenses", "insurance"],
     itinerary: [
@@ -78,9 +86,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Gangotri Dham",
     heading2: "Origin of Holy Ganga",
     price: "6000/person",
+    duration: "5 Days / 4 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/Gangotri.webp",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A spiritual road journey to Gangotri, the revered origin of the Ganga, with temple darshan and scenic stays through the Bhagirathi valley.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["personal expenses", "special rituals", "lunch during transit", "insurance"],
     itinerary: [
@@ -96,9 +106,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Yamunotri Dham",
     heading2: "Source of Yamuna River",
     price: "6000/person",
+    duration: "5 Days / 4 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/Yamunotri.webp",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A classic Yamunotri pilgrimage package with road travel, temple trek, and comfortable halts designed for a smooth spiritual journey.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["pony or palki charges", "personal expenses", "special puja charges", "insurance"],
     itinerary: [
@@ -114,9 +126,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Gangotri & Yamunotri Dham",
     heading2: "Source of Yamuna River",
     price: "6000/person",
+    duration: "5 Days / 4 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/Gangotriyumnotri.webp",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A dual dham pilgrimage to Gangotri and Yamunotri with guided travel, temple visits, and overnight stays across Uttarakhand's sacred valleys.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["pony charges", "special pujas", "personal expenses", "insurance"],
     itinerary: [
@@ -132,9 +146,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Adi Kailash & Om Parvat",
     heading2: "Spiritual Expedition to Adi Kailash & Om Parvat",
     price: "6000/person",
+    duration: "6 Days / 5 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/AdiOm.jpg",
     route: "Kathgodam ⇄ Kathgodam",
+    overview: "A high-altitude spiritual expedition to Adi Kailash and Om Parvat featuring remote mountain routes, sacred sights, and deep Himalayan landscapes.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["permits beyond package scope", "medical costs", "personal expenses", "insurance"],
     itinerary: [
@@ -147,31 +163,67 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     ],
   },
   {
-    slug: "rudranath",
+    slug: "rudranath-spiritual-trek",
     heading: "Rudranath Temple",
-    heading2: "Spiritual Expedition to Rudranath Temple",
-    price: "6000/person",
+    heading2: "The Toughest & Most Beautiful Kedar",
+    price: "₹ 13,500 / person",
     bestSeason: "Best Season: May - Oct",
+    duration: "5 Days / 4 Nights",
     imgSrc: "/images/aboutus/Rudranath.jpeg",
-    route: "Haridwar ⇄ Haridwar",
-    inclusions: ["meals", "stay", "transport", "guide"],
-    exclusions: ["pony or porter charges", "personal equipment", "personal expenses", "insurance"],
-    itinerary: [
-      { title: "Day 1: Haridwar to Sagar/Gopeshwar", details: "Drive to the trek base region and stay overnight." },
-      { title: "Day 2: Begin trek", details: "Start the ascent through forest and meadow sections toward the campsite." },
-      { title: "Day 3: Rudranath darshan", details: "Reach the temple area, attend darshan, and enjoy the mountain setting." },
-      { title: "Day 4: Descend to base", details: "Trek back and return to the lower roadhead." },
-      { title: "Day 5: Drive to Haridwar", details: "Return to Haridwar after breakfast." },
+    route: "Haridwar ⇄ Sagar Village ⇄ Rudranath ⇄ Haridwar",
+    overview: 
+      "A journey to the 'Ekanan' (Face) of Lord Shiva. This 5-day trek takes you through the lush rhododendron forests and high-altitude alpine meadows (Bugyals) of the Garhwal Himalayas to the only Kedar where the face of the Lord is worshipped.",
+    inclusions: [
+      "4 Nights accommodation (1N Sagar, 2N Alpine Camps, 1N Gopeshwar)",
+      "MAP Plan (Healthy Breakfast and Dinner for trekking energy)",
+      "Private Vehicle for Haridwar to Haridwar transfers",
+      "Certified Mountain Guide and Forest Permits",
+      "Basic First Aid and Oxygen Cylinder for the group"
     ],
-  },
+    exclusions: [
+      "Pony or porter charges for personal luggage",
+      "Personal trekking gear (Shoes, Poles, Raincoats)",
+      "Lunch and energy snacks/electrolytes",
+      "Travel insurance or emergency evacuation"
+    ],
+    itinerary: [
+      {
+        title: "Day 1: Haridwar to Sagar Village (The Base)",
+        details:
+          "Pick up from Haridwar. Drive via the holy confluences of Devprayag and Rudraprayag. Reach Sagar Village (near Gopeshwar) by evening. Check into a local homestay, meet your guide for a trek briefing, and prepare your gear. Overnight stay in Sagar."
+      },
+      {
+        title: "Day 2: Sagar Village to Luty Bugyal / Panar Bugyal",
+        details:
+          "Start the 10km steep ascent early in the morning. Trek through dense forests of Oak and Rhododendron. Reach the high-altitude meadow of Panar Bugyal ($3,400m$), offering spectacular views of Trishul and Nanda Devi peaks. Overnight stay in Alpine tents."
+      },
+      {
+        title: "Day 3: Panar Bugyal to Rudranath Temple Darshan",
+        details:
+          "Trek 8km across the ridge through Pitradhar (The Point of Ancestors). Reach the ancient cave temple of Rudranath. Take a holy dip in the Narad Kund and attend the evening Aarti. Witness the sunset over the Chaukhamba peaks. Overnight stay in basic guesthouse/tents near the temple."
+      },
+      {
+        title: "Day 4: Rudranath to Sagar & Drive to Gopeshwar",
+        details:
+          "After morning Darshan, begin the long descent back to Sagar Village. The downhill trek is physically demanding but offers different perspectives of the valley. Once at the base, drive to Gopeshwar. Visit the historic Gopinath Temple (the winter seat of Rudranath). Overnight stay in Gopeshwar."
+      },
+      {
+        title: "Day 5: Gopeshwar to Haridwar Departure",
+        details:
+          "After breakfast, begin the return drive. Stop at the scenic Karnaprayag (Confluence of Alaknanda & Pindar rivers). Reach Haridwar Railway Station by evening (6:00 PM - 7:00 PM) for your onward journey."
+      }
+    ],
+},
   {
     slug: "tungnath",
     heading: "Tungnath Temple",
     heading2: "Spiritual Expedition to Tungnath Temple",
     price: "6000/person",
+    duration: "3 Days / 2 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/wework/Tungnath.jpeg",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A short spiritual escape to Tungnath with mountain drives, an easy temple trek, and serene Himalayan views around Chopta.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["pony charges", "personal expenses", "special pujas", "insurance"],
     itinerary: [
@@ -185,9 +237,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Madhyamaheshwar Temple",
     heading2: "Spiritual Expedition to Madhyamaheshwar Temple",
     price: "6000/person",
+    duration: "5 Days / 4 Nights",
     bestSeason: "Best Season: May - Oct",
     imgSrc: "/images/aboutus/Madmaheshwar.jpg",
     route: "Haridwar ⇄ Haridwar",
+    overview: "A rewarding spiritual trek to Madhyamaheshwar combining scenic mountain trails, temple darshan, and peaceful overnight halts in the highlands.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["porter charges", "personal trek gear", "personal expenses", "insurance"],
     itinerary: [
@@ -203,9 +257,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Panchachuli Base Camp",
     heading2: "Journey to the Five Peaks of Kumaon",
     price: "15000/person",
+    duration: "6 Days / 5 Nights",
     bestSeason: "Best Season: May - June, Sept - Oct",
     imgSrc: "/images/aboutus/Panchachuli-Base-Camp.jpg",
     route: "Kathgodam ⇄ Kathgodam",
+    overview: "An adventurous Kumaon expedition to Panchachuli Base Camp with valley trekking, mountain panoramas, and immersive Himalayan camping.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["personal trek gear", "porter charges", "insurance", "personal expenses"],
     itinerary: [
@@ -222,9 +278,11 @@ export const POPULAR_PACKAGES: PopularPackage[] = [
     heading: "Valley of Flowers",
     heading2: "Explore the Blooming Paradise of the Himalayas",
     price: "8000/person",
+    duration: "6 Days / 5 Nights",
     bestSeason: "Best Season: July - Aug",
     imgSrc: "/images/aboutus/Valleyofflowers.jpg",
     route: "Rishikesh ⇄ Rishikesh",
+    overview: "A seasonal Himalayan getaway to the Valley of Flowers with scenic drives, meadow trails, and a vibrant monsoon bloom experience.",
     inclusions: ["meals", "stay", "transport", "guide"],
     exclusions: ["pony charges", "personal expenses", "entry fees beyond package", "insurance"],
     itinerary: [

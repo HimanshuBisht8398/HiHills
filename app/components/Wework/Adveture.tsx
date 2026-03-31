@@ -168,6 +168,10 @@ const PrevArrow = ({ onClick }: any) => (
                       </p>
 
                       <p className="text-sm opacity-90">
+                        📅 Duration: {items.duration}
+                      </p>
+
+                      <p className="text-sm opacity-90">
                         Inclusions:- {items.inclusions.slice(0, 3).join(", ")}
                       </p>
                       <p className="text-sm opacity-90">

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { CarFront, CalendarDays, MapPin, Mountain, Route, Users, Phone } from "lucide-react";
+import { getApiUrl } from "@/app/lib/api";
 
 type CabCategory = {
   slug: string;
@@ -27,13 +28,15 @@ type BookingForm = {
   notes: string;
 };
 
+type BookingFormErrors = Partial<Record<keyof BookingForm, string>>;
+
 const CAB_CATEGORIES: CabCategory[] = [
   {
     slug: "hatchback",
     name: "Hatchback",
     type: "Budget city cab",
     passengers: "3-4 Persons",
-    hourlyCharge: "₹350/hr",
+    hourlyCharge: "₹150/hr",
     area: "Plain Areas",
     description: "Best for local sightseeing, station pickups, and short plain-road trips.",
   },
@@ -116,9 +119,89 @@ const emptyForm: BookingForm = {
   notes: "",
 };
 
+const REQUIRED_FIELDS: Array<keyof BookingForm> = [
+  "name",
+  "email",
+  "vehicle",
+  "pickup",
+  "destination",
+  "persons",
+  "fromDate",
+  "toDate",
+  "mobile",
+];
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const mobileRegex = /^\d{10}$/;
+
+const validateForm = (form: BookingForm): BookingFormErrors => {
+  const errors: BookingFormErrors = {};
+
+  if (!form.name.trim()) {
+    errors.name = "Name is required.";
+  } else if (form.name.trim().length < 2) {
+    errors.name = "Name must be at least 2 characters.";
+  }
+
+  if (!form.email.trim()) {
+    errors.email = "Email is required.";
+  } else if (!emailRegex.test(form.email.trim())) {
+    errors.email = "Enter a valid email address.";
+  }
+
+  if (!form.vehicle.trim()) {
+    errors.vehicle = "Vehicle type is required.";
+  }
+
+  if (!form.pickup.trim()) {
+    errors.pickup = "Pickup location is required.";
+  }
+
+  if (!form.destination.trim()) {
+    errors.destination = "Destination is required.";
+  }
+
+  if (!form.mobile.trim()) {
+    errors.mobile = "Mobile number is required.";
+  } else if (!mobileRegex.test(form.mobile.trim())) {
+    errors.mobile = "Enter a valid 10-digit mobile number.";
+  }
+
+  if (!form.persons.trim()) {
+    errors.persons = "Number of persons is required.";
+  } else {
+    const persons = Number(form.persons);
+    if (!Number.isInteger(persons) || persons < 1) {
+      errors.persons = "Enter a valid number of persons.";
+    } else if (persons > 26) {
+      errors.persons = "Number of persons cannot exceed 26.";
+    }
+  }
+
+  if (!form.fromDate) {
+    errors.fromDate = "From date is required.";
+  }
+
+  if (!form.toDate) {
+    errors.toDate = "To date is required.";
+  } else if (form.fromDate && form.toDate < form.fromDate) {
+    errors.toDate = "To date cannot be earlier than from date.";
+  }
+
+  return errors;
+};
+
+const getFieldClasses = (hasError: boolean, extraClasses = "") =>
+  `w-full rounded-xl border px-4 py-3 text-slate-700 outline-none transition ${
+    hasError
+      ? "border-red-400 bg-red-50 focus:border-red-500"
+      : "border-slate-300 focus:border-orange-400"
+  } ${extraClasses}`.trim();
+
 export default function CabServicesPage() {
   const [selectedCab, setSelectedCab] = useState<CabCategory | null>(null);
   const [form, setForm] = useState<BookingForm>(emptyForm);
+  const [errors, setErrors] = useState<BookingFormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -129,6 +212,7 @@ export default function CabServicesPage() {
     setSelectedCab(cab);
     setSubmitted(false);
     setSubmitError("");
+    setErrors({});
     setForm({
       ...emptyForm,
       vehicle: cab.name,
@@ -139,6 +223,7 @@ export default function CabServicesPage() {
     setSelectedCab(null);
     setSubmitted(false);
     setSubmitError("");
+    setErrors({});
     setIsSubmitting(false);
     setForm(emptyForm);
   };
@@ -148,18 +233,30 @@ export default function CabServicesPage() {
       ...prev,
       [field]: value,
     }));
+
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+
+      const nextErrors = { ...prev };
+      delete nextErrors[field];
+      return nextErrors;
+    });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const hasEmpty = Object.values(form).some((value) => value.trim() === "");
-    if (hasEmpty) return;
+    const validationErrors = validateForm(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitError("");
+    setErrors({});
 
     try {
-      const response = await fetch("http://localhost:4000/cab_models", {
+      const response = await fetch(getApiUrl("/customers"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -171,11 +268,14 @@ export default function CabServicesPage() {
           vehicleType: form.vehicle,
           pickup: form.pickup,
           destination: form.destination,
+          dateofjourney: new Date(form.fromDate).toISOString(),
           fromDate: form.fromDate,
           toDate: form.toDate,
           numberOfPersons: Number(form.persons),
           metadata: {
-
+            bookingType: "cab-service",
+            flightNumber: form.flightNumber.trim(),
+            notes: form.notes.trim(),
           },
         }),
       });
@@ -193,7 +293,7 @@ export default function CabServicesPage() {
     }
   };
 
-  const isDisabled = Object.values(form).some((value) => value.trim() === "");
+  const isDisabled = REQUIRED_FIELDS.some((field) => form[field].trim() === "");
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f8fafc_0%,#eef4ff_100%)] py-16">
@@ -246,10 +346,10 @@ export default function CabServicesPage() {
                   <Mountain size={16} className="text-orange-500" />
                   <span>Best for: {cab.area}</span>
                 </div>
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <Route size={16} className="text-orange-500" />
                   <span>{cab.hourlyCharge}</span>
-                </div>
+                </div> */}
               </div>
 
               <button
@@ -306,8 +406,9 @@ export default function CabServicesPage() {
                     value={form.name}
                     onChange={(e) => handleChange("name", e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 outline-none focus:border-orange-400"
+                    className={getFieldClasses(Boolean(errors.name))}
                   />
+                  {errors.name ? <p className="mt-2 text-sm text-red-600">{errors.name}</p> : null}
                 </div>
 
                 <div>
@@ -317,8 +418,9 @@ export default function CabServicesPage() {
                     value={form.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 outline-none focus:border-orange-400"
+                    className={getFieldClasses(Boolean(errors.email))}
                   />
+                  {errors.email ? <p className="mt-2 text-sm text-red-600">{errors.email}</p> : null}
                 </div>
 
                 <div>
@@ -326,8 +428,9 @@ export default function CabServicesPage() {
                   <input
                     value={form.vehicle}
                     readOnly
-                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-700 outline-none"
+                    className={getFieldClasses(Boolean(errors.vehicle), "bg-slate-50")}
                   />
+                  {errors.vehicle ? <p className="mt-2 text-sm text-red-600">{errors.vehicle}</p> : null}
                 </div>
 
                 <div>
@@ -338,8 +441,9 @@ export default function CabServicesPage() {
                     value={form.persons}
                     onChange={(e) => handleChange("persons", e.target.value)}
                     placeholder="Enter number of persons"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 outline-none focus:border-orange-400"
+                    className={getFieldClasses(Boolean(errors.persons))}
                   />
+                  {errors.persons ? <p className="mt-2 text-sm text-red-600">{errors.persons}</p> : null}
                 </div>
 
                 <div>
@@ -350,9 +454,10 @@ export default function CabServicesPage() {
                       value={form.pickup}
                       onChange={(e) => handleChange("pickup", e.target.value)}
                       placeholder="Enter pickup location"
-                      className="w-full rounded-xl border border-slate-300 px-11 py-3 text-slate-700 outline-none focus:border-orange-400"
+                      className={getFieldClasses(Boolean(errors.pickup), "px-11")}
                     />
                   </div>
+                  {errors.pickup ? <p className="mt-2 text-sm text-red-600">{errors.pickup}</p> : null}
                 </div>
 
                 <div>
@@ -363,9 +468,10 @@ export default function CabServicesPage() {
                       value={form.destination}
                       onChange={(e) => handleChange("destination", e.target.value)}
                       placeholder="Enter destination"
-                      className="w-full rounded-xl border border-slate-300 px-11 py-3 text-slate-700 outline-none focus:border-orange-400"
+                      className={getFieldClasses(Boolean(errors.destination), "px-11")}
                     />
                   </div>
+                  {errors.destination ? <p className="mt-2 text-sm text-red-600">{errors.destination}</p> : null}
                 </div>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-slate-900">Mobile Number</label>
@@ -375,9 +481,10 @@ export default function CabServicesPage() {
                       value={form.mobile}
                       onChange={(e) => handleChange("mobile", e.target.value)}
                       placeholder="Enter mobile number"
-                      className="w-full rounded-xl border border-slate-300 px-11 py-3 text-slate-700 outline-none focus:border-orange-400"
+                      className={getFieldClasses(Boolean(errors.mobile), "px-11")}
                     />
                   </div>
+                  {errors.mobile ? <p className="mt-2 text-sm text-red-600">{errors.mobile}</p> : null}
                 </div>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-slate-900">From Date</label>
@@ -388,9 +495,10 @@ export default function CabServicesPage() {
                       min={today}
                       value={form.fromDate}
                       onChange={(e) => handleChange("fromDate", e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 px-11 py-3 text-slate-700 outline-none focus:border-orange-400"
+                      className={getFieldClasses(Boolean(errors.fromDate), "px-11")}
                     />
                   </div>
+                  {errors.fromDate ? <p className="mt-2 text-sm text-red-600">{errors.fromDate}</p> : null}
                 </div>
 
                 <div>
@@ -402,9 +510,10 @@ export default function CabServicesPage() {
                       min={form.fromDate || today}
                       value={form.toDate}
                       onChange={(e) => handleChange("toDate", e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 px-11 py-3 text-slate-700 outline-none focus:border-orange-400"
+                      className={getFieldClasses(Boolean(errors.toDate), "px-11")}
                     />
                   </div>
+                  {errors.toDate ? <p className="mt-2 text-sm text-red-600">{errors.toDate}</p> : null}
                 </div>
 
                 {submitError ? (

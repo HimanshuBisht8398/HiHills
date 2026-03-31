@@ -51,7 +51,7 @@ export default function SpiritualYatraDetailPage({ params }: SpiritualYatraPageP
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Price</p>
-                <p className="mt-2 text-2xl font-bold text-white">{item.price}</p>
+                <p className="mt-2 text-xl font-bold text-white">{item.price}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Route</p>

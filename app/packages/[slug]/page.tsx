@@ -45,15 +45,19 @@ export default function PackagePage({ params }: PackagePageProps) {
             <h1 className="mt-5 text-4xl font-black leading-tight md:text-5xl">{item.heading}</h1>
             <p className="mt-4 text-lg text-slate-200">{item.heading2}</p>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Price</p>
-                <p className="mt-2 text-2xl font-bold text-white">{item.price}</p>
+                <p className="mt-2 text-xl font-bold text-white">{item.price}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Duration</p>
+                <p className="mt-2 text-sm font-semibold text-white">{item.duration}</p>
+              </div>
+              {/* <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Route</p>
                 <p className="mt-2 text-sm font-semibold text-white">{item.route}</p>
-              </div>
+              </div> */}
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Season</p>
                 <p className="mt-2 text-sm font-semibold text-white">{item.bestSeason.replace("Best Season: ", "")}</p>
@@ -111,6 +115,10 @@ export default function PackagePage({ params }: PackagePageProps) {
             <div className="rounded-[28px] bg-white p-6 shadow-sm ring-1 ring-slate-100">
               <h2 className="text-xl font-bold text-slate-900">Quick Info</h2>
               <div className="mt-5 space-y-4">
+                <div className="flex items-center gap-3 text-slate-700">
+                  <Calendar size={18} className="text-orange-500" />
+                  <span>{item.duration}</span>
+                </div>
                 <div className="flex items-center gap-3 text-slate-700">
                   <MapPin size={18} className="text-orange-500" />
                   <span>{item.route}</span>
