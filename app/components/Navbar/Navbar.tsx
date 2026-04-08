@@ -2,43 +2,12 @@
 
 import React from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Bars3Icon } from "@heroicons/react/24/outline"
 import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/solid"
 import Drawer from "./Drawer"
 import Drawerdata from "./Drawerdata"
 import Contactusform from "./Contactus"
-
-type PackageLink = {
-  title: string
-  href: string
-}
-
-const packagesData = {
-  chardham: [
-    { title: "Char Dham Yatra 2024", href: "/spiritual-yatra/uttarakhand-char-dham-yatra" },
-    { title: "Char Dham Yatra (9N)", href: "/spiritual-yatra/uttarakhand-char-dham-yatra" },
-    { title: "Char Dham by Helicopter", href: "/chardham/badrinath-heli" },
-    { title: "Do Dham Yatra (Badrinath–Kedarnath)", href: "/spiritual-yatra/do-dham/kedarnath-badrinath" },
-    { title: "Do Dham by Helicopter", href: "/spiritual-yatra/do-dham/kedarnath-badrinath" },
-  ],
-  tours: [
-    { title: "Jim Corbett Safari", href: "/adventure/jungle-safari-corbett" },
-    { title: "Mussoorie Rishikesh Tour", href: "/districts/dehradun" },
-    { title: "Best Nainital Kausani", href: "/districts/nainital" },
-    { title: "Auli Tour Packages", href: "/adventure/skiing-auli" },
-    { title: "Sri Badrinath Ji Yatra", href: "/packages/badrinath" },
-    { title: "Sri Kedarnath Ji Yatra", href: "/packages/kedarnath" },
-  ],
-  treks: [
-    { title: "Valley of Flowers", href: "/treks/valley-of-flowers" },
-    { title: "Gomukh Trek", href: "/treks/gaumukh-tapovan" },
-    { title: "Dayara Bugyal", href: "/treks/dayara-bugyal" },
-    { title: "Dodital Trek", href: "/treks/dayara-bugyal" },
-    { title: "Kunjapuri Trek", href: "/spiritual-places/rishikesh" },
-    { title: "Chopta Trek", href: "/treks/tungnath" },
-  ],
-}
+import { packagesData, type PackageLink } from "./packages-data"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -60,9 +29,12 @@ const Navbar = () => {
       <Link
         key={item.title}
         href={item.href}
-        className="megaItem block"
+        className="group/item flex items-center justify-between rounded-2xl border border-transparent bg-white/80 px-4 py-3 text-sm font-medium text-slate-700 transition-all duration-200 hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600 hover:shadow-sm"
       >
-        {item.title}
+        <span className="pr-4">{item.title}</span>
+        <span className="text-base text-slate-300 transition group-hover/item:translate-x-1 group-hover/item:text-orange-500">
+          →
+        </span>
       </Link>
     ))
 
@@ -123,37 +95,84 @@ const Navbar = () => {
             </Link>
 
             {/* PACKAGES */}
-            <div className="relative group">
-              <span className="navlinks cursor-pointer">
-                Packages
-              </span>
+<div className="relative group">
+  <span className="navlinks inline-flex cursor-pointer items-center gap-2 py-4">
+    Packages
+    <span className="text-xs text-slate-400 transition-transform duration-300 group-hover:rotate-180">
+      ▾
+    </span>
+  </span>
 
-              <div className="
-                absolute left-[-300px] top-full mt-4 w-[1000px]
-                bg-white shadow-2xl rounded-xl p-8
-                grid grid-cols-3 gap-8
-                opacity-0 invisible
-                group-hover:opacity-100 group-hover:visible
-                transition-all duration-200
-              ">
+  {/* Mega Menu Container */}
+  <div className="
+    absolute left-1/2 top-full z-50 w-[1000px] -translate-x-1/2
+    pointer-events-none invisible opacity-0 translate-y-2
+    transition-all duration-300 ease-out
+    group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
+    pt-2 /* This bridge removes the 'height' gap issue */
+  ">
+    <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_40px_100px_-20px_rgba(15,23,42,0.25)]">
+      
+      {/* Sleek Header Section */}
+      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-10 py-7">
+        <div className="max-w-xl">
+          <div className="mb-2 flex items-center gap-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-600">
+              Curated Uttarakhand Journeys
+            </p>
+          </div>
+          <h3 className="text-xl font-bold text-slate-900">
+            Find your next escape by vibe or destination.
+          </h3>
+        </div>
+        <div className="flex flex-col items-end gap-1">
+          <span className="text-3xl font-bold text-slate-900">
+            {packagesData.reduce((count, section) => count + section.items.length, 0)}
+          </span>
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500">
+            Total Experiences
+          </span>
+        </div>
+      </div>
 
-                <div>
-                  <h4 className="font-semibold mb-3">Chardham</h4>
-                  {renderPackageLinks(packagesData.chardham)}
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-3">Tours</h4>
-                  {renderPackageLinks(packagesData.tours)}
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-3">Treks</h4>
-                  {renderPackageLinks(packagesData.treks)}
-                </div>
-
+      {/* Grid Content */}
+      <div className="grid grid-cols-3 gap-6 p-6">
+        {packagesData.map((section) => (
+          <div
+            key={section.title}
+            className={`group/section flex flex-col rounded-[24px] border border-slate-100 p-6 transition-colors duration-300 hover:border-slate-200 hover:bg-slate-50/30 ${section.accent}`}
+          >
+            <div className="mb-6">
+              <div className="mb-3 flex items-center justify-between">
+                <h4 className="font-bold tracking-tight text-slate-900 text-lg">
+                  {section.title}
+                </h4>
+                <span className="rounded-lg bg-white px-2 py-1 text-[10px] font-bold text-slate-500 shadow-sm ring-1 ring-slate-200">
+                  {section.items.length} TOURS
+                </span>
               </div>
+              <p className="text-sm leading-relaxed text-slate-500">
+                {section.description}
+              </p>
             </div>
+
+            <div className="space-y-1.5">
+              {renderPackageLinks(section.items)}
+            </div>
+            
+            {/* Subtle bottom arrow that appears on section hover */}
+            <div className="mt-auto pt-4 opacity-0 transition-opacity group-hover/section:opacity-100">
+              <span className="text-[11px] font-bold text-orange-600 underline underline-offset-4">
+                View All {section.title}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
 
             <Link href="/#blog-section" className="navlinks">
               Popular
