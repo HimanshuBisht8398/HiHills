@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 
 import OpenContactButton from "@/app/components/Treks/OpenContactButton";
+import {
+  ensureCoreInclusions,
+  getCoreInclusionHighlights,
+} from "@/app/components/shared/inclusion-highlights";
 import { TREKS, getTrekBySlug } from "../trek-data";
 
 type TrekDetailPageProps = {
@@ -46,6 +50,9 @@ export default function TrekDetailPage({ params }: TrekDetailPageProps) {
   if (!trek) {
     notFound();
   }
+
+  const detailInclusions = ensureCoreInclusions(trek.inclusions);
+  const highlightBadges = getCoreInclusionHighlights(detailInclusions);
 
   return (
     <main className="bg-slate-50 pb-20">
@@ -148,6 +155,16 @@ export default function TrekDetailPage({ params }: TrekDetailPageProps) {
                     <div>
                       <h3 className="text-lg font-bold text-slate-900">{day.title}</h3>
                       <p className="mt-2 text-sm leading-7 text-slate-600">{day.details}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {highlightBadges.map((highlight) => (
+                          <span
+                            key={highlight.key}
+                            className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700"
+                          >
+                            {highlight.label} Included
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -172,6 +189,16 @@ export default function TrekDetailPage({ params }: TrekDetailPageProps) {
                   <span>Max altitude: {trek.altitude}</span>
                 </div>
               </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {highlightBadges.map((highlight) => (
+                  <span
+                    key={highlight.key}
+                    className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700"
+                  >
+                    {highlight.label}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="rounded-[28px] bg-white p-6 shadow-sm ring-1 ring-slate-100">
@@ -180,7 +207,7 @@ export default function TrekDetailPage({ params }: TrekDetailPageProps) {
                 <h2 className="text-xl font-bold text-slate-900">Inclusions</h2>
               </div>
               <div className="mt-5 space-y-3">
-                {trek.inclusions.map((item) => (
+                {detailInclusions.map((item) => (
                   <div key={item} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
                     <CheckCircle2 size={18} className="mt-1 shrink-0 text-green-600" />
                     <span>{item}</span>

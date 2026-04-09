@@ -27,7 +27,7 @@ const Aboutdata: datatype[] = [
        paragraph: 'We offer unforgettable trekking experiences across summer, monsoon, and winter — each season bringing its own unique charm. From clear skies and alpine views in summer, to lush green trails in monsoon, and snow-covered landscapes in winter, every trek is carefully guided to ensure safety, adventure, and memories that last a lifetime.',
    },
     {
-        heading: "Hotel Booking.",
+        heading: "Hotel Booking",
         imgSrc: "/images/aboutus/Hotel.png",
         paragraph: 'We offer seamless hotel booking services to ensure a comfortable and stress-free stay throughout your journey. From budget-friendly accommodations to premium stays, we carefully select hotels that provide comfort, safety, and convenience — so you can relax and enjoy your trip with complete peace of mind.',
     },
@@ -35,6 +35,11 @@ const Aboutdata: datatype[] = [
         heading: "Jeep Safari.",
         imgSrc: "/images/aboutus/Junglesafari.png",
         paragraph: 'Experience the thrill of a Jeep Safari, where adventure meets the wild. Explore dense forests, scenic landscapes, and wildlife in their natural habitat with our safe and guided safari experiences. Perfect for nature lovers and adventure seekers, our Jeep Safaris offer an exciting and unforgettable journey into the wilderness',
+    },
+    {
+        heading: "Home stay Booking",
+        imgSrc: "/images/aboutus/Hotel.png",
+        paragraph: 'We offer seamless home stay booking services to ensure a comfortable and stress-free stay throughout your journey. From budget-friendly accommodations to premium stays, we carefully select home stays that provide comfort, safety, and convenience — so you can relax and enjoy your trip with complete peace of mind.',
     }
 ]
 

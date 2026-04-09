@@ -5,6 +5,10 @@ import React, { Component } from "react";
 import Link from "next/link";
 import { FaUtensils, FaBed, FaUserTie, FaBus } from "react-icons/fa";
 import { SPIRITUAL_PLACES } from "@/app/spiritual-places/place-data";
+import {
+  ensureCoreInclusions,
+  getCoreInclusionHighlights,
+} from "@/app/components/shared/inclusion-highlights";
 
 type DataType = (typeof SPIRITUAL_PLACES)[number];
 
@@ -91,6 +95,12 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
           <Slider {...settings}>
             {safePlaces.map((item, i) => (
               <div key={item.slug || i} className="px-3 pb-10">
+                {(() => {
+                  const highlights = getCoreInclusionHighlights(
+                    ensureCoreInclusions(item.inclusions || [])
+                  );
+
+                  return (
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden border flex flex-col h-full group">
 
                   {/* Image */}
@@ -133,24 +143,11 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
                       </span>
 
                      <div className="flex items-center gap-4 text-gray-600 text-lg">
-  {(item.inclusions || []).map((value: string, idx: number) => {
-    const v = value.toLowerCase();
-
-    if (v.includes("meal"))
-      return <React.Fragment key={idx}>{React.createElement(FaUtensils as any)}</React.Fragment>;
-    
-    if (v.includes("stay"))
-      return <React.Fragment key={idx}>{React.createElement(FaBed as any)}</React.Fragment>;
-    
-    if (v.includes("guide"))
-      return <React.Fragment key={idx}>{React.createElement(FaUserTie as any)}</React.Fragment>;
-    
-    if (v.includes("transport"))
-      return <React.Fragment key={idx}>{React.createElement(FaBus as any)}</React.Fragment>;
-
-    return null;
-  })}
-</div>
+                      {highlights.some((item) => item.key === "meals") && React.createElement(FaUtensils as any)}
+                      {highlights.some((item) => item.key === "stay") && React.createElement(FaBed as any)}
+                      {highlights.some((item) => item.key === "guide") && React.createElement(FaUserTie as any)}
+                      {highlights.some((item) => item.key === "travel") && React.createElement(FaBus as any)}
+                    </div>
                     </div>
 
                     {/* Button */}
@@ -161,7 +158,9 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
                       View Details
                     </Link>
                   </div>
-                </div>
+                  </div>
+                  )
+                })()}
               </div>
             ))}
           </Slider>

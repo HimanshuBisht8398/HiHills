@@ -197,7 +197,7 @@ const Navbar = () => {
       </div>
 
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-        <Drawerdata />
+        <Drawerdata setIsOpen={setIsOpen} />
       </Drawer>
     </nav>
   )

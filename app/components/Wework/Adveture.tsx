@@ -5,7 +5,12 @@
   import Link from "next/link";
   import "slick-carousel/slick/slick.css";
   import "slick-carousel/slick/slick-theme.css";
+  import { FaUtensils, FaBed, FaUserTie, FaBus } from "react-icons/fa";
   import { ADVENTURE_PACKAGES } from "@/app/adventure/adventure-data";
+  import {
+    ensureCoreInclusions,
+    getCoreInclusionHighlights,
+  } from "@/app/components/shared/inclusion-highlights";
 
   type StateType = {
     animatedWords: string[];
@@ -136,9 +141,13 @@ const PrevArrow = ({ onClick }: any) => (
           {/* Slider */}
           <div className="max-w-7xl mx-auto px-6">
             <Slider {...settings}>
-              {ADVENTURE_PACKAGES.map((items, i) => (
-                <div key={i} className="px-4">
+              {ADVENTURE_PACKAGES.map((items, i) => {
+                const highlights = getCoreInclusionHighlights(
+                  ensureCoreInclusions(items.inclusions)
+                );
 
+                return (
+                <div key={i} className="px-4">
                   <div className="relative h-[340px] rounded-3xl overflow-hidden shadow-xl group">
 
                     {/* Image */}
@@ -172,8 +181,14 @@ const PrevArrow = ({ onClick }: any) => (
                       </p>
 
                       <p className="text-sm opacity-90">
-                        Inclusions:- {items.inclusions.slice(0, 3).join(", ")}
+                        Inclusions
                       </p>
+                      <div className="mt-2 flex items-center gap-3 text-lg text-white">
+                        {highlights.some((item) => item.key === "meals") && React.createElement(FaUtensils as any)}
+                        {highlights.some((item) => item.key === "stay") && React.createElement(FaBed as any)}
+                        {highlights.some((item) => item.key === "guide") && React.createElement(FaUserTie as any)}
+                        {highlights.some((item) => item.key === "travel") && React.createElement(FaBus as any)}
+                      </div>
                       <p className="text-sm opacity-90">
                         ₹{items.price}/-
                       </p>
@@ -189,9 +204,8 @@ const PrevArrow = ({ onClick }: any) => (
                     </div>
 
                   </div>
-
                 </div>
-              ))}
+              )})}
             </Slider>
           </div>
 

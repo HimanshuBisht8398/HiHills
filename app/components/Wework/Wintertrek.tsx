@@ -5,6 +5,10 @@ import React, { Component } from "react";
 import Link from "next/link";
 import { FaUtensils, FaBed, FaUserTie, FaBus } from "react-icons/fa";
 import { Trek, getTrekBySlug } from "@/app/treks/trek-data";
+import {
+  ensureCoreInclusions,
+  getCoreInclusionHighlights,
+} from "@/app/components/shared/inclusion-highlights";
 
 // ✅ SAFE SLUG LIST
 const slugs = [
@@ -114,8 +118,8 @@ export default class Wintertrek extends Component<{}, StateType> {
               // ✅ FINAL SAFETY CHECK
               if (!item?.slug || !item?.img) return null;
 
-              const inclusions = item.inclusions.map((v) =>
-                v.toLowerCase()
+              const highlights = getCoreInclusionHighlights(
+                ensureCoreInclusions(item.inclusions)
               );
 
               return (
@@ -162,16 +166,16 @@ export default class Wintertrek extends Component<{}, StateType> {
                         </span>
 
                       <div className="flex items-center gap-4 text-gray-600 text-lg">
-  {inclusions.some(v => v.toLowerCase().includes("meal")) && 
+  {highlights.some((item) => item.key === "meals") && 
     React.createElement(FaUtensils as any)}
     
-  {inclusions.some(v => v.toLowerCase().includes("stay")) && 
+  {highlights.some((item) => item.key === "stay") && 
     React.createElement(FaBed as any)}
     
-  {inclusions.some(v => v.toLowerCase().includes("guide")) && 
+  {highlights.some((item) => item.key === "guide") && 
     React.createElement(FaUserTie as any)}
     
-  {inclusions.some(v => v.toLowerCase().includes("transport")) && 
+  {highlights.some((item) => item.key === "travel") && 
     React.createElement(FaBus as any)}
 </div>
                       </div>

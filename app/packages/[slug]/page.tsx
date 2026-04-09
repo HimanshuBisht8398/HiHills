@@ -4,6 +4,10 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Bus, Calendar, CheckCircle2, MapPin, Sparkles, XCircle } from "lucide-react";
 
 import OpenContactButton from "@/app/components/Treks/OpenContactButton";
+import {
+  ensureCoreInclusions,
+  getCoreInclusionHighlights,
+} from "@/app/components/shared/inclusion-highlights";
 import { POPULAR_PACKAGES, getPopularPackageBySlug } from "../package-data";
 
 type PackagePageProps = {
@@ -28,6 +32,9 @@ export default function PackagePage({ params }: PackagePageProps) {
   const item = getPopularPackageBySlug(params.slug);
 
   if (!item) notFound();
+
+  const detailInclusions = ensureCoreInclusions(item.inclusions);
+  const highlightBadges = getCoreInclusionHighlights(detailInclusions);
 
   return (
     <main className="bg-slate-50 pb-20">
@@ -104,6 +111,16 @@ export default function PackagePage({ params }: PackagePageProps) {
                     <div>
                       <h3 className="text-lg font-bold text-slate-900">{day.title}</h3>
                       <p className="mt-2 text-sm leading-7 text-slate-600">{day.details}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {highlightBadges.map((highlight) => (
+                          <span
+                            key={highlight.key}
+                            className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700"
+                          >
+                            {highlight.label} Included
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -132,6 +149,16 @@ export default function PackagePage({ params }: PackagePageProps) {
                   <span>Transport arranged as per itinerary</span>
                 </div>
               </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {highlightBadges.map((highlight) => (
+                  <span
+                    key={highlight.key}
+                    className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700"
+                  >
+                    {highlight.label}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="rounded-[28px] bg-white p-6 shadow-sm ring-1 ring-slate-100">
@@ -140,7 +167,7 @@ export default function PackagePage({ params }: PackagePageProps) {
                 <h2 className="text-xl font-bold text-slate-900">Inclusions</h2>
               </div>
               <div className="mt-5 space-y-3">
-                {item.inclusions.map((inc) => (
+                {detailInclusions.map((inc) => (
                   <div key={inc} className="flex items-start gap-3 text-sm leading-6 text-slate-600">
                     <CheckCircle2 size={18} className="mt-1 shrink-0 text-green-600" />
                     <span className="capitalize">{inc}</span>
