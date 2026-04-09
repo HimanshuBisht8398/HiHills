@@ -2,7 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Treks — HI HILLS',
+  title: 'Treks by Season — Winter, Summer & Monsoon',
+  description:
+    'Himalayan treks by season: winter treks (Kedarkantha, Tungnath), summer and monsoon treks. Expert-led group departures from Haridwar.',
 }
 
 export default function TreksPage() {
