@@ -38,8 +38,8 @@ const Aboutdata: datatype[] = [
     },
     {
         heading: "Home stay Booking",
-        imgSrc: "/images/aboutus/Hotel.png",
-        paragraph: 'We offer seamless home stay booking services to ensure a comfortable and stress-free stay throughout your journey. From budget-friendly accommodations to premium stays, we carefully select home stays that provide comfort, safety, and convenience — so you can relax and enjoy your trip with complete peace of mind.',
+        imgSrc: "/images/aboutus/HomeStay.png",
+        paragraph: 'We offer handpicked homestay experiences that bring you closer to the soul of the mountains. More than just a room, these stays invite you to breathe the crisp air of nature and embrace the authentic, slow-paced life of Uttarakhand’s most remote and beautiful corners.'
     }
 ]
 
@@ -149,6 +149,16 @@ const Aboutus = () => {
                                         <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
                                         <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
                                             See Packages
+                                            <ChevronRightIcon width={20} height={20} />
+                                        </div>
+                                    </Link>
+                                ) : item.heading && item.heading.toLowerCase().includes('home') ? (
+                                    <Link href="/homestays" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
+                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
+                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
+                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
+                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
+                                            See Homestays
                                             <ChevronRightIcon width={20} height={20} />
                                         </div>
                                     </Link>

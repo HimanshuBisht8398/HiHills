@@ -134,7 +134,7 @@ export const TREKS: Trek[] = [
     name: "Khaliya Top Trek",
     price: "8,500",
     days: "3N/4D",
-    route: "Munsiyari ⇄ Munsiyari",
+    route: "Kathgodam ⇄ Kathgodam",
     img: "/images/Treks/Khaliyatop.webp",
     tag: "Group",
     overview:
