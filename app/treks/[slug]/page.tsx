@@ -31,6 +31,8 @@ export function generateStaticParams() {
   }));
 }
 
+export const dynamicParams = false;
+
 export function generateMetadata({ params }: TrekDetailPageProps): Metadata {
   const trek = getTrekBySlug(params.slug);
 
@@ -149,6 +151,7 @@ export default function TrekDetailPage({ params }: TrekDetailPageProps) {
                 src={trek.img}
                 alt={trek.name}
                 fill
+                sizes="(min-width: 768px) 42vw, 100vw"
                 className="object-cover"
                 priority
               />

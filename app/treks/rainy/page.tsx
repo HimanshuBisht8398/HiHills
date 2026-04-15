@@ -1,5 +1,3 @@
-"use client"
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, MapPin, CloudRain } from 'lucide-react'
@@ -25,7 +23,7 @@ export default function MonsoonTreksPage() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {monsoonTreks.map((t) => (
+          {monsoonTreks.map((t, index) => (
             <div
               key={t.slug}
               className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col"
@@ -36,6 +34,8 @@ export default function MonsoonTreksPage() {
                   src={t.img}
                   alt={t.name}
                   fill
+                  priority={index < 3}
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
 
@@ -84,6 +84,7 @@ export default function MonsoonTreksPage() {
                   {/* View Details */}
                   <Link
                     href={`/treks/${t.slug}`}
+                    prefetch
                     className="flex-1 text-center border border-orange-300 text-orange-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-50 transition"
                   >
                     View Details
