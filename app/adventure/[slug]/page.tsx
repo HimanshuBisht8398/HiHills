@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -15,6 +16,7 @@ import {
   ensureCoreInclusions,
   getCoreInclusionHighlights,
 } from "@/app/components/shared/inclusion-highlights";
+import { SITE_NAME, SITE_URL } from "@/app/lib/site-config";
 import {
   ADVENTURE_PACKAGES,
   getAdventurePackageBySlug,
@@ -32,12 +34,46 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: AdventurePageProps) {
+export function generateMetadata({ params }: AdventurePageProps): Metadata {
   const pkg = getAdventurePackageBySlug(params.slug);
 
+  if (!pkg) {
+    return {
+      title: `Adventure Package Not Found | ${SITE_NAME}`,
+    };
+  }
+
+  const title = `${pkg.name} in Uttarakhand`;
+  const description = `${pkg.overview} Pickup: ${pkg.pickup}. Duration: ${pkg.duration}.`;
+  const url = `${SITE_URL}/adventure/${pkg.slug}`;
+
   return {
-    title: pkg ? `${pkg.name} - HI HILLS` : "Adventure Package Not Found - HI HILLS",
-    description: pkg?.overview,
+    title,
+    description,
+    keywords: [
+      pkg.name,
+      `${pkg.name} package`,
+      `${pkg.pickup} adventure activity`,
+      "Rishikesh adventure packages",
+      "Uttarakhand adventure activities",
+      "Hi Hills adventure",
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images: [{ url: pkg.img, alt: pkg.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [pkg.img],
+    },
   };
 }
 

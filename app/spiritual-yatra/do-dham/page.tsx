@@ -1,12 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { ArrowLeft, Calendar, MapPin } from "lucide-react";
 
 import { DO_DHAM_COMBOS } from "./do-dham-data";
+import { SITE_URL } from "@/app/lib/site-config";
 
-export const metadata = {
-  title: "Do Dham Yatra Combinations - HI HILLS",
-  description: "Choose from all Do Dham combinations of Kedarnath, Badrinath, Gangotri, and Yamunotri.",
+export const metadata: Metadata = {
+  title: "Do Dham Yatra Packages from Haridwar",
+  description:
+    "Choose from Do Dham Yatra combinations covering Kedarnath, Badrinath, Gangotri, and Yamunotri with Hi Hills Travels.",
+  alternates: {
+    canonical: `${SITE_URL}/spiritual-yatra/do-dham`,
+  },
 };
 
 export default function DoDhamSelectionPage() {

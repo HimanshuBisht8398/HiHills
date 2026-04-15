@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -15,6 +16,7 @@ import {
   ensureCoreInclusions,
   getCoreInclusionHighlights,
 } from "@/app/components/shared/inclusion-highlights";
+import { SITE_NAME, SITE_URL } from "@/app/lib/site-config";
 import { TREKS, getTrekBySlug } from "../trek-data";
 
 type TrekDetailPageProps = {
@@ -29,18 +31,46 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: TrekDetailPageProps) {
+export function generateMetadata({ params }: TrekDetailPageProps): Metadata {
   const trek = getTrekBySlug(params.slug);
 
   if (!trek) {
     return {
-      title: "Trek Not Found - HI HILLS",
+      title: `Trek Not Found | ${SITE_NAME}`,
     };
   }
 
+  const title = `${trek.name} Trek Package in Uttarakhand`;
+  const description = `${trek.overview} Route: ${trek.route}. Best time: ${trek.bestTime}.`;
+  const url = `${SITE_URL}/treks/${trek.slug}`;
+
   return {
-    title: `${trek.name} - HI HILLS`,
-    description: trek.overview,
+    title,
+    description,
+    keywords: [
+      trek.name,
+      `${trek.name} trek package`,
+      `${trek.name} trek`,
+      `${trek.season} trek in Uttarakhand`,
+      "Uttarakhand trekking packages",
+      "Hi Hills treks",
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images: [{ url: trek.img, alt: trek.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [trek.img],
+    },
   };
 }
 

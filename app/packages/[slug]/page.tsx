@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Bus, Calendar, CheckCircle2, MapPin, Sparkles, XCircle } from "lucide-react";
 
@@ -8,6 +9,7 @@ import {
   ensureCoreInclusions,
   getCoreInclusionHighlights,
 } from "@/app/components/shared/inclusion-highlights";
+import { SITE_NAME, SITE_URL } from "@/app/lib/site-config";
 import { POPULAR_PACKAGES, getPopularPackageBySlug } from "../package-data";
 
 type PackagePageProps = {
@@ -20,11 +22,47 @@ export function generateStaticParams() {
   return POPULAR_PACKAGES.map((item) => ({ slug: item.slug }));
 }
 
-export function generateMetadata({ params }: PackagePageProps) {
+export function generateMetadata({ params }: PackagePageProps): Metadata {
   const item = getPopularPackageBySlug(params.slug);
+
+  if (!item) {
+    return {
+      title: `Package Not Found | ${SITE_NAME}`,
+    };
+  }
+
+  const packageName = item.heading.replace(/\.$/, "");
+  const title = `${packageName} Package from Haridwar`;
+  const description = `${item.overview} Duration: ${item.duration}. Route: ${item.route}.`;
+  const url = `${SITE_URL}/packages/${item.slug}`;
+
   return {
-    title: item ? `${item.heading} - HI HILLS` : "Package Not Found - HI HILLS",
-    description: item?.heading2,
+    title,
+    description,
+    keywords: [
+      packageName,
+      `${packageName} package`,
+      `${packageName} tour package`,
+      "Uttarakhand tour packages",
+      "Haridwar travel package",
+      "Hi Hills Travels",
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images: [{ url: item.imgSrc, alt: packageName }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [item.imgSrc],
+    },
   };
 }
 

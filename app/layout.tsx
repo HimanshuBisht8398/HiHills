@@ -2,55 +2,53 @@ import './globals.css';
 import Navbar from './components/Navbar/index';
 import Footer from './components/Footer/index';
 import WhatsappChatButton from './components/WhatsappChatButton';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://hihills.com';
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from './lib/site-config';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Hi Hills — Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
-    template: '%s | Hi Hills',
+    default: 'Hi Hills Travels - Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
+    template: `%s | ${SITE_NAME}`,
   },
   description:
-    'Premier Haridwar-based travel agency for Uttarakhand tour packages, Char Dham Yatra, Himalayan treks, jeep safaris & handpicked stays. Expert-led, safe & customized itineraries.',
+    'Hi Hills Travels offers Uttarakhand tour packages, Char Dham Yatra, Himalayan treks, spiritual journeys, jeep safaris, and handpicked stays from Haridwar.',
   keywords: [
-    'Uttarakhand tours',
-    'Char Dham Yatra',
-    'Haridwar travel agency',
-    'Himalayan treks',
-    'Badrinath Kedarnath package',
-    'winter treks India',
-    'jeep safari Corbett',
-    'Uttarakhand hotels',
-    'Rishikesh adventure',
+    'Hi Hills Travels',
+    'Hi Hills travel agency',
+    'Uttarakhand tour packages',
+    'Char Dham Yatra package',
+    'Chardham yatra from Haridwar',
+    'Kedarnath package',
+    'Badrinath package',
+    'Do Dham yatra package',
+    'Himalayan treks in Uttarakhand',
+    'Rishikesh adventure packages',
   ],
   authors: [{ name: 'Hi Hills', url: SITE_URL }],
-  creator: 'Hi Hills',
-  publisher: 'Hi Hills',
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     url: SITE_URL,
-    siteName: 'Hi Hills',
-    title: 'Hi Hills — Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
+    siteName: SITE_NAME,
+    title: 'Hi Hills Travels - Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
     description:
-      'Premier Haridwar-based travel agency for Uttarakhand tour packages, Char Dham Yatra, Himalayan treks, jeep safaris & handpicked stays.',
+      'Book Uttarakhand tour packages, Char Dham Yatra, treks, spiritual journeys, and adventure trips with Hi Hills Travels.',
     images: [
       {
-        url: '/images/og-default.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Hi Hills — Uttarakhand Tours & Char Dham Yatra',
+        url: DEFAULT_OG_IMAGE,
+        alt: 'Hi Hills Travels',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hi Hills — Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
+    title: 'Hi Hills Travels - Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
     description:
-      'Premier Haridwar-based travel agency for Uttarakhand tours, Char Dham Yatra, treks & jeep safaris.',
-    images: ['/images/og-default.jpg'],
+      'Book Uttarakhand tours, Char Dham Yatra, treks, and adventure packages with Hi Hills Travels.',
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,
@@ -80,10 +78,10 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,
-      name: 'Hi Hills',
+      name: SITE_NAME,
       url: SITE_URL,
       description:
-        'Premier Haridwar-based travel agency for Uttarakhand tour packages, Char Dham Yatra, Himalayan treks, jeep safaris and handpicked stays.',
+        'Haridwar-based travel company for Uttarakhand tour packages, Char Dham Yatra, treks, jeep safaris, and spiritual journeys.',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Haridwar',
@@ -96,7 +94,7 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: 'Hi Hills',
+      name: SITE_NAME,
       description: 'Uttarakhand Tours, Char Dham Yatra & Himalayan Treks',
       publisher: { '@id': `${SITE_URL}/#organization` },
       inLanguage: 'en-IN',

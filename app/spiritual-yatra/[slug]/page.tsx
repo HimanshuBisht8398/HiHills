@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Bus, Calendar, CheckCircle2, MapPin, Sparkles, XCircle } from "lucide-react";
 
 import OpenContactButton from "@/app/components/Treks/OpenContactButton";
+import { SITE_NAME, SITE_URL } from "@/app/lib/site-config";
 import {
   SPIRITUAL_YATRA_PACKAGES,
   getSpiritualYatraBySlug,
@@ -19,11 +21,47 @@ export function generateStaticParams() {
   return SPIRITUAL_YATRA_PACKAGES.map((item) => ({ slug: item.slug }));
 }
 
-export function generateMetadata({ params }: SpiritualYatraPageProps) {
+export function generateMetadata({ params }: SpiritualYatraPageProps): Metadata {
   const item = getSpiritualYatraBySlug(params.slug);
+
+  if (!item) {
+    return {
+      title: `Spiritual Yatra Not Found | ${SITE_NAME}`,
+    };
+  }
+
+  const packageName = item.heading.replace(/\.$/, "");
+  const title = `${packageName} Package`;
+  const description = `${item.paragraph} Best time: ${item.bestTime}. Route: ${item.route}.`;
+  const url = `${SITE_URL}/spiritual-yatra/${item.slug}`;
+
   return {
-    title: item ? `${item.heading} - HI HILLS` : "Spiritual Yatra Not Found - HI HILLS",
-    description: item?.paragraph,
+    title,
+    description,
+    keywords: [
+      packageName,
+      `${packageName} yatra package`,
+      "Char Dham Yatra package",
+      "spiritual tour packages",
+      "Haridwar yatra packages",
+      "Hi Hills Travels",
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images: [{ url: item.imgSrc, alt: packageName }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [item.imgSrc],
+    },
   };
 }
 

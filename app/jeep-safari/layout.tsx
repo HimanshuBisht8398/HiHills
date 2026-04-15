@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://hihills.com';
+import { SITE_URL } from '../lib/site-config';
 
 export const metadata: Metadata = {
   title: 'Jeep Safari Packages — Corbett, Rajaji & More',

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Bus, Calendar, CheckCircle2, MapPin, Sparkles, XCircle } from "lucide-react";
 
@@ -8,6 +9,7 @@ import {
   ensureCoreInclusions,
   getCoreInclusionHighlights,
 } from "@/app/components/shared/inclusion-highlights";
+import { SITE_NAME, SITE_URL } from "@/app/lib/site-config";
 import { DO_DHAM_COMBOS, getDoDhamComboBySlug } from "../do-dham-data";
 
 type DoDhamPageProps = {
@@ -20,11 +22,46 @@ export function generateStaticParams() {
   return DO_DHAM_COMBOS.map((item) => ({ slug: item.slug }));
 }
 
-export function generateMetadata({ params }: DoDhamPageProps) {
+export function generateMetadata({ params }: DoDhamPageProps): Metadata {
   const item = getDoDhamComboBySlug(params.slug);
+
+  if (!item) {
+    return {
+      title: `Do Dham Package Not Found | ${SITE_NAME}`,
+    };
+  }
+
+  const title = `${item.name} Package from Haridwar`;
+  const description = `${item.overview} Duration: ${item.duration}. Best time: ${item.bestTime}.`;
+  const url = `${SITE_URL}/spiritual-yatra/do-dham/${item.slug}`;
+
   return {
-    title: item ? `${item.name} - HI HILLS` : "Do Dham Package Not Found - HI HILLS",
-    description: item?.overview,
+    title,
+    description,
+    keywords: [
+      item.name,
+      `${item.name} package`,
+      "Do Dham yatra package",
+      "Kedarnath Badrinath package",
+      "Haridwar Do Dham package",
+      "Hi Hills Travels",
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images: [{ url: item.imgSrc, alt: item.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [item.imgSrc],
+    },
   };
 }
 

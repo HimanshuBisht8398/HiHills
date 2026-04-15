@@ -1,22 +1,22 @@
 import { Metadata } from 'next';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://hihills.com';
+import { SITE_URL } from '../lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Char Dham Yatra & Do Dham Packages',
+  title: 'Char Dham Yatra Packages from Haridwar',
   description:
-    'Book Char Dham Yatra (Badrinath, Kedarnath) and Do Dham packages. Helicopter options, fixed departures, and custom itineraries. Expert Haridwar-based travel agency.',
+    'Browse Char Dham and Do Dham Yatra packages from Haridwar with Hi Hills Travels, including Kedarnath, Badrinath, and helicopter options.',
   keywords: [
     'Char Dham Yatra',
+    'Char Dham Yatra package from Haridwar',
     'Badrinath Kedarnath package',
     'Do Dham helicopter',
     'Char Dham tour from Haridwar',
     'Kedarnath Badrinath tour',
   ],
   openGraph: {
-    title: 'Char Dham Yatra & Do Dham Packages | Hi Hills',
+    title: 'Char Dham Yatra Packages from Haridwar | Hi Hills',
     description:
-      'Book Char Dham Yatra and Do Dham packages. Helicopter options and custom itineraries.',
+      'Browse Char Dham and Do Dham Yatra packages from Haridwar, including Kedarnath, Badrinath, and helicopter options.',
     url: `${SITE_URL}/chardham`,
   },
   alternates: { canonical: `${SITE_URL}/chardham` },
