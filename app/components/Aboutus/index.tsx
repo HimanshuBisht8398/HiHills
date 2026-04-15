@@ -1,229 +1,106 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
-interface datatype {
-    heading: string;
-    imgSrc: string;
-    paragraph: string;
+type ServiceCard = {
+  heading: string;
+  imgSrc: string;
+  paragraph: string;
+  href: string;
+  cta: string;
+};
+
+const services: ServiceCard[] = [
+  {
+    heading: "Cab Services",
+    imgSrc: "/images/aboutus/Transportation.png",
+    paragraph:
+      "Reliable airport pickups, intercity travel and local transport planned for comfortable mountain travel.",
+    href: "/cab-services",
+    cta: "Explore cars",
+  },
+  {
+    heading: "Adventure Activities",
+    imgSrc: "/images/aboutus/Adventure.png",
+    paragraph:
+      "River rafting, hot air ballooning, boating and other guided experiences with safety in focus.",
+    href: "/adventure",
+    cta: "See adventures",
+  },
+  {
+    heading: "Treks",
+    imgSrc: "/images/aboutus/Trek.png",
+    paragraph:
+      "Season-based Himalayan treks with local guidance, clear itineraries and comfortable support.",
+    href: "/treks",
+    cta: "View treks",
+  },
+  {
+    heading: "Hotel Booking",
+    imgSrc: "/images/aboutus/Hotel.png",
+    paragraph:
+      "Handpicked stays across Uttarakhand for pilgrimages, family trips and short mountain breaks.",
+    href: "/hotels",
+    cta: "See stays",
+  },
+  {
+    heading: "Jeep Safari",
+    imgSrc: "/images/aboutus/Junglesafari.png",
+    paragraph:
+      "Wildlife and scenic safari bookings for travellers who want a more adventurous day in the hills.",
+    href: "/jeep-safari",
+    cta: "Book safari",
+  },
+  {
+    heading: "Homestays",
+    imgSrc: "/images/aboutus/HomeStay.png",
+    paragraph:
+      "Peaceful local stays that bring you closer to mountain life, slower travel and authentic hospitality.",
+    href: "/homestays",
+    cta: "See homestays",
+  },
+];
+
+export default function Aboutus() {
+  return (
+    <section id="services-section" className="py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#1A2B49]">
+            Services
+          </p>
+          <h2 className="mt-4 text-4xl font-bold text-slate-900 sm:text-5xl">
+            Everything you need for a smooth Uttarakhand trip.
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-slate-600">
+            We trimmed the old auto-slider here so the page stays faster and your
+            visitors can scan services immediately.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {services.map((item) => (
+            <Link
+              key={item.heading}
+              href={item.href}
+              className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#1A2B49] hover:shadow-xl"
+            >
+              <Image
+                src={item.imgSrc}
+                alt={item.heading}
+                width={84}
+                height={84}
+                sizes="84px"
+                className="mb-6"
+              />
+              <h3 className="text-2xl font-bold text-slate-900">{item.heading}</h3>
+              <p className="mt-4 text-base leading-7 text-slate-600">{item.paragraph}</p>
+              <span className="mt-6 inline-flex items-center text-sm font-semibold text-orange-600 transition group-hover:text-[#1A2B49]">
+                {item.cta}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-
-const Aboutdata: datatype[] = [
-    {
-        heading: "Cab Services.",
-        imgSrc: "/images/aboutus/Transportation.png",
-        paragraph: 'We provide reliable and comfortable transportation services to make your journey smooth and hassle-free. From airport pickups and local transfers to complete travel arrangements for tours and treks, we ensure safe, timely, and convenient travel so you can focus on enjoying your trip.',
-    },
-    {
-        heading: "Adventure Activities.",
-        imgSrc: "/images/aboutus/Adventure.png",
-        paragraph: 'We offer thrilling adventure activities to make your trip truly unforgettable. From exciting river rafting and jet skiing to peaceful boating, kayaking, breathtaking hot air balloon rides and many more, there’s something for every adventure lover. Whether you seek adrenaline or scenic fun, we ensure safe, well-organized, and memorable experiences every time.',
-    },
-    {
-       heading: "Treks.",
-       imgSrc: "/images/aboutus/Trek.png",
-       paragraph: 'We offer unforgettable trekking experiences across summer, monsoon, and winter — each season bringing its own unique charm. From clear skies and alpine views in summer, to lush green trails in monsoon, and snow-covered landscapes in winter, every trek is carefully guided to ensure safety, adventure, and memories that last a lifetime.',
-   },
-    {
-        heading: "Hotel Booking",
-        imgSrc: "/images/aboutus/Hotel.png",
-        paragraph: 'We offer seamless hotel booking services to ensure a comfortable and stress-free stay throughout your journey. From budget-friendly accommodations to premium stays, we carefully select hotels that provide comfort, safety, and convenience — so you can relax and enjoy your trip with complete peace of mind.',
-    },
-       {
-        heading: "Jeep Safari.",
-        imgSrc: "/images/aboutus/Junglesafari.png",
-        paragraph: 'Experience the thrill of a Jeep Safari, where adventure meets the wild. Explore dense forests, scenic landscapes, and wildlife in their natural habitat with our safe and guided safari experiences. Perfect for nature lovers and adventure seekers, our Jeep Safaris offer an exciting and unforgettable journey into the wilderness',
-    },
-    {
-        heading: "Home stay Booking",
-        imgSrc: "/images/aboutus/HomeStay.png",
-        paragraph: 'We offer handpicked homestay experiences that bring you closer to the soul of the mountains. More than just a room, these stays invite you to breathe the crisp air of nature and embrace the authentic, slow-paced life of Uttarakhand’s most remote and beautiful corners.'
-    }
-]
-
-const Aboutus = () => {
-    const [index, setIndex] = useState<number>(0);
-    const [slidesToShow, setSlidesToShow] = useState<number>(3);
-    const [isPaused, setIsPaused] = useState<boolean>(false);
-    const intervalRef = useRef<number | null>(null);
-
-    // update slidesToShow based on window width
-    useEffect(() => {
-        const update = () => {
-            if (typeof window === 'undefined') return;
-            const w = window.innerWidth;
-            if (w >= 1024) setSlidesToShow(3);
-            else if (w >= 640) setSlidesToShow(2);
-            else setSlidesToShow(1);
-        };
-        update();
-        window.addEventListener('resize', update);
-        return () => window.removeEventListener('resize', update);
-    }, []);
-
-    // auto-advance
-    useEffect(() => {
-        const maxIndex = Math.max(0, Aboutdata.length - slidesToShow);
-        if (index > maxIndex) setIndex(0);
-    }, [slidesToShow]);
-
-    useEffect(() => {
-        if (isPaused) return;
-        // use window.setInterval so that TS knows the return type is number
-        intervalRef.current = window.setInterval(() => {
-            setIndex((prev) => {
-                const maxIndex = Math.max(0, Aboutdata.length - slidesToShow);
-                return prev >= maxIndex ? 0 : prev + 1;
-            });
-        }, 1000);
-
-        return () => {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
-            }
-        };
-    }, [slidesToShow, isPaused]);
-
-    return (
-        <div id="services-section">
-            {/* <div className='mx-auto max-w-7xl px-4 py-24 my-32 lg:px-10 bg-lightgrey rounded-3xl relative'> */}
-                <Image src="/images/aboutus/dots.svg" width={100} height={100} alt="dots-image" className="absolute bottom-1 -left-20" />
-                <h4 className='text-center text-4xl lg:text-65xl font-bold'>Know more about our Services.</h4>
-
-                {/* Carousel wrapper */}
-                <div
-                    className="relative overflow-hidden my-16"
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                >
-                    <div
-                        className="flex transition-transform duration-700"
-                        style={{
-                            transform: `translateX(-${(index * 100) / slidesToShow}%)`,
-                        }}
-                    >
-                        {Aboutdata.map((item, i) => (
-                            <div
-                                key={i}
-                                className='flex-shrink-0 px-4'
-                                style={{ width: `${100 / slidesToShow}%` }}
-                            >
-                                {/* if this card is the Treks card, link to /treks page, otherwise keep Book Now behaviour */}
-                                {item.heading && item.heading.toLowerCase().includes('cab') ? (
-                                    <Link href="/cab-services" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            Explore Cars
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : item.heading && item.heading.toLowerCase().includes('trek') ? (
-                                    <Link href="/treks" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            Book Now
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : item.heading && item.heading.toLowerCase().includes('advent') ? (
-                                    <Link href="/adventure" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            See Packages
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : item.heading && item.heading.toLowerCase().includes('hotel') ? (
-                                    <Link href="/hotels" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            See Packages
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : item.heading && item.heading.toLowerCase().includes('home') ? (
-                                    <Link href="/homestays" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            See Homestays
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : item.heading && (item.heading.toLowerCase().includes('char') && item.heading.toLowerCase().includes('dham') || item.heading.toLowerCase().includes('chardham')) ? (
-                                    <Link href="/chardham/char-dham" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            See Packages
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : item.heading && (item.heading.toLowerCase().includes('jeep') || item.heading.toLowerCase().includes('safari')) ? (
-                                    <Link href="/jeep-safari" className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group block'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <div className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'>
-                                            See Packages
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </div>
-                                    </Link>
-                                ) : (
-                                    <div className='hover:bg-navyblue bg-white rounded-3xl mt-16 pt-10 pl-8 pb-10 pr-6 shadow-xl group'>
-                                        <h4 className='text-4xl font-semibold  text-black mb-5 group-hover:text-white'>{item.heading}</h4>
-                                        <Image src={item.imgSrc} alt={item.imgSrc} width={100} height={100} className="mb-5" />
-                                        <h4 className='text-lg font-normal text-black group-hover:text-offwhite mb-5'>{item.paragraph}</h4>
-                                        <button
-                                            type="button"
-                                            className='text-lg font-semibold group-hover:text-white text-blue hover-underline flex items-center gap-2'
-                                            onClick={() => {
-                                                try {
-                                                    if (typeof window !== 'undefined') {
-                                                        window.dispatchEvent(new Event('openContactForm'))
-                                                    }
-                                                } catch (e) {
-                                                    // ignore
-                                                }
-                                            }}
-                                        >
-                                            Book Now
-                                            <ChevronRightIcon width={20} height={20} />
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* simple indicators */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 bottom-6 flex gap-2">
-                        {Array.from({ length: Math.max(1, Aboutdata.length - slidesToShow + 1) }).map((_, ii) => (
-                            <button
-                                key={ii}
-                                onClick={() => setIndex(ii)}
-                                // className={`w-3 h-3 rounded-full ${ii === index ? 'bg-blue' : 'bg-gray-300'}`}
-                                aria-label={`Go to slide ${ii + 1}`}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        // </div>
-    )
-}
-
-export default Aboutus;

@@ -55,6 +55,7 @@ const Banner = () => {
               alt="Hi Hills Team and Services in Uttarakhand" 
               width={750} 
               height={600}
+              sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover rounded-2xl shadow-2xl"
             />
           </div>
