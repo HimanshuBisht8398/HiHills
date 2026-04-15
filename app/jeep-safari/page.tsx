@@ -1,5 +1,6 @@
 "use client"
 import Image from 'next/image'
+import Link from 'next/link'
 
 const jeepPackages = [
   { slug: 'corbett-jeep', name: 'Jim Corbett Jeep Safari', duration: '1N/2D', price: '₹4,500/person', img: '/images/dedicated/man.svg' },
@@ -36,7 +37,7 @@ export default function JeepSafariPage() {
                   >
                     Book Now
                   </button>
-                  <a href="#" className="px-4 py-2 rounded-lg border border-gray-200">Details</a>
+                  <Link href="#" className="px-4 py-2 rounded-lg border border-gray-200">Details</Link>
                 </div>
               </div>
             </div>

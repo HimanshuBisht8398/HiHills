@@ -1,8 +1,10 @@
 "use client";
 
-import Slider from "react-slick";
+import dynamic from "next/dynamic";
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
 import React, { Component } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FaEye } from "react-icons/fa";
 
 import "slick-carousel/slick/slick.css";
@@ -126,10 +128,12 @@ export default class Index extends Component<{}, StateType> {
                   <Link href={`/districts/${slug}`} className="block">
                     <div className="relative h-[260px] rounded-3xl overflow-hidden shadow-xl group flex items-center justify-center bg-black/5">
 
-                      <img
+                      <Image
                         src={items.images[0]}
                         alt={items.district}
-                        className="max-w-full max-h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
                       />
 
                       {/* Gradient Overlay */}

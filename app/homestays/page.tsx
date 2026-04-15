@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomestaysComingSoon() {
   const notify = () => {
@@ -36,9 +37,9 @@ export default function HomestaysComingSoon() {
             Notify Me
           </button>
 
-          <a href="/" className="px-6 py-3 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-100">
+          <Link href="/" className="px-6 py-3 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-100">
             Back to Home
-          </a>
+          </Link>
         </div>
 
         <p className="text-sm text-gray-500 mt-6">

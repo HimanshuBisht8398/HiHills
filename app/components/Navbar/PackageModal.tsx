@@ -1,5 +1,6 @@
 "use client"
 import React from "react"
+import Image from "next/image"
 
 interface Props {
   open: boolean
@@ -39,7 +40,9 @@ const PackageModal = ({ open, onClose, title, items, image, description }: Props
         ) : (
           <>
             {image && (
-              <img src={image} alt={title} className="rounded-xl h-[260px] w-full object-cover" />
+              <div className="relative h-[260px] w-full rounded-xl overflow-hidden">
+                <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 600px" className="object-cover" />
+              </div>
             )}
             <div className="p-4">
               <h2 className="text-2xl font-bold mb-2">{title}</h2>

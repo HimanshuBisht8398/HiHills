@@ -1,8 +1,10 @@
 "use client";
 
-import Slider from "react-slick";
+import dynamic from "next/dynamic";
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
 import React, { Component } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FaUtensils, FaBed, FaUserTie, FaBus } from "react-icons/fa";
 import { SPIRITUAL_PLACES } from "@/app/spiritual-places/place-data";
 import {
@@ -25,7 +27,9 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
   words = this.text.split(" ");
 
   componentDidMount() {
-    this.animateWords();
+    setTimeout(() => {
+      this.animateWords();
+    }, 2500);
   }
 
   animateWords = () => {
@@ -105,10 +109,12 @@ export default class SpiritualPlaces extends Component<{}, StateType> {
 
                   {/* Image */}
                   <div className="relative h-60 overflow-hidden">
-                    <img
+                    <Image
                       src={item.imgSrc || "/images/fallback.jpg"}
                       alt={item.profession || "Place"}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
 
