@@ -258,7 +258,7 @@ export const ADVENTURE_PACKAGES: AdventurePackage[] = [
     price: "2,000",
     duration: "1N/2D",
     pickup: "Auli Base Camp",
-    img: "/images/wework/SnowSkii.jpeg",
+    img: "/images/wework/Snowskii.jpeg",
     overview:
       "A winter sports package in Auli with slope access, basic ski support, and a short stay in the mountain region.",
     inclusions: [

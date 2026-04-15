@@ -196,7 +196,14 @@ const PrevArrow = ({ onClick }: any) => (
                       <div className="mt-4">
                         <Link
                           href={`/adventure/${items.slug}`}
-                          className="inline-flex rounded-lg border border-orange-300 bg-white/90 px-4 py-2 text-sm font-semibold text-orange-600 transition hover:bg-orange-50"
+                          className=" inline-flex items-center justify-center
+  rounded-lg
+  bg-orange-500 text-white
+  px-5 py-2.5
+  text-sm font-semibold
+  shadow-lg
+  hover:bg-orange-600 
+  transition duration-300"
                         >
                           View Details
                         </Link>

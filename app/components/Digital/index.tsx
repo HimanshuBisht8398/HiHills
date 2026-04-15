@@ -29,7 +29,7 @@ export default function Digital() {
             src:"/images/digital/BADRINATH.mp4"
           },
           {
-            src: "/images/digital/Views.mp4",
+            src: "/images/digital/views.mp4",
           },
           {
             src:"/images/digital/JOSHIMATH.mp4"
